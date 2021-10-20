@@ -4,4 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DeliveryApp.Core\DeliveryApp.Core.csproj" />
+    <ProjectReference Include="..\DeliveryApp.Data\DeliveryApp.Data.csproj" />
+    <ProjectReference Include="..\DeliveryApp.Shared\DeliveryApp.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

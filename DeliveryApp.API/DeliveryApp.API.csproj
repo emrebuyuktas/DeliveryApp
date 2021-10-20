@@ -8,4 +8,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DeliveryApp.Core\DeliveryApp.Core.csproj" />
+    <ProjectReference Include="..\DeliveryApp.Data\DeliveryApp.Data.csproj" />
+    <ProjectReference Include="..\DeliveryApp.Services\DeliveryApp.Services.csproj" />
+  </ItemGroup>
+
 </Project>
