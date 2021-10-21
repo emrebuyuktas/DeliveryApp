@@ -9,7 +9,7 @@ namespace DeliveryApp.API.Controllers
         [HttpGet]
         public IActionResult Product()
         {
-            return Ok("Deneme");
+            return Ok("31");
         }
     }
 }
