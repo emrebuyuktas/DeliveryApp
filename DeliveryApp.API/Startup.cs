@@ -1,18 +1,13 @@
+using DeliveryApp.Core.Repositories.Abstract;
 using DeliveryApp.Data.EntityFramework.Context;
+using DeliveryApp.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DeliveryApp.API
 {
@@ -37,6 +32,7 @@ namespace DeliveryApp.API
                 );
             });
             services.AddControllers();
+            services.AddScoped(typeof(IRepository<>), typeof(RepositoryBase<>));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DeliveryApp.API", Version = "v1" });

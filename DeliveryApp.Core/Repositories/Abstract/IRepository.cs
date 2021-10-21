@@ -1,6 +1,9 @@
-﻿namespace DeliveryApp.Core.Repositories.Abstract
+﻿using DeliveryApp.Core.Entities.Abstaract;
+
+namespace DeliveryApp.Core.Repositories.Abstract
 {
-    public interface IRepository
+    public interface IRepository<T> where T: class, IEntity, new()
     {
+
     }
 }
