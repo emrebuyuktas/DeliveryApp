@@ -28,7 +28,14 @@ namespace DeliveryApp.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConStr")));
+            services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration["ConnectionStrings:SqlConStr"].ToString(), o =>
+                {
+                    o.MigrationsAssembly("DeliveryApp.Data");
+                }
+                );
+            });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
