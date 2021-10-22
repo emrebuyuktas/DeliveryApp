@@ -1,7 +1,10 @@
 ﻿using DeliveryApp.Core.Entities.Abstaract;
 using DeliveryApp.Core.Repositories.Abstract;
+using DeliveryApp.Data.EntityFramework.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -9,29 +12,58 @@ namespace DeliveryApp.Data.Repositories
 {
     public class RepositoryBase<T> : IRepository<T> where T : class, IEntity, new()
     {
-        public Task AddAsync(T entity)
+        protected readonly AppDbContext _context;
+
+        public RepositoryBase(AppDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task DeleteAsync(T entity)
+        public async Task AddAsync(T entity)
         {
-            throw new NotImplementedException();
+            await _context.Set<T>().AddAsync(entity);
         }
 
-        public Task<IList<T>> GetAllAsync(Expression<Func<T, bool>> predicate = null, params Expression<Func<T, object>>[] includeProperties)
+        public async Task DeleteAsync(T entity)
         {
-            throw new NotImplementedException();
+            await Task.Run(() => { _context.Set<T>().Remove(entity); });
         }
 
-        public Task<T> GetAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
+        public async Task<IList<T>> GetAllAsync(Expression<Func<T, bool>> predicate = null, params Expression<Func<T, object>>[] includeProperties)
         {
-            throw new NotImplementedException();
+            IQueryable<T> query = _context.Set<T>();
+            if (predicate != null)
+            {
+                query = query.Where(predicate);
+            }
+            if (includeProperties.Any())
+            {
+                foreach (var includeProperty in includeProperties)
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
+            return await query.ToListAsync();
         }
 
-        public Task UpdateAsync(T entity)
+        public async Task<T> GetAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
         {
-            throw new NotImplementedException();
+            IQueryable<T> query = _context.Set<T>();
+            query = query.Where(predicate);
+
+            if (includeProperties.Any())
+            {
+                foreach (var includeProperty in includeProperties)
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
+            return await query.SingleOrDefaultAsync();
+        }
+
+        public async Task UpdateAsync(T entity)
+        {
+            await Task.Run(() => { _context.Set<T>().Update(entity); });
         }
     }
 }

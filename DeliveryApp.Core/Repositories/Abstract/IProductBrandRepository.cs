@@ -6,9 +6,5 @@ namespace DeliveryApp.Core.Repositories.Abstract
     public interface IProductBrandRepository:IRepository<ProductBrand>
     {
        
-
-
-
-
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DeliveryApp.Core.UnitOfWorks;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace DeliveryApp.API.Controllers
 {
@@ -6,10 +8,22 @@ namespace DeliveryApp.API.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult Product()
+        private readonly IUnitOfWork _unitOfWork;
+
+        public ProductsController(IUnitOfWork unitOfWork)
         {
-            return Ok("31");
+            _unitOfWork = unitOfWork;
+        }
+
+        public ProductsController()
+        {
+
+        }
+        [HttpGet("{id}")]
+        public async  Task<IActionResult> Product(int id)
+        {
+            var product= await _unitOfWork.Products.GetAsync(x => x.Id == id);
+            return Ok(product);
         }
     }
 }

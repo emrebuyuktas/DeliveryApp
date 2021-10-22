@@ -4,6 +4,5 @@ namespace DeliveryApp.Core.Repositories.Abstract
 {
     public interface IProductRepository:IRepository<Product>
     {
-        IProductRepository Products { get; }
     }
 }

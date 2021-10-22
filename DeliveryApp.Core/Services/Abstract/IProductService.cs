@@ -1,6 +1,6 @@
 ﻿namespace DeliveryApp.Core.Services.Abstract
 {
-    interface IProductService
+    public interface IProductService
     {
         
     }

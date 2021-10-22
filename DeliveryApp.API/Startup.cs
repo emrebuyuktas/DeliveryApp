@@ -1,6 +1,8 @@
 using DeliveryApp.Core.Repositories.Abstract;
+using DeliveryApp.Core.UnitOfWorks;
 using DeliveryApp.Data.EntityFramework.Context;
 using DeliveryApp.Data.Repositories;
+using DeliveryApp.Data.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -25,13 +27,14 @@ namespace DeliveryApp.API
         {
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer(Configuration["ConnectionStrings:SqlConStr"].ToString(), o =>
+                options.UseSqlServer(Configuration["ConnectionStrings:LocalDB"].ToString(), o =>
                 {
                     o.MigrationsAssembly("DeliveryApp.Data");
                 }
                 );
             });
             services.AddControllers();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IRepository<>), typeof(RepositoryBase<>));
             services.AddSwaggerGen(c =>
             {
