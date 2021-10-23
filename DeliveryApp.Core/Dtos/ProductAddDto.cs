@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DeliveryApp.Shared.Dtos
+namespace DeliveryApp.Core.Dtos
 {
     public class ProductAddDto
     {

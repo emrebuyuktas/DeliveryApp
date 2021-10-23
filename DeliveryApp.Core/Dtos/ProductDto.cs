@@ -1,4 +1,4 @@
-﻿namespace DeliveryApp.Shared.Dtos
+﻿namespace DeliveryApp.Core.Dtos
 {
     public class ProductDto
     {
@@ -9,7 +9,5 @@
         public string ProductBrand { get; set; }
         public string ProductType { get; set; }        
         public string PictureUrl { get; set; }
-
-
     }
 }

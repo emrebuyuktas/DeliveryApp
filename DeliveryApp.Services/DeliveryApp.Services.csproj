@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DeliveryApp.Core\DeliveryApp.Core.csproj" />
     <ProjectReference Include="..\DeliveryApp.Data\DeliveryApp.Data.csproj" />
     <ProjectReference Include="..\DeliveryApp.Shared\DeliveryApp.Shared.csproj" />

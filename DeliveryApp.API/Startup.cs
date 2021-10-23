@@ -55,6 +55,8 @@ namespace DeliveryApp.API
             }
 
             app.UseHttpsRedirection();
+            
+            app.UseStaticFiles();
 
             app.UseRouting();
 
