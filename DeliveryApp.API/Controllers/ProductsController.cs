@@ -15,10 +15,6 @@ namespace DeliveryApp.API.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public ProductsController()
-        {
-
-        }
         [HttpGet("{id}")]
         public async  Task<IActionResult> Product(int id)
         {
