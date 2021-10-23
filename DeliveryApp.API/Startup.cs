@@ -1,8 +1,11 @@
 using DeliveryApp.Core.Repositories.Abstract;
+using DeliveryApp.Core.Services.Abstract;
 using DeliveryApp.Core.UnitOfWorks;
 using DeliveryApp.Data.EntityFramework.Context;
 using DeliveryApp.Data.Repositories;
 using DeliveryApp.Data.UnitOfWork;
+using DeliveryApp.Services.AutoMapper.Profiles;
+using DeliveryApp.Services.Concrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -34,9 +37,13 @@ namespace DeliveryApp.API
                 }
                 );
             });
-            services.AddControllers().AddJsonOptions(x =>
-   x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+            services.AddControllers().AddJsonOptions(opt =>
+            {
+                opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
+            services.AddAutoMapper(typeof(ProductProfile));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IProductService, ProductService>();
             services.AddScoped(typeof(IRepository<>), typeof(RepositoryBase<>));
             services.AddSwaggerGen(c =>
             {

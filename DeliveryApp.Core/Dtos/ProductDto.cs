@@ -1,4 +1,6 @@
-﻿namespace DeliveryApp.Core.Dtos
+﻿
+
+namespace DeliveryApp.Core.Dtos
 {
     public class ProductDto
     {

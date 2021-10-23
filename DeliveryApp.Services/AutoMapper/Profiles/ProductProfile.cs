@@ -4,7 +4,7 @@ using DeliveryApp.Core.Entities.Concrete;
 
 namespace DeliveryApp.Services.AutoMapper.Profiles
 {
-    class ProductProfile : Profile
+    public class ProductProfile : Profile
     {
         public ProductProfile()
         {

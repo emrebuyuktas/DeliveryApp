@@ -1,4 +1,5 @@
 ﻿using DeliveryApp.Core.Entities.Concrete;
+using DeliveryApp.Core.Services.Abstract;
 using DeliveryApp.Core.UnitOfWorks;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -10,16 +11,18 @@ namespace DeliveryApp.API.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IProductService _iproductService;
 
-        public ProductsController(IUnitOfWork unitOfWork)
+        public ProductsController(IUnitOfWork unitOfWork, IProductService iproductService)
         {
             _unitOfWork = unitOfWork;
+            _iproductService = iproductService;
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Product(int id)
         {
-            var product= await _unitOfWork.Products.GetAsync(x => x.Id == id, x=> x.ProductBrand,x => x.ProductType);
+            var product = await _iproductService.Get(id);
             return Ok(product);
         }
         [HttpGet]

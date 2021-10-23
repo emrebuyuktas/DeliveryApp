@@ -10,15 +10,6 @@ namespace DeliveryApp.Shared.Result.Concrete
 {
     public class DataResult<T> : IDataResult<T>
     {
-        public T Data { get; set; }
-
-        public ResultStatus ResultStatus { get; set; }
-
-        public string Message { get; set; }
-
-        public Exception Exception { get; set; }
-
-
         public DataResult(ResultStatus _resultStatus, T data)
         {
             ResultStatus = _resultStatus;
@@ -37,5 +28,12 @@ namespace DeliveryApp.Shared.Result.Concrete
             Data = data;
             Exception = exception;
         }
+        public T Data { get; }
+
+        public ResultStatus ResultStatus { get; }
+
+        public string Message { get; }
+
+        public Exception Exception { get; }
     }
 }
