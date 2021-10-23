@@ -16,10 +16,16 @@ namespace DeliveryApp.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async  Task<IActionResult> Product(int id)
+        public async Task<IActionResult> Product(int id)
         {
-            var product= await _unitOfWork.Products.GetAsync(x => x.Id == id);
+            var product= await _unitOfWork.Products.GetAsync(x => x.Id == id, x=> x.ProductBrand,x => x.ProductType);
             return Ok(product);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Product()
+        {
+            var products = await _unitOfWork.Products.GetAllAsync(null,x =>x.ProductBrand, x => x.ProductType);
+            return Ok(products);
         }
     }
 }
