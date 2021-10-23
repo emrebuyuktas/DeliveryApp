@@ -9,4 +9,8 @@
     <Folder Include="Areas\Admin\ViewComponents\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\js\site.js" />
+  </ItemGroup>
+
 </Project>
