@@ -11,7 +11,7 @@ namespace DeliveryApp.Core.Services.Abstract
     {
         Task<IDataResult<ProductTypeDto>> GetAsync(int typeId);
         Task<IDataResult<IList<ProductTypeDto>>> GetAllAsync();
-        Task<IResult> AddAsync(ProductTypeAddDto productTypeAddDto);
+        Task<IResult> AddAsync(ProductTypeAddDto typeAddDto);
         Task<IResult> UpdateAsync(ProductTypeUpdateDto updateTypeDto);
         Task<IResult> DeleteAsync(int id);
     }
