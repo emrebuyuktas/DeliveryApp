@@ -1,6 +1,5 @@
 ﻿using DeliveryApp.Core.Dtos;
 using DeliveryApp.Core.Services.Abstract;
-using DeliveryApp.Core.UnitOfWorks;
 using DeliveryApp.Shared.Result.ComplexTypes;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -21,25 +20,25 @@ namespace DeliveryApp.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Product(int id)
         {
-            var product = await _iproductService.Get(id);
+            var product = await _iproductService.GetAsync(id);
             return Ok(product);
         }
         [HttpGet]
         public async Task<IActionResult> Product()
         {
-            var products = await _iproductService.GetAll();
+            var products = await _iproductService.GetAllAsync();
             return Ok(products);
         }
         [HttpPost]
         public async Task<IActionResult> Save(ProductAddDto productAddDto)
         {
-            var product=await _iproductService.Add(productAddDto);
+            var product=await _iproductService.AddAsync(productAddDto);
             return Created(string.Empty, product);
         }
         [HttpPut]
         public async Task<IActionResult> Update(ProductUpdateDto productUpdateDto)
         {
-            var response=await _iproductService.Update(productUpdateDto);
+            var response=await _iproductService.UpdateAsync(productUpdateDto);
             if(response.ResultStatus == ResultStatus.Succes)
                 return NoContent();
             return BadRequest(response);

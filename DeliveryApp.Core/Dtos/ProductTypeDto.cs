@@ -1,5 +1,7 @@
 using DeliveryApp.Core.Entities.Concrete;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace DeliveryApp.Core.Dtos
 {

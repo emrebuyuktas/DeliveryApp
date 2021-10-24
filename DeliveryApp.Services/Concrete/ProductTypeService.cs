@@ -33,37 +33,37 @@ namespace DeliveryApp.Services.Concrete
 
         public async Task<IDataResult<ProductTypeDto>> GetAsync(int typeId)
         {
-            var type = await _unitOfWork.Type.GetAsync(x => x.Id == typeId, x => x.ProductService, x => x.ProductBrand); //bakılması gerekiyor.
+            var type = await _unitOfWork.Type.GetAsync(x => x.Id == typeId); 
             if (type == null)
-                return new DataResult<TypeDto>(ResultStatus.Error, "No products found with specified criteria",null);
-            var typeToReturnDto = _mapper.Map<TypeDto>(type);                                                            //bakılması gerekiyor.
-            return new DataResult<TypeDto>(ResultStatus.Succes, typeToReturnDto);
+                return new DataResult<ProductTypeDto>(ResultStatus.Error, "No types found with specified criteria",null);
+            var typeToReturnDto = _mapper.Map<ProductTypeDto>(type);                                                            
+            return new DataResult<ProductTypeDto>(ResultStatus.Succes, typeToReturnDto);
         }
 
         public async Task<IDataResult<IList<ProductTypeDto>>> GetAllAsync()
         {
-            var type = await _unitOfWork.Type.GetAllAsync(null, x => x.ProductService, x => x.ProductBrand);
-            if (type == null)
-                return new DataResult<IList<TypeDto>>(ResultStatus.Error, "No products found with specified criteria", null);
-            var typeToList = _mapper.Map<IList<ProductTypeDto>>(type);
-            return new DataResult<IList<TypeDto>>(ResultStatus.Succes,typeToList);
+            var types = await _unitOfWork.Type.GetAllAsync();
+            if (types == null)
+                return new DataResult<IList<ProductTypeDto>>(ResultStatus.Error, "No types found with specified criteria", null);
+            var typesToList = _mapper.Map<IList<ProductTypeDto>>(types);
+            return new DataResult<IList<ProductTypeDto>>(ResultStatus.Succes, typesToList);
         }
 
         public async Task<IResult> UpdateAsync(ProductTypeUpdateDto updateTypeDto)
         {
-            var type = _mapper.Map<Type>(updateTypeDto);
+            var type = _mapper.Map<ProductType>(updateTypeDto);
             await _unitOfWork.Type.UpdateAsync(type);
             await _unitOfWork.CommitAsync();
-            return new Result(ResultStatus.Succes,$"{type.Name} shas been updated successfully");
+            return new Result(ResultStatus.Succes,$"{type.Name} has been updated successfully");
         }
         public async Task<IResult> DeleteAsync(int id)
         {
-            var type = await _unitOfWork.Type.GetAsync(x => x.Id == id, x => x.ProductService, x => x.ProductBrand);
+            var type = await _unitOfWork.Type.GetAsync(x => x.Id == id);
             if (type == null)
-                return new Result(ResultStatus.Error, "No products found with specified criteria");
+                return new Result(ResultStatus.Error, "No types found with specified criteria");
             await _unitOfWork.Type.DeleteAsync(type);
             await _unitOfWork.CommitAsync();
-            return new Result(ResultStatus.Succes, $"{type.Name} shas been deleted successfully");
+            return new Result(ResultStatus.Succes, $"{type.Name} has been deleted successfully");
         }
     }
 }

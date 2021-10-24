@@ -31,39 +31,40 @@ namespace DeliveryApp.Services.Concrete
             return new Result(ResultStatus.Succes,$"{brand.Name} has been added successfully");
         }
 
+        
         public async Task<IDataResult<ProductBrandDto>> GetAsync(int brandId)
         {
-            var brand = await _unitOfWork.Brand.GetAsync(x => x.Id == brandId, x => x.ProductService, x => x.ProductType); //bakılması gerekiyor.
+            var brand = await _unitOfWork.Brand.GetAsync(x => x.Id == brandId); 
             if (brand == null)
-                return new DataResult<BrandDto>(ResultStatus.Error, "No products found with specified criteria",null);
-            var brandToReturnDto = _mapper.Map<BrandDto>(brand);                                                            //bakılması gerekiyor.
-            return new DataResult<BrandDto>(ResultStatus.Succes, brandToReturnDto);
+                return new DataResult<ProductBrandDto>(ResultStatus.Error, "No brands found with specified criteria",null);
+            var brandToReturnDto = _mapper.Map<ProductBrandDto>(brand);                                                            
+            return new DataResult<ProductBrandDto>(ResultStatus.Succes, brandToReturnDto);
         }
 
         public async Task<IDataResult<IList<ProductBrandDto>>> GetAllAsync()
         {
-            var brand = await _unitOfWork.Brand.GetAllAsync(null, x => x.ProductService, x => x.ProductType);
+            var brand = await _unitOfWork.Brand.GetAllAsync();
             if (brand == null)
-                return new DataResult<IList<BrandDto>>(ResultStatus.Error, "No products found with specified criteria", null);
+                return new DataResult<IList<ProductBrandDto>>(ResultStatus.Error, "No brands found with specified criteria", null);
             var brandToList = _mapper.Map<IList<ProductBrandDto>>(brand);
-            return new DataResult<IList<BrandDto>>(ResultStatus.Succes,brandToList);
+            return new DataResult<IList<ProductBrandDto>>(ResultStatus.Succes,brandToList);
         }
 
         public async Task<IResult> UpdateAsync(ProductBrandUpdateDto brandUpdateDto)
         {
-            var brand = _mapper.Map<Brand>(brandUpdateDto);
+            var brand = _mapper.Map<ProductBrand>(brandUpdateDto);
             await _unitOfWork.Brand.UpdateAsync(brand);
             await _unitOfWork.CommitAsync();
-            return new Result(ResultStatus.Succes,$"{brand.Name} shas been updated successfully");
+            return new Result(ResultStatus.Succes,$"{brand.Name} has been updated successfully");
         }
         public async Task<IResult> DeleteAsync(int id)
         {
-            var brand = await _unitOfWork.Brand.GetAsync(x => x.Id == id, x => x.ProductService, x => x.ProductType);
+            var brand = await _unitOfWork.Brand.GetAsync(x => x.Id == id);
             if (brand == null)
-                return new Result(ResultStatus.Error, "No products found with specified criteria");
+                return new Result(ResultStatus.Error, "No brands found with specified criteria");
             await _unitOfWork.Brand.DeleteAsync(brand);
             await _unitOfWork.CommitAsync();
-            return new Result(ResultStatus.Succes, $"{brand.Name} shas been deleted successfully");
+            return new Result(ResultStatus.Succes, $"{brand.Name} has been deleted successfully");
         }
     }
 }

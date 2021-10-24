@@ -42,9 +42,11 @@ namespace DeliveryApp.API
                 opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
             });
-            services.AddAutoMapper(typeof(ProductProfile));
+            services.AddAutoMapper(typeof(ProductProfile),typeof(ProducTypeProfile), typeof(ProductBrandProfile));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductTypeService, ProductTypeService>();
+            services.AddScoped<IProductBrandService, ProductBrandService>();
             services.AddScoped(typeof(IRepository<>), typeof(RepositoryBase<>));
             services.AddSwaggerGen(c =>
             {

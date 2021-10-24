@@ -54,7 +54,7 @@ namespace DeliveryApp.Services.Concrete
             var product = _mapper.Map<Product>(updateDto);
             await _unitOfWork.Products.UpdateAsync(product);
             await _unitOfWork.CommitAsync();
-            return new Result(ResultStatus.Succes,$"{product.Name} shas been updated successfully");
+            return new Result(ResultStatus.Succes,$"{product.Name} has been updated successfully");
         }
         public async Task<IResult> DeleteAsync(int id)
         {
@@ -63,7 +63,7 @@ namespace DeliveryApp.Services.Concrete
                 return new Result(ResultStatus.Error, "No products found with specified criteria");
             await _unitOfWork.Products.DeleteAsync(product);
             await _unitOfWork.CommitAsync();
-            return new Result(ResultStatus.Succes, $"{product.Name} shas been deleted successfully");
+            return new Result(ResultStatus.Succes, $"{product.Name} has been deleted successfully");
         }
     }
 }
