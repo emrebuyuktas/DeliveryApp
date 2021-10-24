@@ -40,6 +40,7 @@ namespace DeliveryApp.API
             services.AddControllers().AddJsonOptions(opt =>
             {
                 opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
             });
             services.AddAutoMapper(typeof(ProductProfile));
             services.AddScoped<IUnitOfWork, UnitOfWork>();

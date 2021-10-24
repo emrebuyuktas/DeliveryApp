@@ -9,9 +9,10 @@ namespace DeliveryApp.Core.Services.Abstract
 {
     public interface IProductService
     {
-        Task<IDataResult<ProductDto>> Get(int productId);
-        Task<IDataResult<IList<ProductDto>>> GetAll();
-        Task<IResult> Add(ProductAddDto productAddDto);
-        Task<IResult> Update(ProductUpdateDto updateDto);
+        Task<IDataResult<ProductDto>> GetAsync(int productId);
+        Task<IDataResult<IList<ProductDto>>> GetAllAsync();
+        Task<IResult> AddAsync(ProductAddDto productAddDto);
+        Task<IResult> UpdateAsync(ProductUpdateDto updateDto);
+        Task<IResult> DeleteAsync(int id);
     }
 }
