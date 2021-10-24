@@ -26,14 +26,14 @@ namespace DeliveryApp.Services.Concrete
         public async Task<IResult> AddAsync(ProductBrandAddDto brandAddDto)
         {
             var brand = _mapper.Map<ProductBrand>(brandAddDto);
-            await _unitOfWork.Products.AddAsync(brand);
+            await _unitOfWork.Brand.AddAsync(brand);
             await _unitOfWork.CommitAsync();
             return new Result(ResultStatus.Succes,$"{brand.Name} has been added successfully");
         }
 
         public async Task<IDataResult<ProductBrandDto>> GetAsync(int brandId)
         {
-            var brand = await _unitOfWork.Products.GetAsync(x => x.Id == brandId, x => x.ProductService, x => x.ProductType); //bakılması gerekiyor.
+            var brand = await _unitOfWork.Brand.GetAsync(x => x.Id == brandId, x => x.ProductService, x => x.ProductType); //bakılması gerekiyor.
             if (brand == null)
                 return new DataResult<BrandDto>(ResultStatus.Error, "No products found with specified criteria",null);
             var brandToReturnDto = _mapper.Map<BrandDto>(brand);                                                            //bakılması gerekiyor.
@@ -42,10 +42,10 @@ namespace DeliveryApp.Services.Concrete
 
         public async Task<IDataResult<IList<ProductBrandDto>>> GetAllAsync()
         {
-            var brand = await _unitOfWork.Products.GetAllAsync(null, x => x.ProductService, x => x.ProductType);
+            var brand = await _unitOfWork.Brand.GetAllAsync(null, x => x.ProductService, x => x.ProductType);
             if (brand == null)
                 return new DataResult<IList<BrandDto>>(ResultStatus.Error, "No products found with specified criteria", null);
-            var brandToList = _mapper.Map<IList<ProductDto>>(brand);
+            var brandToList = _mapper.Map<IList<ProductBrandDto>>(brand);
             return new DataResult<IList<BrandDto>>(ResultStatus.Succes,brandToList);
         }
 
