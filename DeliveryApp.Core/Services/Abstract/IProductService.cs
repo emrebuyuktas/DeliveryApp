@@ -15,5 +15,6 @@ namespace DeliveryApp.Core.Services.Abstract
         Task<IResult> AddAsync(ProductAddDto productAddDto);
         Task<IResult> UpdateAsync(ProductUpdateDto updateDto);
         Task<IResult> DeleteAsync(int id);
+        Task<IDataResult<ProductListDto>> SearchAsync(string keyword, int currentPage, int pageSize = 5, bool isAscending = false);
     }
 }

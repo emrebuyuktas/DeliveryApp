@@ -61,7 +61,7 @@ namespace DeliveryApp.Data.Repositories
             return await query.SingleOrDefaultAsync();
         }
 
-        public async Task<IList<T>> Search(IList<Expression<Func<T, bool>>> predicates, params Expression<Func<T, object>>[] includeProperties)
+        public async Task<IList<T>> SearchAsync(IList<Expression<Func<T, bool>>> predicates, params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> query = _context.Set<T>();
             if (predicates.Any())
