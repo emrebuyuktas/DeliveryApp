@@ -17,6 +17,7 @@ namespace DeliveryApp.Services.AutoMapper.Profiles
 
             CreateMap<ProductType, ProductTypeUpdateDto>().ReverseMap();
             CreateMap<ProductType, ProductTypeAddDto>().ReverseMap();
+            CreateMap<ProductType, ProductTypeWithProductsDto>();
         }
     }
 }

@@ -16,7 +16,5 @@ namespace DeliveryApp.Core.Dtos
         [MaxLength(100, ErrorMessage = "Name can not be longer than 100 character.")]
         [MinLength(1, ErrorMessage = "Name can not be shorter than 1 character.")]
         public string Name { get; set; }      
-
-
     }
 }

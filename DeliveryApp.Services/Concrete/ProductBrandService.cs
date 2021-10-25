@@ -66,5 +66,14 @@ namespace DeliveryApp.Services.Concrete
             await _unitOfWork.CommitAsync();
             return new Result(ResultStatus.Succes, $"{brand.Name} has been deleted successfully");
         }
+
+        public async Task<IDataResult<ProductBrandWithProductsDto>> GetWithProducts(int id)
+        {
+            var types = await _unitOfWork.Brand.GetAsync(x => x.Id == id, x => x.Products);
+            if (types == null)
+                return new DataResult<ProductBrandWithProductsDto>(ResultStatus.Error, "No brands found with specified criteria", null);
+            var typesToList = _mapper.Map<ProductBrandWithProductsDto>(types);
+            return new DataResult<ProductBrandWithProductsDto>(ResultStatus.Succes, typesToList);
+        }
     }
 }

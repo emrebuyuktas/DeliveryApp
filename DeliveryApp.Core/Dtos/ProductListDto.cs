@@ -3,10 +3,11 @@ using System.Collections.Generic;
 
 namespace DeliveryApp.Core.Dtos
 {
-    public class ProductListDto
+    public class ProductListDto:DtoGetBase
     {
-        public IList<Product> Products { get; set; }
+        public IList<ProductDto> Products { get; set; }
         public int? BrandId { get; set; }
+        public int? TypeId { get; set; }
 
     }
 }

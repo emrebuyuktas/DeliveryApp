@@ -43,7 +43,7 @@ namespace DeliveryApp.Services.Concrete
         public async Task<IDataResult<IList<ProductTypeDto>>> GetAllAsync()
         {
             var types = await _unitOfWork.Type.GetAllAsync();
-            if (types == null)
+            if (types.Count == 0)
                 return new DataResult<IList<ProductTypeDto>>(ResultStatus.Error, "No types found with specified criteria", null);
             var typesToList = _mapper.Map<IList<ProductTypeDto>>(types);
             return new DataResult<IList<ProductTypeDto>>(ResultStatus.Succes, typesToList);
@@ -64,6 +64,16 @@ namespace DeliveryApp.Services.Concrete
             await _unitOfWork.Type.DeleteAsync(type);
             await _unitOfWork.CommitAsync();
             return new Result(ResultStatus.Succes, $"{type.Name} has been deleted successfully");
+        }
+
+        public async Task<IDataResult<ProductTypeWithProductsDto>> GetWithProducts(int id)
+        {
+            var types = await _unitOfWork.Type.GetAsync(x => x.Id == id, x => x.Products);
+            if(types==null)
+                return new DataResult<ProductTypeWithProductsDto>(ResultStatus.Error, "No types found with specified criteria", null);
+            var typesToList = _mapper.Map<ProductTypeWithProductsDto>(types);
+            return new DataResult<ProductTypeWithProductsDto>(ResultStatus.Succes, typesToList);
+
         }
     }
 }

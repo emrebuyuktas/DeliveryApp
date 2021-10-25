@@ -8,6 +8,7 @@ using DeliveryApp.Shared.Result.Abstract;
 using DeliveryApp.Shared.Result.ComplexTypes;
 using DeliveryApp.Shared.Result.Concrete;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.Services.Concrete
@@ -64,6 +65,40 @@ namespace DeliveryApp.Services.Concrete
             await _unitOfWork.Products.DeleteAsync(product);
             await _unitOfWork.CommitAsync();
             return new Result(ResultStatus.Succes, $"{product.Name} has been deleted successfully");
+        }
+
+        public async Task<IDataResult<ProductListDto>> GetAllWithPagesAsync(int? productTypeId, int? productBrandId, int currentPage, int pageSize = 5, bool isAscending = false)
+        {
+            IList<Product> products = new List<Product>();
+            pageSize = pageSize > 20 ? 20 : pageSize;
+            if (productTypeId ==null && productBrandId==null)
+            {
+                products = await _unitOfWork.Products.GetAllAsync(null, x => x.ProductBrand, x => x.ProductType);
+            }
+            else if (productTypeId != null && productBrandId == null)
+            {
+                products = await _unitOfWork.Products.GetAllAsync(x => x.ProductTypeId == productTypeId, x => x.ProductBrand, x => x.ProductType);
+            }
+            else if (productTypeId == null && productBrandId != null)
+            {
+                products = await _unitOfWork.Products.GetAllAsync(x => x.ProductBrandId == productBrandId, x => x.ProductBrand, x => x.ProductType);
+            }
+            else if (productTypeId != null && productBrandId != null)
+            {
+                products = await _unitOfWork.Products.GetAllAsync(x => x.ProductTypeId == productTypeId && x.ProductBrandId==productBrandId, x => x.ProductBrand, x => x.ProductType);
+            }
+            var sortedProducts = isAscending ? products.OrderBy(x => x.Price).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList() :
+                products.OrderByDescending(x => x.Price).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+            var productsToReturn = _mapper.Map<IList<ProductDto>>(sortedProducts);
+            return new DataResult<ProductListDto>(ResultStatus.Succes, new ProductListDto { 
+                Products=productsToReturn,
+                BrandId=productBrandId,
+                TypeId=productTypeId,
+                PageSize=pageSize,
+                IsAscending=isAscending,
+                TotalCount=productsToReturn.Count,
+                CurrentPage=currentPage
+            });
         }
     }
 }

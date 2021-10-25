@@ -1,11 +1,7 @@
 ﻿using DeliveryApp.Core.Dtos;
 using DeliveryApp.Core.Services.Abstract;
 using DeliveryApp.Shared.Result.ComplexTypes;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.API.Controllers
@@ -25,6 +21,12 @@ namespace DeliveryApp.API.Controllers
         public async Task<IActionResult> Type(int id)
         {
             var product = await _iproductTypeService.GetAsync(id);
+            return Ok(product);
+        }
+        [HttpGet("{id}/products")]
+        public async Task<IActionResult> TypeWithProducts(int id)
+        {
+            var product = await _iproductTypeService.GetWithProducts(id);
             return Ok(product);
         }
         [HttpGet]

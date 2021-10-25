@@ -61,6 +61,26 @@ namespace DeliveryApp.Data.Repositories
             return await query.SingleOrDefaultAsync();
         }
 
+        public async Task<IList<T>> Search(IList<Expression<Func<T, bool>>> predicates, params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> query = _context.Set<T>();
+            if (predicates.Any())
+            {
+                foreach (var q in predicates)
+                {
+                    query = query.Where(q);
+                }
+            }
+            if (includeProperties.Any())
+            {
+                foreach (var p in includeProperties)
+                {
+                    query = query.Include(p);
+;                }
+            }
+            return await query.ToListAsync();
+        }
+
         public async Task UpdateAsync(T entity)
         {
             await Task.Run(() => { _context.Set<T>().Update(entity); });

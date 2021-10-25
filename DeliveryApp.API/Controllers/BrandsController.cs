@@ -23,6 +23,12 @@ namespace DeliveryApp.API.Controllers
             var brand = await _iproductBrandService.GetAsync(id);
             return Ok(brand);
         }
+        [HttpGet("{id}/products")]
+        public async Task<IActionResult> BrandWithProducts(int id)
+        {
+            var product = await _iproductBrandService.GetWithProducts(id);
+            return Ok(product);
+        }
         [HttpGet]
         public async Task<IActionResult> Brand()
         {
