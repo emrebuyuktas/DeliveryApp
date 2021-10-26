@@ -1,6 +1,7 @@
 ﻿using DeliveryApp.Core.Entities.Abstaract;
 using DeliveryApp.Core.Repositories.Abstract;
 using DeliveryApp.Data.EntityFramework.Context;
+using LinqKit;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -71,17 +72,19 @@ namespace DeliveryApp.Data.Repositories
             IQueryable<T> query = _context.Set<T>();
             if (predicates.Any())
             {
-                foreach (var q in predicates)
+                var predicateChain = PredicateBuilder.New<T>();
+                foreach (var predicate in predicates)
                 {
-                    query = query.Where(q);
+                    predicateChain.Or(predicate);
                 }
+                query = query.Where(predicateChain);
             }
             if (includeProperties.Any())
             {
-                foreach (var p in includeProperties)
+                foreach (var include in includeProperties)
                 {
-                    query = query.Include(p);
-;                }
+                    query = query.Include(include);
+                }
             }
             return await query.ToListAsync();
         }

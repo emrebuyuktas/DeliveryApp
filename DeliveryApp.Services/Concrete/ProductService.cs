@@ -132,10 +132,9 @@ namespace DeliveryApp.Services.Concrete
                 (p) => p.ProductType.Name.Contains(keyword)
             }, p => p.ProductType, p => p.ProductBrand);
 
-                products = await _unitOfWork.Products.GetAllAsync(null, x => x.ProductBrand, x => x.ProductType);
-                var sortedProducts = isAscending ? products.OrderBy(x => x.Price).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList() :
-                    products.OrderByDescending(x => x.Price).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
-                var productsToReturn = _mapper.Map<IList<ProductDto>>(sortedProducts);
+                var sortedAndSearchedProducts = isAscending ? searchedArticles.OrderBy(x => x.Price).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList() :
+                    searchedArticles.OrderByDescending(x => x.Price).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                var productsToReturn = _mapper.Map<IList<ProductDto>>(sortedAndSearchedProducts);
                 return new DataResult<ProductListDto>(ResultStatus.Succes, new ProductListDto
                 {
                     Products = productsToReturn,
