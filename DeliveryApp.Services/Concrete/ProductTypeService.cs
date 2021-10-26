@@ -3,7 +3,6 @@ using DeliveryApp.Core.Dtos;
 using DeliveryApp.Core.Entities.Concrete;
 using DeliveryApp.Core.Services.Abstract;
 using DeliveryApp.Core.UnitOfWorks;
-using DeliveryApp.Shared.Result;
 using DeliveryApp.Shared.Result.Abstract;
 using DeliveryApp.Shared.Result.ComplexTypes;
 using DeliveryApp.Shared.Result.Concrete;
@@ -74,6 +73,14 @@ namespace DeliveryApp.Services.Concrete
             var typesToList = _mapper.Map<ProductTypeWithProductsDto>(types);
             return new DataResult<ProductTypeWithProductsDto>(ResultStatus.Succes, typesToList);
 
+        }
+
+        public async Task<IResult> AddRangeAsync(IList<ProductTypeAddDto> types)
+        {
+            var typeToAdd = _mapper.Map<IList<ProductType>>(types);
+            await _unitOfWork.Type.AddRangeAsync(typeToAdd);
+            await _unitOfWork.CommitAsync();
+            return new Result(ResultStatus.Succes, "types has been added successfully");
         }
     }
 }

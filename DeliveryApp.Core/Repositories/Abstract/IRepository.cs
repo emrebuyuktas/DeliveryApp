@@ -14,5 +14,6 @@ namespace DeliveryApp.Core.Repositories.Abstract
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);
         Task<IList<T>> SearchAsync(IList<Expression<Func<T, bool>>> predicates, params Expression<Func<T, object>>[] includeProperties);
+        Task AddRangeAsync(IList<T> entities);
     }
 }

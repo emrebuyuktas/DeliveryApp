@@ -147,5 +147,13 @@ namespace DeliveryApp.Services.Concrete
             }
 
         }
+
+        public async Task<IResult> AddRangeAsync(IList<ProductAddDto> products)
+        {
+            var product = _mapper.Map<IList<Product>>(products);
+            await _unitOfWork.Products.AddRangeAsync(product);
+            await _unitOfWork.CommitAsync();
+            return new Result(ResultStatus.Succes, "products has been added successfully");
+        }
     }
 }

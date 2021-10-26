@@ -24,6 +24,11 @@ namespace DeliveryApp.Data.Repositories
             await _context.Set<T>().AddAsync(entity);
         }
 
+        public async Task AddRangeAsync(IList<T> entities)
+        {
+            await _context.Set<T>().AddRangeAsync(entities);
+        }
+
         public async Task DeleteAsync(T entity)
         {
             await Task.Run(() => { _context.Set<T>().Remove(entity); });
