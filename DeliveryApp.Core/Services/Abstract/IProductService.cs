@@ -13,7 +13,9 @@ namespace DeliveryApp.Core.Services.Abstract
         Task<IDataResult<IList<ProductDto>>> GetAllAsync();
         Task<IDataResult<ProductListDto>> GetAllWithPagesAsync(int? productTypeId,int? productBrandId,int currentPage,int pageSize=5,bool isAscending=false);
         Task<IResult> AddAsync(ProductAddDto productAddDto);
+        Task<IResult> AddRangeAsync(IList<ProductAddDto> products);
         Task<IResult> UpdateAsync(ProductUpdateDto updateDto);
         Task<IResult> DeleteAsync(int id);
+        Task<IDataResult<ProductListDto>> SearchAsync(string keyword, int currentPage, int pageSize = 5, bool isAscending = false);
     }
 }

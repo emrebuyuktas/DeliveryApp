@@ -2,6 +2,7 @@
 using DeliveryApp.Core.Services.Abstract;
 using DeliveryApp.Shared.Result.ComplexTypes;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.API.Controllers
@@ -32,24 +33,36 @@ namespace DeliveryApp.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(ProductAddDto productAddDto)
         {
-            var product=await _iproductService.AddAsync(productAddDto);
+            var product = await _iproductService.AddAsync(productAddDto);
             return Created(string.Empty, product);
+        }
+        [HttpPost("products")]
+        public async Task<IActionResult> Save(IList<ProductAddDto> productAddDtos)
+        {
+            var products = await _iproductService.AddRangeAsync(productAddDtos);
+            return Created(string.Empty, products);
         }
         [HttpPut]
         public async Task<IActionResult> Update(ProductUpdateDto productUpdateDto)
         {
-            var response=await _iproductService.UpdateAsync(productUpdateDto);
-            if(response.ResultStatus == ResultStatus.Succes)
+            var response = await _iproductService.UpdateAsync(productUpdateDto);
+            if (response.ResultStatus == ResultStatus.Succes)
                 return NoContent();
             return BadRequest(response);
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(int id)
         {
-            var response=await _iproductService.DeleteAsync(id);
+            var response = await _iproductService.DeleteAsync(id);
             if (response.ResultStatus == ResultStatus.Succes)
                 return NoContent();
             return BadRequest(response);
+        }
+        [HttpGet("search")]
+        public async Task<IActionResult> Search(string keyword, int currentPage, int pageSize = 5, bool isAscending = false)
+        {
+            var products = await _iproductService.SearchAsync(keyword,currentPage,pageSize,isAscending);
+            return Ok(products);
         }
     }
 }

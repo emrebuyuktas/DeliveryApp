@@ -2,6 +2,7 @@
 using DeliveryApp.Core.Services.Abstract;
 using DeliveryApp.Shared.Result.ComplexTypes;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.API.Controllers
@@ -40,6 +41,12 @@ namespace DeliveryApp.API.Controllers
         {
             var product = await _iproductBrandService.AddAsync(productBrandAddDto);
             return Created(string.Empty, product);
+        }
+        [HttpPost("brands")]
+        public async Task<IActionResult> Save(IList<ProductBrandAddDto> productBrandAddDtos)
+        {
+            var brands = await _iproductBrandService.AddRangeAsync(productBrandAddDtos);
+            return Created(string.Empty, brands);
         }
         [HttpPut]
         public async Task<IActionResult> Update(ProductBrandUpdateDto productBrandUpdateDto)

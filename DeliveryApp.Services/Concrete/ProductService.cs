@@ -7,8 +7,10 @@ using DeliveryApp.Shared.Result;
 using DeliveryApp.Shared.Result.Abstract;
 using DeliveryApp.Shared.Result.ComplexTypes;
 using DeliveryApp.Shared.Result.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.Services.Concrete
@@ -93,13 +95,65 @@ namespace DeliveryApp.Services.Concrete
             var productsToReturn = _mapper.Map<IList<ProductDto>>(sortedProducts);
             return new DataResult<ProductListDto>(ResultStatus.Succes, new ProductListDto { 
                 Products=productsToReturn,
-                BrandId=productBrandId,
-                TypeId=productTypeId,
+                BrandId=productBrandId.Value,
+                TypeId=productTypeId.Value,
                 PageSize=pageSize,
                 IsAscending=isAscending,
                 TotalCount=productsToReturn.Count,
                 CurrentPage=currentPage
             });
+        }
+
+        public async Task<IDataResult<ProductListDto>> SearchAsync(string keyword, int currentPage, int pageSize = 5, bool isAscending = false)
+        {
+            IList<Product> products = new List<Product>();
+            pageSize = pageSize > 20 ? 20 : pageSize;
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                    products = await _unitOfWork.Products.GetAllAsync(null, x => x.ProductBrand, x => x.ProductType);
+                var sortedProducts = isAscending ? products.OrderBy(x => x.Price).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList() :
+                    products.OrderByDescending(x => x.Price).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                var productsToReturn = _mapper.Map<IList<ProductDto>>(sortedProducts);
+                return new DataResult<ProductListDto>(ResultStatus.Succes, new ProductListDto
+                {
+                    Products = productsToReturn,
+                    PageSize = pageSize,
+                    IsAscending = isAscending,
+                    TotalCount = productsToReturn.Count,
+                    CurrentPage = currentPage
+                });
+            }
+            else 
+            {
+                var searchedArticles = await _unitOfWork.Products.SearchAsync(new List<Expression<Func<Product, bool>>>
+            {
+                (p) => p.Name.Contains(keyword),
+                (p) => p.Description.Contains(keyword),
+                (p) => p.ProductBrand.Name.Contains(keyword),
+                (p) => p.ProductType.Name.Contains(keyword)
+            }, p => p.ProductType, p => p.ProductBrand);
+
+                var sortedAndSearchedProducts = isAscending ? searchedArticles.OrderBy(x => x.Price).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList() :
+                    searchedArticles.OrderByDescending(x => x.Price).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                var productsToReturn = _mapper.Map<IList<ProductDto>>(sortedAndSearchedProducts);
+                return new DataResult<ProductListDto>(ResultStatus.Succes, new ProductListDto
+                {
+                    Products = productsToReturn,
+                    PageSize = pageSize,
+                    IsAscending = isAscending,
+                    TotalCount = productsToReturn.Count,
+                    CurrentPage = currentPage
+                });
+            }
+
+        }
+
+        public async Task<IResult> AddRangeAsync(IList<ProductAddDto> products)
+        {
+            var product = _mapper.Map<IList<Product>>(products);
+            await _unitOfWork.Products.AddRangeAsync(product);
+            await _unitOfWork.CommitAsync();
+            return new Result(ResultStatus.Succes, "products has been added successfully");
         }
     }
 }

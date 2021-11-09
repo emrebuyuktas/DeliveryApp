@@ -75,5 +75,13 @@ namespace DeliveryApp.Services.Concrete
             var typesToList = _mapper.Map<ProductBrandWithProductsDto>(types);
             return new DataResult<ProductBrandWithProductsDto>(ResultStatus.Succes, typesToList);
         }
+
+        public async Task<IResult> AddRangeAsync(IList<ProductBrandAddDto> brands)
+        {
+            var brandsToAdd = _mapper.Map<IList<ProductBrand>>(brands);
+            await _unitOfWork.Brand.AddRangeAsync(brandsToAdd);
+            await _unitOfWork.CommitAsync();
+            return new Result(ResultStatus.Succes, "brands has been added successfully");
+        }
     }
 }

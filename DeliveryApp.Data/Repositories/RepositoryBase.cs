@@ -1,6 +1,7 @@
 ﻿using DeliveryApp.Core.Entities.Abstaract;
 using DeliveryApp.Core.Repositories.Abstract;
 using DeliveryApp.Data.EntityFramework.Context;
+using LinqKit;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,11 @@ namespace DeliveryApp.Data.Repositories
         public async Task AddAsync(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
+        }
+
+        public async Task AddRangeAsync(IList<T> entities)
+        {
+            await _context.Set<T>().AddRangeAsync(entities);
         }
 
         public async Task DeleteAsync(T entity)
@@ -61,22 +67,24 @@ namespace DeliveryApp.Data.Repositories
             return await query.SingleOrDefaultAsync();
         }
 
-        public async Task<IList<T>> Search(IList<Expression<Func<T, bool>>> predicates, params Expression<Func<T, object>>[] includeProperties)
+        public async Task<IList<T>> SearchAsync(IList<Expression<Func<T, bool>>> predicates, params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> query = _context.Set<T>();
             if (predicates.Any())
             {
-                foreach (var q in predicates)
+                var predicateChain = PredicateBuilder.New<T>();
+                foreach (var predicate in predicates)
                 {
-                    query = query.Where(q);
+                    predicateChain.Or(predicate);
                 }
+                query = query.Where(predicateChain);
             }
             if (includeProperties.Any())
             {
-                foreach (var p in includeProperties)
+                foreach (var include in includeProperties)
                 {
-                    query = query.Include(p);
-;                }
+                    query = query.Include(include);
+                }
             }
             return await query.ToListAsync();
         }
