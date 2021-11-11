@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using DeliveryApp.Core.Entities.Abstaract;
+using Microsoft.AspNetCore.Identity;
 
 namespace DeliveryApp.Core.Entities.Concrete
 {
-    public class RoleClaim : IdentityRoleClaim<int>
+    public class RoleClaim : IdentityRoleClaim<int>, IEntity
     {
     }
 }
