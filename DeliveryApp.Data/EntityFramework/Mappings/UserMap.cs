@@ -30,17 +30,6 @@ namespace DeliveryApp.Data.EntityFramework.Mappings
             // The relationships between User and other entity types
             // Note that these relationships are configured with no navigation properties
 
-            // Each User can have many UserClaims
-            b.HasMany<UserClaim>().WithOne().HasForeignKey(uc => uc.UserId).IsRequired();
-
-            // Each User can have many UserLogins
-            b.HasMany<UserLogin>().WithOne().HasForeignKey(ul => ul.UserId).IsRequired();
-
-            // Each User can have many UserTokens
-            b.HasMany<UserToken>().WithOne().HasForeignKey(ut => ut.UserId).IsRequired();
-
-            // Each User can have many entries in the UserRole join table
-            b.HasMany<UserRole>().WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
 
             
         }

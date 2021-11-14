@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DeliveryApp.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211111202801_InitialCreate")]
+    [Migration("20211114111050_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -327,8 +327,6 @@ namespace DeliveryApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("AspNetUserClaims");
                 });
 
@@ -349,8 +347,6 @@ namespace DeliveryApp.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserLogins");
                 });
@@ -475,44 +471,11 @@ namespace DeliveryApp.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DeliveryApp.Core.Entities.Concrete.UserClaim", b =>
-                {
-                    b.HasOne("DeliveryApp.Core.Entities.Concrete.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DeliveryApp.Core.Entities.Concrete.UserLogin", b =>
-                {
-                    b.HasOne("DeliveryApp.Core.Entities.Concrete.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("DeliveryApp.Core.Entities.Concrete.UserRole", b =>
                 {
                     b.HasOne("DeliveryApp.Core.Entities.Concrete.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DeliveryApp.Core.Entities.Concrete.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DeliveryApp.Core.Entities.Concrete.UserToken", b =>
-                {
-                    b.HasOne("DeliveryApp.Core.Entities.Concrete.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

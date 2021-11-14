@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DeliveryApp.Data.EntityFramework.Context
 {
-    public class AppDbContext: IdentityDbContext<User, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
+    public class AppDbContext : IdentityDbContext<User, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }
@@ -24,15 +24,15 @@ namespace DeliveryApp.Data.EntityFramework.Context
             modelBuilder.ApplyConfiguration(new ProductBrandMap());
             modelBuilder.ApplyConfiguration(new ProductTypeMap());
             modelBuilder.ApplyConfiguration(new OrderMap());
-            modelBuilder.ApplyConfiguration(new RoleMap());
+            modelBuilder.ApplyConfiguration(new CommentMap());
+            modelBuilder.ApplyConfiguration(new AdressMap());
             modelBuilder.ApplyConfiguration(new UserMap());
+            modelBuilder.ApplyConfiguration(new RoleMap());
+            modelBuilder.ApplyConfiguration(new UserRoleMap());
             modelBuilder.ApplyConfiguration(new RoleClaimMap());
             modelBuilder.ApplyConfiguration(new UserClaimMap());
             modelBuilder.ApplyConfiguration(new UserLoginMap());
-            modelBuilder.ApplyConfiguration(new UserRoleMap());
             modelBuilder.ApplyConfiguration(new UserTokenMap());
-            modelBuilder.ApplyConfiguration(new CommentMap());
-            modelBuilder.ApplyConfiguration(new AdressMap());
         }
     }
 }
