@@ -1,4 +1,5 @@
 ﻿using DeliveryApp.Core.Entities.Concrete;
+using DeliveryApp.Core.Services.Abstract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,12 +14,22 @@ namespace DeliveryApp.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
-        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager)
+        private readonly IUserService _userService;
+
+        public AuthController(IUserService userService)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
+            _userService = userService;
+        }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(UserLoginDto userLoginDto)
+        {
+
+        }
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register(UserRegisterDto userRegisterDto)
+        {
+
         }
     }
 }

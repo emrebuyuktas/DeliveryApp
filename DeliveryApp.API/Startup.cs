@@ -44,6 +44,7 @@ namespace DeliveryApp.API
             });
             services.AddAutoMapper(typeof(ProductProfile),typeof(ProducTypeProfile), typeof(ProductBrandProfile));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductTypeService, ProductTypeService>();
             services.AddScoped<IProductBrandService, ProductBrandService>();
