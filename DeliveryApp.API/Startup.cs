@@ -1,3 +1,4 @@
+using DeliveryApp.Core.Entities.Concrete;
 using DeliveryApp.Core.Repositories.Abstract;
 using DeliveryApp.Core.Services.Abstract;
 using DeliveryApp.Core.UnitOfWorks;
@@ -6,13 +7,18 @@ using DeliveryApp.Data.Repositories;
 using DeliveryApp.Data.UnitOfWork;
 using DeliveryApp.Services.AutoMapper.Profiles;
 using DeliveryApp.Services.Concrete;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Configuration;
+using System.Text;
 using System.Text.Json.Serialization;
 
 namespace DeliveryApp.API
@@ -42,13 +48,45 @@ namespace DeliveryApp.API
                 opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
             });
-            services.AddAutoMapper(typeof(ProductProfile),typeof(ProducTypeProfile), typeof(ProductBrandProfile));
+            services.AddAutoMapper(typeof(ProductProfile),typeof(ProducTypeProfile), typeof(ProductBrandProfile),typeof(RoleProfile));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductTypeService, ProductTypeService>();
             services.AddScoped<IProductBrandService, ProductBrandService>();
+            services.AddScoped<IRoleService, RoleService>();
             services.AddScoped(typeof(IRepository<>), typeof(RepositoryBase<>));
+
+
+
+            // For Identity  
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
+            // Adding Authentication  
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+
+            // Adding Jwt Bearer  
+            .AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = Configuration["Token:Audience"],
+                    ValidIssuer = Configuration["Token:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Token:SecurityKey"]))
+                };
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DeliveryApp.API", Version = "v1" });
@@ -71,6 +109,7 @@ namespace DeliveryApp.API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DeliveryApp.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211114111050_InitialCreate")]
+    [Migration("20211208100549_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -293,6 +293,10 @@ namespace DeliveryApp.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("UserSurname")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 

@@ -14,18 +14,18 @@ namespace DeliveryApp.Core.Dtos
         [Required(ErrorMessage = "Password can not be null.")]
         [MaxLength(100, ErrorMessage = "Password can not be longer than 100 character.")]
         [MinLength(7, ErrorMessage = "Password can not be shorter than 7 character.")]
-        public string Password { get; set; }
+        public string CurrentPassword { get; set; }
 
         [DisplayName("New_Password")]
         [Required(ErrorMessage = "New_Password can not be null.")]
         [MaxLength(100, ErrorMessage = "New_Password can not be longer than 100 character.")]
         [MinLength(7, ErrorMessage = "New_Password can not be shorter than 7 character.")]
-        public string New_Password { get; set; }
+        public string NewPassword { get; set; }
 
         [DisplayName("NewPassword_repeat")]
         [Required(ErrorMessage = "NewPassword_repeat can not be null.")]
         [MaxLength(100, ErrorMessage = "NewPassword_repeat can not be longer than 100 character.")]
         [MinLength(7, ErrorMessage = "NewPassword_repeat can not be shorter than 7 character.")]
-        public string NewPassword_repeat { get; set; }
+        public string RepeatPassword { get; set; }
     }
 }

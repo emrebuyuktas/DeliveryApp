@@ -1,6 +1,7 @@
 ﻿using DeliveryApp.Core.Dtos;
 using DeliveryApp.Core.Services.Abstract;
 using DeliveryApp.Shared.Result.ComplexTypes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace DeliveryApp.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BrandsController : ControllerBase
     {
         private readonly IProductBrandService _iproductBrandService;

@@ -9,6 +9,7 @@ namespace DeliveryApp.Core.Entities.Concrete
         public ICollection<Adress> Adresses { get; set; }
         public ICollection<Order> Orders { get; set; }
         public ICollection<Comment> Comments { get; set; }
+        public string UserSurname { get; set; }
 
     }
 }

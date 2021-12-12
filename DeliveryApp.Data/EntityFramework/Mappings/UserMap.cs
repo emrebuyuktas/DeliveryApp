@@ -23,6 +23,7 @@ namespace DeliveryApp.Data.EntityFramework.Mappings
 
             // Limit the size of columns to use efficient database types
             b.Property(u => u.UserName).HasMaxLength(256);
+            b.Property(u => u.UserSurname).HasMaxLength(256);
             b.Property(u => u.NormalizedUserName).HasMaxLength(256);
             b.Property(u => u.Email).HasMaxLength(256);
             b.Property(u => u.NormalizedEmail).HasMaxLength(256);
