@@ -12,6 +12,7 @@ namespace DeliveryApp.Core.UnitOfWorks
         IProductRepository Products { get; }
         IProductBrandRepository Brand { get; }
         IProductTypeRepository Type { get; }
+        ICommentRepository Comment { get; }
 
         Task CommitAsync();
         void Commit();

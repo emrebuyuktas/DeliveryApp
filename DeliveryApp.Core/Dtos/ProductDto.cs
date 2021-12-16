@@ -1,5 +1,7 @@
 ﻿
 
+using System.Collections.Generic;
+
 namespace DeliveryApp.Core.Dtos
 {
     public class ProductDto
@@ -11,5 +13,6 @@ namespace DeliveryApp.Core.Dtos
         public string ProductBrand { get; set; }
         public string ProductType { get; set; }        
         public string PictureUrl { get; set; }
+        public IList<CommentDto> Comments { get; set; }
     }
 }

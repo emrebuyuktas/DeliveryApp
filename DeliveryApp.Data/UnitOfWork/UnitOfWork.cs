@@ -13,7 +13,7 @@ namespace DeliveryApp.Data.UnitOfWork
         private ProductRepository _productRepository;
         private ProductBrandRepository _brandRepository;
         private ProductTypeRepository _productTypeRepository;
-        
+        private CommentRepository _commentRepository;
 
         public IProductRepository Products => _productRepository ??= new ProductRepository(_context);
 
@@ -22,6 +22,7 @@ namespace DeliveryApp.Data.UnitOfWork
         public IProductTypeRepository Type => _productTypeRepository ??= new ProductTypeRepository(_context);
 
         public IProductBrandRepository Brand => _brandRepository ??= new ProductBrandRepository(_context);
+        public ICommentRepository Comment => _commentRepository ??= new CommentRepository(_context);
 
         public UnitOfWork(AppDbContext context)
         {

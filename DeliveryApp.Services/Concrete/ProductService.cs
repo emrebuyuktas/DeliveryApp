@@ -3,7 +3,6 @@ using DeliveryApp.Core.Dtos;
 using DeliveryApp.Core.Entities.Concrete;
 using DeliveryApp.Core.Services.Abstract;
 using DeliveryApp.Core.UnitOfWorks;
-using DeliveryApp.Shared.Result;
 using DeliveryApp.Shared.Result.Abstract;
 using DeliveryApp.Shared.Result.ComplexTypes;
 using DeliveryApp.Shared.Result.Concrete;
@@ -154,6 +153,15 @@ namespace DeliveryApp.Services.Concrete
             await _unitOfWork.Products.AddRangeAsync(product);
             await _unitOfWork.CommitAsync();
             return new Result(ResultStatus.Succes, "products has been added successfully");
+        }
+
+        public async Task<IDataResult<ProductDto>> GetProductWithComments(int productId)
+        {
+            var product = await _unitOfWork.Products.GetAsync(x => x.Id == productId, x => x.ProductBrand, x => x.ProductType,x=>x.Comments.AsEnumerable().Where(x=>x.IsPublished==true));
+            if(product==null)
+                return new DataResult<ProductDto>(ResultStatus.Error, "No products found with specified criteria", null);
+            var productToReturnDto = _mapper.Map<ProductDto>(product);
+            return new DataResult<ProductDto>(ResultStatus.Succes, productToReturnDto);
         }
     }
 }
