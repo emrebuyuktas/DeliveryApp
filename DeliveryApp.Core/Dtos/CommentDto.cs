@@ -8,5 +8,6 @@ namespace DeliveryApp.Core.Dtos
         public DateTime Date { get; set; }
         public string UserName { get; set; }
         public string UserSurname { get; set; }
+        public int ProductId { get; set; }
     }
 }

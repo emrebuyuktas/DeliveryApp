@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using StackExchange.Redis;
 using System.Configuration;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -55,12 +56,17 @@ namespace DeliveryApp.API
             services.AddScoped<IProductTypeService, ProductTypeService>();
             services.AddScoped<IProductBrandService, ProductBrandService>();
             services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped(typeof(IRepository<>), typeof(RepositoryBase<>));
+            services.AddSingleton<IConnectionMultiplexer>(c => {
+                var configuration = ConfigurationOptions.Parse(Configuration
+                    .GetConnectionString("Redis"), true);
+                return ConnectionMultiplexer.Connect(configuration);
+            });
 
-
-
-            // For Identity  
-            services.AddIdentity<User, Role>()
+            // For Identity
+            services.AddIdentity<User, DeliveryApp.Core.Entities.Concrete.Role>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
