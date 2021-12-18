@@ -8,6 +8,6 @@ namespace DeliveryApp.Web.HttpService
 {
     public interface IApiService<T> where T: class
     {
-        Task<T> GetAsync(string url, HttpClient client);
+        Task<T> GetAsync(string url, HttpClient httpClient);
     }
 }

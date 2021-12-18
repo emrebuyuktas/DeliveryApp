@@ -1,4 +1,5 @@
 using DeliveryApp.Web.HttpService;
+using DeliveryApp.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.Web
@@ -24,8 +26,17 @@ namespace DeliveryApp.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
-            services.AddControllersWithViews();
+
+            services.AddControllersWithViews().AddJsonOptions(opt =>
+            {
+                opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                opt.JsonSerializerOptions.PropertyNamingPolicy = null;
+            });
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped(typeof(IApiService<>), typeof(ApiService<>));
+            services.AddHttpClient<ProductService>(opt => {
+                opt.BaseAddress = new Uri(Configuration["baseUrl"]);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

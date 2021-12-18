@@ -1,9 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿//using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Text.Json;
+using DeliveryApp.Web.Models;
 
 namespace DeliveryApp.Web.HttpService
 {
@@ -11,10 +13,9 @@ namespace DeliveryApp.Web.HttpService
     {
         public async Task<T> GetAsync(string url,HttpClient httpClient)
         {
+            await Task.Delay(2000);
             var response = await httpClient.GetAsync(url);
-
-            return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
-
+            return JsonSerializer.Deserialize<T>(await response.Content.ReadAsStringAsync());
 
         }
 

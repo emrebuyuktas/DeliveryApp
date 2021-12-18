@@ -46,8 +46,8 @@ namespace DeliveryApp.API
             });
             services.AddControllers().AddJsonOptions(opt =>
             {
-                opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-                opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+               //opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                opt.JsonSerializerOptions.PropertyNamingPolicy=null;
             });
             services.AddAutoMapper(typeof(ProductProfile),typeof(ProducTypeProfile), typeof(ProductBrandProfile),typeof(RoleProfile));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
