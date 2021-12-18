@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace DeliveryApp.Web.Models
 {
-    public class Brand
+    public class Category
     {
 
-        public IList<ProductBrandDto> Data { get; set; }
+        public IList<ProductTypeDto> Data { get; set; }
 
         public ResultStatus ResultStatus { get; set; }
 

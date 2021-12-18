@@ -12,5 +12,6 @@ namespace DeliveryApp.Web.HttpService
         Task<string> AddAsync(T model, string url, HttpClient httpClient);
         Task DeleteAsync(string url, HttpClient httpClient);
         Task UpdateAsync(T model, string url, HttpClient httpClient);
+        
     }
 }

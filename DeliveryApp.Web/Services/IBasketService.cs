@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace DeliveryApp.Web.Services
 {
-    public interface IBrandService
+    public interface IBasketService
     {
-        Task<Brand> GetAsync(string url);
-        Task<string> AddAsync(Brand brand, string url);
+        Task<Basket> GetAsync(string url);
+        Task<string> AddAsync(Basket basket, string url);
         Task DeleteAsync(string url, string id);
-        Task UpdateAsync(Brand brand, string url);
+        Task UpdateAsync(Basket basket, string url);
+
     }
 }

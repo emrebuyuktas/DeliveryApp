@@ -7,5 +7,7 @@ namespace DeliveryApp.Web.Services
     {
         Task<Product> GetAsync(string url);
         Task<string> AddAsync(Product product, string url);
+        Task DeleteAsync(string url, string id);
+        Task UpdateAsync(Product product, string url);
     }
 }

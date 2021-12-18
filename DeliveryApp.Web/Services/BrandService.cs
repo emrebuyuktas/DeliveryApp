@@ -16,9 +16,26 @@ namespace DeliveryApp.Web.Services
             _client = client;
         }
 
+        public async Task<string> AddAsync(Brand brand, string url)
+        {
+            return await _service.AddAsync(brand, url, _client);
+        }
+
+        public async Task DeleteAsync(string url, string id)
+        {
+            await _service.DeleteAsync(url + id, _client);
+        }
+
         public async Task<Brand> GetAsync(string url)
         {
             return await _service.GetAsync(url, _client);
         }
+        
+        public async Task UpdateAsync(Brand brand, string url)
+        {
+            await _service.UpdateAsync(brand, url, _client);
+        }
+
+        
     }
 }

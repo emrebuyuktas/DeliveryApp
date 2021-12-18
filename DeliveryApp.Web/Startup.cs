@@ -33,12 +33,20 @@ namespace DeliveryApp.Web
                 opt.JsonSerializerOptions.PropertyNamingPolicy = null;
             });
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IBrandService, BrandService>();
+            services.AddScoped<ICommentService, CommentService>();
             services.AddScoped(typeof(IApiService<>), typeof(ApiService<>));
             services.AddHttpClient<ProductService>(opt => {
                 opt.BaseAddress = new Uri(Configuration["baseUrl"]);
             });
             services.AddHttpClient<BrandService>(opt => {
+                opt.BaseAddress = new Uri(Configuration["baseUrl"]);
+            });
+            services.AddHttpClient<CommentService>(opt => {
+                opt.BaseAddress = new Uri(Configuration["baseUrl"]);
+            });
+            services.AddHttpClient<CategoryService>(opt => {
                 opt.BaseAddress = new Uri(Configuration["baseUrl"]);
             });
         }
