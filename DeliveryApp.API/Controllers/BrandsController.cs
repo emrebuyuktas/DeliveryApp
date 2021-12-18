@@ -10,7 +10,6 @@ namespace DeliveryApp.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class BrandsController : ControllerBase
     {
         private readonly IProductBrandService _iproductBrandService;

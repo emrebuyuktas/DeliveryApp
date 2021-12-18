@@ -14,8 +14,6 @@ namespace DeliveryApp.Core.Entities.Concrete
         public DateTime Date { get; set; } = DateTime.Now;
         public int ProductId { get; set; }
         public Product Product { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; }
         public virtual bool IsPublished { get; set; } = false;
     }
 }

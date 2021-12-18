@@ -19,7 +19,6 @@ namespace DeliveryApp.Data.EntityFramework.Mappings
             builder.Property(p => p.Text).HasMaxLength(250);
             builder.Property(p => p.Text).IsRequired();
             builder.Property(p => p.Date).IsRequired();
-            builder.HasOne<User>(p => p.User).WithMany(p => p.Comments).HasForeignKey(P => P.UserId);
             builder.HasOne<Product>(p => p.Product).WithMany(p => p.Comments).HasForeignKey(P => P.ProductId);
         }
     }

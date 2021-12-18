@@ -10,7 +10,6 @@ namespace DeliveryApp.Data.EntityFramework.Context
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<ProductBrand> ProductBrands { get; set; }
-        public DbSet<Order> Orders { get; set; }
         public DbSet<Comment> Comments { get; set; }
 
 
@@ -23,7 +22,6 @@ namespace DeliveryApp.Data.EntityFramework.Context
             modelBuilder.ApplyConfiguration(new ProductMap());
             modelBuilder.ApplyConfiguration(new ProductBrandMap());
             modelBuilder.ApplyConfiguration(new ProductTypeMap());
-            modelBuilder.ApplyConfiguration(new OrderMap());
             modelBuilder.ApplyConfiguration(new CommentMap());
             modelBuilder.ApplyConfiguration(new AdressMap());
             modelBuilder.ApplyConfiguration(new UserMap());

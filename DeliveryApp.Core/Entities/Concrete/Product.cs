@@ -12,7 +12,6 @@ namespace DeliveryApp.Core.Entities.Concrete
         public ProductType ProductType { get; set; }
         public int ProductBrandId { get; set; }
         public ProductBrand ProductBrand { get; set; }
-        public ICollection<Order> Orders { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public virtual int Rating { get; set; } = 0;
     }

@@ -1,0 +1,131 @@
+[
+  {
+    "Name": "1Kg Calf Meat",
+    "Price": 50,
+    "Description": "1Kg Calf Meat",
+    "ProductBrandId": 1,
+    "ProductTypeId": 2,
+    "PictureUrl": "https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/25010473/uzman-kasap-dana-yanak-577c85-1650x1650.jpg"
+  },
+  {
+    "Name": "Pinar Feta Cheese",
+    "Price": 28,
+    "Description": "Pýnar 800gram Feta Cheese",
+    "ProductBrandId": 2,
+    "ProductTypeId": 2,
+    "PictureUrl": "https://d2j6dbq0eux0bg.cloudfront.net/images/14151233/1562366055.jpg"
+  },
+  {
+    "Name": "Içim Semi-skimmed Milk",
+    "Price": 11,
+    "Description": "1 Liter Milk",
+    "ProductBrandId": 3,
+    "ProductTypeId": 2,
+    "PictureUrl": "https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/11014567/11014567-50f9b6.jpg"
+  },
+  {
+    "Name": "Uno Rye Bread",
+    "Price": 5,
+    "Description": "450gram Rye Bread",
+    "ProductBrandId": 4,
+    "ProductTypeId": 3,
+    "PictureUrl": "https://productimages.hepsiburada.net/s/27/500/10183751925810.jpg"
+  },
+  {
+    "Name": "Golf Ice Cream",
+    "Price": 18,
+    "Description": "Golf Marasim",
+    "ProductBrandId": 5,
+    "ProductTypeId": 1,
+    "PictureUrl": "https://3dpackshots.com/wp-content/uploads/2018/01/Golf-Marasim-1.jpg"
+  },
+  {
+    "Name": "Eti Burcak",
+    "Price": 3,
+    "Description": "131 gram Eti Burcak",
+    "ProductBrandId": 6,
+    "ProductTypeId": 1,
+    "PictureUrl": "https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/07010112/07010112-3c6818-1650x1650.jpg"
+  },
+  {
+    "Name": "Ulker Napoliten",
+    "Price": 4,
+    "Description": "Ulker Napoliten 33gram",
+    "ProductBrandId": 7,
+    "ProductTypeId": 1,
+    "PictureUrl": "https://cdn.cimri.io/market/260x260/ulker-napoliten-33-gr-cikolata-_458390.jpg"
+  },
+  {
+    "Name": "Ruffles with Ketchup Party",
+    "Price": 8,
+    "Description": "Ruffles with Ketchup Party 150 gram",
+    "ProductBrandId": 8,
+    "ProductTypeId": 1,
+    "PictureUrl": "https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/05087054/05087054-b7d4df-1650x1650.jpg"
+  },
+  {
+    "Name": "Lays Potato Chips",
+    "Price": 5,
+    "Description": "Lays Potato Chips Party",
+    "ProductBrandId": 9,
+    "ProductTypeId": 1,
+    "PictureUrl": "https://m.media-amazon.com/images/I/61FXwBMClcL._AC_SL1500_.jpg"
+  },
+  {
+    "Name": "Domestos bleach",
+    "Price": 15,
+    "Description": "mountain scented bleach 1.85 Liter",
+    "ProductBrandId": 10,
+    "ProductTypeId": 5,
+    "PictureUrl": "https://productimages.hepsiburada.net/s/112/1500/110000059284678.jpg"
+  },
+  {
+    "Name": "Elseve Shampoo",
+    "Price": 27,
+    "Description": "Complete Repair Shampoo 360Ml",
+    "ProductBrandId": 11,
+    "ProductTypeId": 4,
+    "PictureUrl": "https://cdn.dsmcdn.com/mnresize/1200/1800/ty76/product/media/images/20210220/2/65359313/143978031/1/1_org_zoom.jpg"
+  },
+  {
+    "Name": "Elseve Arginine",
+    "Price": 23,
+    "Description": "Hair care cream 450Ml",
+    "ProductBrandId": 11,
+    "ProductTypeId": 4,
+    "PictureUrl": "https://cdn.dsmcdn.com/mnresize/1200/1800/ty7/product/media/images/20200730/13/6420961/79367122/1/1_org_zoom.jpg"
+  },
+  {
+    "Name": "Elseve Macassar",
+    "Price": 21,
+    "Description": "hair beautifying cream",
+    "ProductBrandId": 11,
+    "ProductTypeId": 4,
+    "PictureUrl": "https://cdn.dsmcdn.com/mnresize/1200/1800/ty158/product/media/images/20210810/15/117338469/134947073/1/1_org_zoom.jpg"
+  },
+  {
+    "Name": "Lipton Tea Bags",
+    "Price": 25,
+    "Description": "Yellow Label Tea Bag 50 pieces",
+    "ProductBrandId": 12,
+    "ProductTypeId": 6,
+    "PictureUrl": "https://semtgida.com/wp-content/uploads/2019/05/yellow-label-50-pcs.jpg"
+  },
+  {
+    "Name": "lipton ice tea",
+    "Price": 10,
+    "Description": "lipton ice tea lemon 1.5L",
+    "ProductBrandId": 12,
+    "ProductTypeId": 6,
+    "PictureUrl": "https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/08059595/08059595-77e914.png"
+  },
+  {
+    "Name": "Domestos Surface cleaner",
+    "Price": 33,
+    "Description": "Surface cleaner 1.5L",
+    "ProductBrandId": 10,
+    "ProductTypeId": 5,
+    "PictureUrl": "https://productimages.hepsiburada.net/s/77/500/110000019298534.jpg"
+  }
+
+]
