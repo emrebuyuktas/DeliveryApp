@@ -9,6 +9,20 @@ namespace DeliveryApp.Core.Entities.Concrete
 {
     public class Adress:IEntity
     {
+        public Adress()
+        {
+
+        }
+        public Adress(int ıd, string street, string city, string neighbourhood, string doorNumber, string defination)
+        {
+            Id = ıd;
+            Street = street;
+            City = city;
+            Neighbourhood = neighbourhood;
+            DoorNumber = doorNumber;
+            Defination = defination;
+        }
+
         public int Id { get; set; }
         public string Street { get; set; }
         public string City { get; set; }

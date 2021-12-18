@@ -1,11 +1,7 @@
 ﻿using DeliveryApp.Core.Dtos;
 using DeliveryApp.Core.Services.Abstract;
 using DeliveryApp.Shared.Result.ComplexTypes;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.API.Controllers
