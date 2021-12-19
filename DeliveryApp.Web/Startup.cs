@@ -35,7 +35,9 @@ namespace DeliveryApp.Web
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IBrandService, BrandService>();
+            services.AddScoped<IBasketService, BasketService>();
             services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<IAuthService, AuthService>();
             services.AddScoped(typeof(IApiService<>), typeof(ApiService<>));
             services.AddHttpClient<ProductService>(opt => {
                 opt.BaseAddress = new Uri(Configuration["baseUrl"]);
@@ -47,6 +49,12 @@ namespace DeliveryApp.Web
                 opt.BaseAddress = new Uri(Configuration["baseUrl"]);
             });
             services.AddHttpClient<CategoryService>(opt => {
+                opt.BaseAddress = new Uri(Configuration["baseUrl"]);
+            });
+            services.AddHttpClient<BasketService>(opt => {
+                opt.BaseAddress = new Uri(Configuration["baseUrl"]);
+            });
+            services.AddHttpClient<AuthService>(opt => {
                 opt.BaseAddress = new Uri(Configuration["baseUrl"]);
             });
         }

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.Web.Controllers
-{
+{    
     public class HomeController : Controller
     {
         private readonly IProductService _product;
@@ -11,6 +11,7 @@ namespace DeliveryApp.Web.Controllers
         {
             _product = product;
         }
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var model = await _product.GetAsync("https://localhost:44369/api/Products");
