@@ -1,6 +1,7 @@
 ﻿using DeliveryApp.Core.Entities.Abstaract;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace DeliveryApp.Core.Entities.Concrete
 {

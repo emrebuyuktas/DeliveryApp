@@ -10,6 +10,6 @@ namespace DeliveryApp.Core.Services.Abstract
 {
     public interface IOrderService
     {
-        Task<IDataResult<OrderDto>> CreateOrderAsync(string basketId);
+        Task<IDataResult<OrderDto>> CreateOrderAsync(string basketId,string userEmail);
     }
 }

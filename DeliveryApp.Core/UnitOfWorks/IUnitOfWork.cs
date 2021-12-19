@@ -14,6 +14,7 @@ namespace DeliveryApp.Core.UnitOfWorks
         IProductTypeRepository Type { get; }
         ICommentRepository Comment { get; }
         IOrderRepository Order { get; }
+        IAddressRepository Address { get; }
         Task CommitAsync();
         void Commit();
 

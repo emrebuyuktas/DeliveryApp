@@ -4,11 +4,11 @@ using DeliveryApp.Core.Entities.Concrete;
 
 namespace DeliveryApp.Services.AutoMapper.Profiles
 {
-    public class OrderProfile:Profile
+    public class AddressProfile:Profile
     {
-        public OrderProfile()
+        public AddressProfile()
         {
-            CreateMap<Order, OrderDto>().ReverseMap();
+            CreateMap<AddressDto, Adress>().ReverseMap();
         }
     }
 }

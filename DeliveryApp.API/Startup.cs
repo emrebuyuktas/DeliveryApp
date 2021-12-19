@@ -46,11 +46,12 @@ namespace DeliveryApp.API
             });
             services.AddControllers().AddJsonOptions(opt =>
             {
-               //opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                //opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
                 opt.JsonSerializerOptions.PropertyNamingPolicy=null;
             });
             services.AddAutoMapper(typeof(ProductProfile),typeof(ProducTypeProfile), typeof(ProductBrandProfile),
-                typeof(RoleProfile), typeof(OrderProfile));
+                typeof(RoleProfile), typeof(OrderProfile), typeof(AddressProfile));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();
@@ -59,6 +60,8 @@ namespace DeliveryApp.API
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<IBasketRepository, BasketRepository>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IAddressService, AddressService>();
             services.AddScoped(typeof(IRepository<>), typeof(RepositoryBase<>));
             services.AddHttpContextAccessor();
             services.AddSingleton<IConnectionMultiplexer>(c => {

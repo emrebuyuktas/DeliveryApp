@@ -30,6 +30,7 @@ namespace DeliveryApp.Web
             services.AddControllersWithViews().AddJsonOptions(opt =>
             {
                 opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
                 opt.JsonSerializerOptions.PropertyNamingPolicy = null;
             });
             services.AddScoped<IProductService, ProductService>();

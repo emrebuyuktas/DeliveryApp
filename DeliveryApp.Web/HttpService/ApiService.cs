@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Text.Json;
 using DeliveryApp.Web.Models;
+using System.Text.Json.Serialization;
 
 namespace DeliveryApp.Web.HttpService
 {
@@ -27,7 +28,10 @@ namespace DeliveryApp.Web.HttpService
         {
             await Task.Delay(2000);
             var response = await httpClient.GetAsync(url);
-            return JsonSerializer.Deserialize<T>(await response.Content.ReadAsStringAsync());
+            return JsonSerializer.Deserialize<T>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            });
         }
 
         public async Task UpdateAsync(T model, string url, HttpClient httpClient)
