@@ -1,11 +1,7 @@
 ﻿using DeliveryApp.Core.Entities.Concrete;
 using DeliveryApp.Core.Repositories.Abstract;
-using DeliveryApp.Shared.Result.Abstract;
 using StackExchange.Redis;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -27,7 +23,22 @@ namespace DeliveryApp.Data.Repositories
         public async Task<CustomerBasket> GetBasketAsync(string id)
         {
             var data = await _database.StringGetAsync(id);
-            return data.IsNullOrEmpty ? null : JsonSerializer.Deserialize<CustomerBasket>(data);
+            CustomerBasket basket = new CustomerBasket();
+            if (!data.IsNullOrEmpty)
+            {
+                basket= JsonSerializer.Deserialize<CustomerBasket>(data);
+                foreach (var item in basket.Items)
+                {
+                    if(item.Quantity>0)
+                        basket.TotalPrice += item.Price * item.Quantity;
+                    else
+                    {
+                        basket.TotalPrice += item.Price;
+                    }
+                }
+            }
+
+            return data.IsNullOrEmpty ? null : basket;
         }
 
         public async Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket)

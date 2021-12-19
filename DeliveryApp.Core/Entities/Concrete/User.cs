@@ -1,5 +1,6 @@
 ﻿using DeliveryApp.Core.Entities.Abstaract;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace DeliveryApp.Core.Entities.Concrete
 {
@@ -7,6 +8,6 @@ namespace DeliveryApp.Core.Entities.Concrete
     {
         public Adress Adresses { get; set; }
         public string UserSurname { get; set; }
-
+        public ICollection<Order> Orders { get; set; }
     }
 }

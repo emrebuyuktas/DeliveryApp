@@ -14,5 +14,6 @@ namespace DeliveryApp.Core.Dtos
         public string ProductType { get; set; }        
         public string PictureUrl { get; set; }
         public IList<CommentDto> Comments { get; set; }
+        public virtual int Quantity { get; set; } = 0;
     }
 }

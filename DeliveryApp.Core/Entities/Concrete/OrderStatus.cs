@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DeliveryApp.Core.Entities.Concrete
 {
-    public enum OrderStaus
+    public enum OrderStatus
     {
         [EnumMember(Value = "Preparing")]
         Preparing,

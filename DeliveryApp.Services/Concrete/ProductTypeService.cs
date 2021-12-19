@@ -72,7 +72,6 @@ namespace DeliveryApp.Services.Concrete
                 return new DataResult<ProductTypeWithProductsDto>(ResultStatus.Error, "No types found with specified criteria", null);
             var typesToList = _mapper.Map<ProductTypeWithProductsDto>(types);
             return new DataResult<ProductTypeWithProductsDto>(ResultStatus.Succes, typesToList);
-
         }
 
         public async Task<IResult> AddRangeAsync(IList<ProductTypeAddDto> types)

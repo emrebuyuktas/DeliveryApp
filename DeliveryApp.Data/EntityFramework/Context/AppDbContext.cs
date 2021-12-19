@@ -11,7 +11,7 @@ namespace DeliveryApp.Data.EntityFramework.Context
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<ProductBrand> ProductBrands { get; set; }
         public DbSet<Comment> Comments { get; set; }
-
+        public DbSet<Order> Orders { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -31,6 +31,7 @@ namespace DeliveryApp.Data.EntityFramework.Context
             modelBuilder.ApplyConfiguration(new UserClaimMap());
             modelBuilder.ApplyConfiguration(new UserLoginMap());
             modelBuilder.ApplyConfiguration(new UserTokenMap());
+            modelBuilder.ApplyConfiguration(new OrderMap());
         }
     }
 }

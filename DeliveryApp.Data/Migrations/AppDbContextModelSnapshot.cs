@@ -56,7 +56,8 @@ namespace DeliveryApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Adress");
                 });
@@ -87,6 +88,39 @@ namespace DeliveryApp.Data.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("DeliveryApp.Core.Entities.Concrete.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DeliverAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsCanceled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("DeliveryApp.Core.Entities.Concrete.Product", b =>
@@ -367,11 +401,26 @@ namespace DeliveryApp.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("OrderProduct", b =>
+                {
+                    b.Property<int>("OrdersId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrdersId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("OrderProduct");
+                });
+
             modelBuilder.Entity("DeliveryApp.Core.Entities.Concrete.Adress", b =>
                 {
                     b.HasOne("DeliveryApp.Core.Entities.Concrete.User", "User")
-                        .WithMany("Adresses")
-                        .HasForeignKey("UserId")
+                        .WithOne("Adresses")
+                        .HasForeignKey("DeliveryApp.Core.Entities.Concrete.Adress", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -387,6 +436,17 @@ namespace DeliveryApp.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("DeliveryApp.Core.Entities.Concrete.Order", b =>
+                {
+                    b.HasOne("DeliveryApp.Core.Entities.Concrete.User", "User")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DeliveryApp.Core.Entities.Concrete.Product", b =>
@@ -426,6 +486,21 @@ namespace DeliveryApp.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("OrderProduct", b =>
+                {
+                    b.HasOne("DeliveryApp.Core.Entities.Concrete.Order", null)
+                        .WithMany()
+                        .HasForeignKey("OrdersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DeliveryApp.Core.Entities.Concrete.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("DeliveryApp.Core.Entities.Concrete.Product", b =>
                 {
                     b.Navigation("Comments");
@@ -444,6 +519,8 @@ namespace DeliveryApp.Data.Migrations
             modelBuilder.Entity("DeliveryApp.Core.Entities.Concrete.User", b =>
                 {
                     b.Navigation("Adresses");
+
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

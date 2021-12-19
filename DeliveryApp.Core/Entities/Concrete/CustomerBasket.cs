@@ -23,5 +23,6 @@ namespace DeliveryApp.Core.Entities.Concrete
         public string ClientSecret { get; set; }
         public string PaymentIntentId { get; set; }
         public decimal ShippingPrice { get; set; }
+        public decimal TotalPrice { get; set; }
     }
 }

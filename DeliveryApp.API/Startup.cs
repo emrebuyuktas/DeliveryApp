@@ -49,7 +49,8 @@ namespace DeliveryApp.API
                //opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 opt.JsonSerializerOptions.PropertyNamingPolicy=null;
             });
-            services.AddAutoMapper(typeof(ProductProfile),typeof(ProducTypeProfile), typeof(ProductBrandProfile),typeof(RoleProfile));
+            services.AddAutoMapper(typeof(ProductProfile),typeof(ProducTypeProfile), typeof(ProductBrandProfile),
+                typeof(RoleProfile), typeof(OrderProfile));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();
@@ -59,6 +60,7 @@ namespace DeliveryApp.API
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped(typeof(IRepository<>), typeof(RepositoryBase<>));
+            services.AddHttpContextAccessor();
             services.AddSingleton<IConnectionMultiplexer>(c => {
                 var configuration = ConfigurationOptions.Parse(Configuration
                     .GetConnectionString("Redis"), true);

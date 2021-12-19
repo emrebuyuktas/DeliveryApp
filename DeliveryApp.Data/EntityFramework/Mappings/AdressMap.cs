@@ -21,7 +21,7 @@ namespace DeliveryApp.Data.EntityFramework.Mappings
             builder.Property(p => p.DoorNumber).IsRequired();
             builder.Property(p => p.Defination).HasMaxLength(150);
             builder.Property(p => p.Defination).IsRequired();
-            builder.HasOne<User>(p => p.User).WithMany(p => p.Adresses).HasForeignKey(P => P.UserId);
+            builder.HasOne<User>(p => p.User).WithOne(p => p.Adresses).HasForeignKey<Adress>(p => p.UserId);
         }
     }
 }
