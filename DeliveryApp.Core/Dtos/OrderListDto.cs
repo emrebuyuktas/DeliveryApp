@@ -10,7 +10,7 @@ namespace DeliveryApp.Core.Dtos
     public class OrderListDto
     {
         public int Id { get; set; }
-        public IList<Product> Products { get; set; }
+        public IList<OrderedProductDto> Products { get; set; }
         public string DeliverAddress { get; set; }
         public DateTime OrderDate { get; set; }
         public virtual OrderStatus Status { get; set; }

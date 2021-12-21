@@ -62,6 +62,7 @@ namespace DeliveryApp.API
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IAddressService, AddressService>();
+            services.AddScoped<IOrderProductRepository, OrderProductRepository>();
             services.AddScoped(typeof(IRepository<>), typeof(RepositoryBase<>));
             services.AddHttpContextAccessor();
             services.AddSingleton<IConnectionMultiplexer>(c => {

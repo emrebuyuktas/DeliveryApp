@@ -1,4 +1,5 @@
-﻿using DeliveryApp.Core.Entities.Concrete;
+﻿using DeliveryApp.Core.Dtos;
+using DeliveryApp.Core.Entities.Concrete;
 using DeliveryApp.Data.EntityFramework.Mappings;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ namespace DeliveryApp.Data.EntityFramework.Context
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Adress> Adress { get; set; }
+        public DbSet<OrderProduct> OrderProduct { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {

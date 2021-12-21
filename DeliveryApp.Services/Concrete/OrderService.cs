@@ -21,13 +21,15 @@ namespace DeliveryApp.Services.Concrete
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
         private readonly IAddressService _addressService;
-        public OrderService(IBasketRepository basketRepo, IUnitOfWork unitOfWork, UserManager<User> userManager, IMapper mapper, IAddressService addressService)
+        private readonly IOrderProductRepository _orderProductRepository;
+        public OrderService(IBasketRepository basketRepo, IUnitOfWork unitOfWork, UserManager<User> userManager, IMapper mapper, IAddressService addressService, IOrderProductRepository orderProductRepository)
         {
             _basketRepo = basketRepo;
             _unitOfWork = unitOfWork;
             _userManager = userManager;
             _mapper = mapper;
             _addressService = addressService;
+            _orderProductRepository = orderProductRepository;
         }
 
 
@@ -56,6 +58,11 @@ namespace DeliveryApp.Services.Concrete
             if (response == null)
                 return new DataResult<IList<OrderListDto>>(ResultStatus.Error, null);
             var orders = _mapper.Map<IList<OrderListDto>>(response);
+            List<int> Quantities = new List<int>();
+            foreach (var item in response)
+            {
+                Quantities.Add(await _orderProductRepository.GetAsync(x=>x.OrdersId==item.Id && x.OrdersId ==item.Products.));
+            }
             return new DataResult<IList<OrderListDto>>(ResultStatus.Succes, orders);
         }
 
