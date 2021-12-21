@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
 </head>
+
 <body>
+    <div>@Html.Partial("Header", null)</div>
     <div>
         @RenderBody()
+    </div>
+
+    <div>
+        @Html.Partial("Footer", null)
     </div>
 </body>
 </html>
