@@ -4,7 +4,6 @@ using DeliveryApp.Core.Entities.Concrete;
 using DeliveryApp.Core.Repositories.Abstract;
 using DeliveryApp.Core.Services.Abstract;
 using DeliveryApp.Core.UnitOfWorks;
-using DeliveryApp.Data.UnitOfWork;
 using DeliveryApp.Shared.Result.Abstract;
 using DeliveryApp.Shared.Result.ComplexTypes;
 using DeliveryApp.Shared.Result.Concrete;
@@ -46,16 +45,51 @@ namespace DeliveryApp.Services.Concrete
             Order order = new Order(productList,deliveryAddress,user.Id,user,basket.TotalPrice);
             await _unitOfWork.Order.AddAsync(order);
             var returnDto=_mapper.Map<OrderDto>(order);
-            try
-            {
-                await _unitOfWork.CommitAsync();
-            }
-            catch (Exception e)
-            {
-
-                throw;
-            }
+            await _unitOfWork.CommitAsync();
             return new DataResult<OrderDto>(ResultStatus.Succes, returnDto);
+        }
+
+        public async Task<IDataResult<IList<OrderListDto>>> GetOrderAsync(string userEmail)
+        {
+            var user= await _userManager.FindByEmailAsync(userEmail);
+            var response = await _unitOfWork.Order.GetAllAsync(x=>x.UserId==user.Id,x=>x.Products);
+            if (response == null)
+                return new DataResult<IList<OrderListDto>>(ResultStatus.Error, null);
+            var orders = _mapper.Map<IList<OrderListDto>>(response);
+            return new DataResult<IList<OrderListDto>>(ResultStatus.Succes, orders);
+        }
+
+        public async Task<IDataResult<IList<OrderListDto>>> GetOrdersAsync()
+        {
+            var response = await _unitOfWork.Order.GetAllAsync(null,x=>x.Products);
+            if (response == null)
+                return new DataResult<IList<OrderListDto>>(ResultStatus.Error, null);
+            var orders = _mapper.Map<IList<OrderListDto>>(response);
+            return new DataResult<IList<OrderListDto>>(ResultStatus.Succes, orders);
+        }
+
+        public async Task<IResult> OrderCancelAsync(int id)
+        {
+            var response = await _unitOfWork.Order.GetAsync(x => x.Id==id);
+            if (response.Status == OrderStatus.Delivered || response.Status == OrderStatus.InDelivery || response==null)
+                return new Result(ResultStatus.Info, "You cannot cancel your order that has been delivered or delivered.");
+            response.IsCanceled = true;
+            await _unitOfWork.Order.UpdateAsync(response);
+            await _unitOfWork.CommitAsync();
+            return new Result(ResultStatus.Succes, "Your order has been canceled");
+        }
+        public async Task<IResult> UpdateOrderAsync(OrderListDto orderListDto)
+        {
+            var response = await _unitOfWork.Order.GetAsync(x => x.Id == orderListDto.Id,x=>x.Products);
+            if (response==null)
+                return new Result(ResultStatus.Error, "There is no any order specified criteria");
+            var updateDto = _mapper.Map<Order>(orderListDto);
+            updateDto.Products = response.Products;
+            updateDto.UserId = response.UserId;
+            updateDto.Status = orderListDto.Status;
+            await _unitOfWork.Order.UpdateAsync(response);
+            await _unitOfWork.CommitAsync();
+            return new Result(ResultStatus.Succes, "Your order has been updated");
         }
     }
 }

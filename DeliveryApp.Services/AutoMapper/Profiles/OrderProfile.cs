@@ -9,6 +9,7 @@ namespace DeliveryApp.Services.AutoMapper.Profiles
         public OrderProfile()
         {
             CreateMap<Order, OrderDto>().ReverseMap();
+            CreateMap<Order, OrderListDto>().ReverseMap();
         }
     }
 }

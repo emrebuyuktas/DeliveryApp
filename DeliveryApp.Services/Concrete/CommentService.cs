@@ -6,6 +6,7 @@ using DeliveryApp.Core.UnitOfWorks;
 using DeliveryApp.Shared.Result.Abstract;
 using DeliveryApp.Shared.Result.ComplexTypes;
 using DeliveryApp.Shared.Result.Concrete;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.Services.Concrete
@@ -36,6 +37,15 @@ namespace DeliveryApp.Services.Concrete
             await _unitOfWork.Comment.DeleteAsync(comment);
             await _unitOfWork.CommitAsync();
             return new Result(ResultStatus.Succes, $"Comment has been deleted successfully");
+        }
+
+        public async Task<IDataResult<IList<CommentReturnDto>>> GetAllComments()
+        {
+            var response = await _unitOfWork.Comment.GetAllAsync();
+            if (response == null)
+                return new DataResult<IList<CommentReturnDto>>(ResultStatus.Error, null);
+            var comments = _mapper.Map<IList<CommentReturnDto>>(response);
+            return new DataResult<IList<CommentReturnDto>>(ResultStatus.Succes, comments);
         }
 
         public async Task<IResult> PublishAsync(int id)

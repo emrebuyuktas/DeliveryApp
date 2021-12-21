@@ -16,6 +16,14 @@ namespace DeliveryApp.API.Controllers
         {
             _commentService = commentService;
         }
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var comments = await _commentService.GetAllComments();
+            if (comments == null)
+                return BadRequest(comments);
+            return Ok(comments);
+        }
         [HttpPost]
         public async Task<IActionResult> Add(CommentDto commentDto)
         {
@@ -32,7 +40,7 @@ namespace DeliveryApp.API.Controllers
                 return BadRequest(deletedComment);
             return NoContent();
         }
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Publish(int id)
         {
             var comment = await _commentService.PublishAsync(id);

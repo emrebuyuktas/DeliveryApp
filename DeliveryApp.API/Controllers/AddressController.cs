@@ -1,5 +1,6 @@
 ﻿using DeliveryApp.Core.Dtos;
 using DeliveryApp.Core.Services.Abstract;
+using DeliveryApp.Shared.Result.ComplexTypes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,16 +27,43 @@ namespace DeliveryApp.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Adress(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            var brand = await _addressService.GetAsync(id);
-            return Ok(brand);
+            var address = await _addressService.GetAsync(id);
+            if (address.ResultStatus == ResultStatus.Error)
+                return BadRequest(address);
+            return Ok(address);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var address = await _addressService.GetAllAsync();
+            if (address.ResultStatus == ResultStatus.Error)
+                return BadRequest(address);
+            return Ok(address);
         }
         [HttpPost]
-        public async Task<IActionResult> Adress(AddressDto addressDto)
+        public async Task<IActionResult> Add(AddressAddDto addressDto)
         {
             var userEmail = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
             return Created(string.Empty,await _addressService.AddAsync(addressDto, userEmail));
+        }
+        [HttpPut]
+        public async Task<IActionResult> Update(AddressUpdateDto addressDto)
+        {
+            var userEmail = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+            var result = await _addressService.UpdateAsync(addressDto,userEmail);
+            if (result.ResultStatus == ResultStatus.Error)
+                return BadRequest(result);
+            return NoContent();
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _addressService.DeleteAsync(id);
+            if (result.ResultStatus == ResultStatus.Error)
+                return BadRequest(result);
+            return NoContent();
         }
     }
 }

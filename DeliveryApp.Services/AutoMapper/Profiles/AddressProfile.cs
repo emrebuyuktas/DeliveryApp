@@ -9,6 +9,8 @@ namespace DeliveryApp.Services.AutoMapper.Profiles
         public AddressProfile()
         {
             CreateMap<AddressDto, Adress>().ReverseMap();
+            CreateMap<AddressAddDto, Adress>().ReverseMap();
+            CreateMap<AddressUpdateDto, Adress>().ReverseMap();
         }
     }
 }

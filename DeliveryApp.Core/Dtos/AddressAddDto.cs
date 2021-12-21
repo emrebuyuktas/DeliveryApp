@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace DeliveryApp.Core.Dtos
 {
-    public class AddressDto
+    public class AddressAddDto
     {
-        public int Id { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
         public string Neighbourhood { get; set; }

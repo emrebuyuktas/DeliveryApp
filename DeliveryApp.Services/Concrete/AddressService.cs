@@ -7,10 +7,7 @@ using DeliveryApp.Shared.Result.Abstract;
 using DeliveryApp.Shared.Result.ComplexTypes;
 using DeliveryApp.Shared.Result.Concrete;
 using Microsoft.AspNetCore.Identity;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.Services.Concrete
@@ -27,7 +24,7 @@ namespace DeliveryApp.Services.Concrete
             _userManager = userManager;
         }
 
-        public async Task<IResult> AddAsync(AddressDto address,string userEmail)
+        public async Task<IResult> AddAsync(AddressAddDto address,string userEmail)
         {
             var add = _mapper.Map<Adress>(address);
             var user = await _userManager.FindByEmailAsync(userEmail);
@@ -38,9 +35,23 @@ namespace DeliveryApp.Services.Concrete
             return new Result(ResultStatus.Succes, "Address successfully added");
         }
 
-        public Task<IResult> DeleteAsync(int id)
+        public async Task<IResult> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var address = await _unitOfWork.Address.GetAsync(x => x.Id == id);
+            if (address == null)
+                return new Result(ResultStatus.Error, "The specified address was not found.");
+            await _unitOfWork.Address.DeleteAsync(address);
+            await _unitOfWork.CommitAsync();
+            return new Result(ResultStatus.Succes, "The specified address deleted.");
+        }
+
+        public async Task<IDataResult<IList<AddressDto>>> GetAllAsync()
+        {
+            var response =await _unitOfWork.Address.GetAllAsync();
+            if (response == null)
+                return new DataResult<IList<AddressDto>>(ResultStatus.Error, null);
+            var addresses = _mapper.Map<IList<AddressDto>>(response);
+            return new DataResult<IList<AddressDto>>(ResultStatus.Succes, addresses);
         }
 
         public async Task<IDataResult<AddressDto>> GetAsync(int id)
@@ -60,9 +71,15 @@ namespace DeliveryApp.Services.Concrete
             return new DataResult<AddressDto>(ResultStatus.Succes,map);
         }
 
-        public Task<IResult> UpdateAsync(AddressDto address)
+        public async Task<IResult> UpdateAsync(AddressUpdateDto addressUpdateDto, string userEmail)
         {
-            throw new NotImplementedException();
+            var address = _mapper.Map<Adress>(addressUpdateDto);
+            var user = await _userManager.FindByEmailAsync(userEmail);
+            address.User = user;
+            address.UserId = user.Id;
+            await _unitOfWork.Address.UpdateAsync(address);
+            await _unitOfWork.CommitAsync();
+            return new Result(ResultStatus.Succes, "The specified address updated.");
         }
     }
 }

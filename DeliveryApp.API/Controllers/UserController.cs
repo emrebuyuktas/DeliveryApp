@@ -1,10 +1,7 @@
 ﻿using DeliveryApp.Core.Dtos;
-using DeliveryApp.Core.Entities.Concrete;
 using DeliveryApp.Core.Services.Abstract;
 using DeliveryApp.Shared.Result.ComplexTypes;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.API.Controllers

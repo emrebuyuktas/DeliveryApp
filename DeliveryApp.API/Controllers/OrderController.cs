@@ -1,5 +1,7 @@
-﻿using DeliveryApp.Core.Entities.Concrete;
+﻿using DeliveryApp.Core.Dtos;
+using DeliveryApp.Core.Entities.Concrete;
 using DeliveryApp.Core.Services.Abstract;
+using DeliveryApp.Shared.Result.ComplexTypes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -24,12 +26,47 @@ namespace DeliveryApp.API.Controllers
             _userManager = userManager;
         }
         [HttpPost("{id}")]
-        public async Task<ActionResult<Order>> CreateOrder(string id)
+        public async Task<IActionResult> CreateOrder(string id)
         {
             var userEmail = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
             var userId = await _userManager.FindByEmailAsync(userEmail);
             var order = await _orderService.CreateOrderAsync(id, userEmail);
+            if (order.ResultStatus == ResultStatus.Error)
+                return BadRequest(order);
             return Ok(order);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetOrders()
+        {
+            var orders = await _orderService.GetOrdersAsync();
+            if (orders.ResultStatus == ResultStatus.Error)
+                return BadRequest(orders);
+            return Ok(orders);
+        }
+        [HttpGet("user")]
+        public async Task<IActionResult> GetUserOrders()
+        {
+            var userEmail = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+            var orders = await _orderService.GetOrderAsync(userEmail);
+            if (orders.ResultStatus == ResultStatus.Error)
+                return BadRequest(orders);
+            return Ok(orders);
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> OrderCancel(int id)
+        {
+            var orderCancel = await _orderService.OrderCancelAsync(id);
+            if (orderCancel.ResultStatus == ResultStatus.Info)
+                return BadRequest(orderCancel);
+            return NoContent();
+        }
+        [HttpPut]
+        public async Task<IActionResult> UpdateOrder(OrderListDto orderListDto)
+        {
+            var order = await _orderService.UpdateOrderAsync(orderListDto);
+            if (order.ResultStatus == ResultStatus.Error)
+                return BadRequest(order);
+            return NoContent();
         }
     }
 }
