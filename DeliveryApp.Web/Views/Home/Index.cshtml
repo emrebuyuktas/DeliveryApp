@@ -1,11 +1,15 @@
 ﻿@model DeliveryApp.Web.Models.Product
-@Html.Partial("Header", null)
 
-@Html.Partial("Banner", null)
 
-@Html.Partial("Products2", Model)
+    <div>@Html.Partial("Header", null)</div>
 
-@Html.Partial("RelatedProducts", null)
+    <div>@Html.Partial("Banner", null)</div>
 
-@Html.Partial("Footer", Model)
+    <div>@Html.Partial("Products2", Model)</div>
 
+
+    <div>@Html.Partial("RelatedProducts", null)</div>
+
+
+
+    <div>@Html.Partial("Footer", Model)</div>
