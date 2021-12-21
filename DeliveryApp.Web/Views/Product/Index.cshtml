@@ -1,10 +1,5 @@
 ﻿@model DeliveryApp.Web.Models.Product
 
 
-@Html.Partial("Header", Model);
+@Html.Partial("ProductDetail", Model);
 
-@foreach (var data in Model.Data)
-{
-    <img src="@data.PictureUrl"><a></a>
-
-}
