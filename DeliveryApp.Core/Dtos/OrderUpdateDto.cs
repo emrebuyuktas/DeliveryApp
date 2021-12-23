@@ -7,14 +7,10 @@ using System.Threading.Tasks;
 
 namespace DeliveryApp.Core.Dtos
 {
-    public class OrderListDto
+    public class OrderUpdateDto
     {
         public int Id { get; set; }
-        public IList<OrderedProductDto> Products { get; set; }
-        public string DeliverAddress { get; set; }
-        public string Quantities { get; set; }
-        public DateTime OrderDate { get; set; }
         public OrderStatus Status { get; set; }
-        public decimal TotalPrice { get; set; }
+        public bool IsCanceled { get; set; }
     }
 }

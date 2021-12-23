@@ -61,9 +61,9 @@ namespace DeliveryApp.API.Controllers
             return NoContent();
         }
         [HttpPut]
-        public async Task<IActionResult> UpdateOrder(OrderListDto orderListDto)
+        public async Task<IActionResult> UpdateOrder(OrderUpdateDto orderUpdateDto)
         {
-            var order = await _orderService.UpdateOrderAsync(orderListDto);
+            var order = await _orderService.UpdateOrderAsync(orderUpdateDto);
             if (order.ResultStatus == ResultStatus.Error)
                 return BadRequest(order);
             return NoContent();

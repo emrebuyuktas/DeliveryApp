@@ -14,6 +14,6 @@ namespace DeliveryApp.Core.Services.Abstract
         Task<IDataResult<IList<OrderListDto>>> GetOrderAsync(string userEmail);
         Task<IDataResult<IList<OrderListDto>>> GetOrdersAsync();
         Task<IResult> OrderCancelAsync(int id);
-        Task<IResult> UpdateOrderAsync(OrderListDto orderListDto);
+        Task<IResult> UpdateOrderAsync(OrderUpdateDto orderUpdateDto);
     }
 }
