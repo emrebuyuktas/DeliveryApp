@@ -30,7 +30,7 @@ namespace DeliveryApp.Web.Services
             await _service.DeleteAsync(url + id, _client);
         }
 
-        public async Task<Product> GetAsync(string url,PagginationDto pagginationDto)
+        public async Task<Product> GetAsync(string url)
         {
             return await _service.GetAsync(url, _client);
         }
