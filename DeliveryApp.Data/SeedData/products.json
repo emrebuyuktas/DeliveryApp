@@ -2,7 +2,7 @@
   {
     "Name": "Sultan Veal Cubes",
     "Price": 50,
-    "Description": "400 g Should be stored from 0° to 4°C until expiry date.Low fat veal cubes from veal shank.",
+    "Description": "400 g Should be stored from 0° to 4°C until expiry date.",
     "ProductBrandId": 1,
     "ProductTypeId": 2,
     "PictureUrl": "https://cdn.getir.com/product/5f72e7dbbbc38dea7312bc35_tr_1607605436961.jpeg"
@@ -26,7 +26,7 @@
   {
     "Name": "Uno Large White Bread",
     "Price": 5,
-    "Description": "550 g Packaged in our new environmentally-friendly packaging. Packaging dissolves within nature in 18-24 months with no negative impact whatsoever.",
+    "Description": "550 g Packaged in our new environmentally-friendly packaging. ",
     "ProductBrandId": 4,
     "ProductTypeId": 3,
     "PictureUrl": "https://cdn.getir.com/product/5f732abc256958314ff3e84d_tr_1612851563923.jpeg"
@@ -88,14 +88,6 @@
     "PictureUrl": "https://cdn.getir.com/product/6194ac3dce90b2b3cd48873d_tr_1637242152391.jpeg"
   },
   {
-    "Name": "Elseve Arginine",
-    "Price": 23,
-    "Description": "Hair care cream 450Ml",
-    "ProductBrandId": 11,
-    "ProductTypeId": 4,
-    "PictureUrl": "https://cdn.dsmcdn.com/mnresize/1200/1800/ty7/product/media/images/20200730/13/6420961/79367122/1/1_org_zoom.jpg"
-  },
-  {
     "Name": "Pantene",
     "Price": 21,
     "Description": "200 ml Pantene 3 Minute Miracle Repair and Protect Conditioner",
@@ -120,12 +112,19 @@
     "PictureUrl": "https://cdn.getir.com/product/5bcec8fd9c50285679ac15ab_tr_1634883023930.jpeg"
   },
   {
+    "Name": "Uno Large White Bread",
+    "Price": 5,
+    "Description": "550 g Packaged in our new environmentally-friendly packaging.",
+    "ProductBrandId": 4,
+    "ProductTypeId": 3,
+    "PictureUrl": "https://cdn.getir.com/product/5f732abc256958314ff3e84d_tr_1612851563923.jpeg"
+  },
+  {
     "Name": "Mr Muscle",
     "Price": 33,
-    "Description": "2.5 LSuitable for hard surfaces such as marble, tiles, ceramics and all washable surfaces such as countertops and sinks.",
+    "Description": "2.5 LSuitable for hard surfaces such as marble.",
     "ProductBrandId": 10,
     "ProductTypeId": 5,
     "PictureUrl": "https://cdn.getir.com/product/5ce6581bfd9b330001c4a877_tr_1628239918701.jpeg"
   }
-
 ]
