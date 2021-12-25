@@ -1,51 +1,51 @@
 [
   {
-    "Name": "1Kg Calf Meat",
+    "Name": "Sultan Veal Cubes",
     "Price": 50,
-    "Description": "1Kg Calf Meat",
+    "Description": "400 g Should be stored from 0° to 4°C until expiry date.Low fat veal cubes from veal shank.",
     "ProductBrandId": 1,
     "ProductTypeId": 2,
-    "PictureUrl": "https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/25010473/uzman-kasap-dana-yanak-577c85-1650x1650.jpg"
+    "PictureUrl": "https://cdn.getir.com/product/5f72e7dbbbc38dea7312bc35_tr_1607605436961.jpeg"
   },
   {
-    "Name": "Pinar Feta Cheese",
+    "Name": "Sütaþ Strained Cheese",
     "Price": 28,
-    "Description": "Pýnar 800gram Feta Cheese",
+    "Description": "Pýnar 500 gram Feta Cheese",
     "ProductBrandId": 2,
     "ProductTypeId": 2,
-    "PictureUrl": "https://d2j6dbq0eux0bg.cloudfront.net/images/14151233/1562366055.jpg"
+    "PictureUrl": "https://cdn.getir.com/product/582337bb5b31d60004489be3_tr_1579699634031.jpeg"
   },
   {
-    "Name": "Içim Semi-skimmed Milk",
+    "Name": "Ýçim Lactose-Free Milk",
     "Price": 11,
-    "Description": "1 Liter Milk",
+    "Description": "1 L Produced without lactose.Easy to digest.",
     "ProductBrandId": 3,
     "ProductTypeId": 2,
-    "PictureUrl": "https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/11014567/11014567-50f9b6.jpg"
+    "PictureUrl": "https://cdn.getir.com/product/5ced482dd349d10001e70531_tr_1623652157209.jpeg"
   },
   {
-    "Name": "Uno Rye Bread",
+    "Name": "Uno Large White Bread",
     "Price": 5,
-    "Description": "450gram Rye Bread",
+    "Description": "550 g Packaged in our new environmentally-friendly packaging. Packaging dissolves within nature in 18-24 months with no negative impact whatsoever.",
     "ProductBrandId": 4,
     "ProductTypeId": 3,
-    "PictureUrl": "https://productimages.hepsiburada.net/s/27/500/10183751925810.jpg"
+    "PictureUrl": "https://cdn.getir.com/product/5f732abc256958314ff3e84d_tr_1612851563923.jpeg"
   },
   {
-    "Name": "Golf Ice Cream",
-    "Price": 18,
-    "Description": "Golf Marasim",
+    "Name": "Golf Maraþým Sandwich",
+    "Price": 8,
+    "Description": "120 ml Superior flavor award-winning rich milk ice cream in between two chocolate cookies",
     "ProductBrandId": 5,
     "ProductTypeId": 1,
-    "PictureUrl": "https://3dpackshots.com/wp-content/uploads/2018/01/Golf-Marasim-1.jpg"
+    "PictureUrl": "https://cdn.getir.com/product/5ef30b8a0b42fb64315f2f56_tr_1619507985229.jpeg"
   },
   {
-    "Name": "Eti Burcak",
+    "Name": "Eti Burçak Whole Wheat Bakery Biscuit",
     "Price": 3,
     "Description": "131 gram Eti Burcak",
     "ProductBrandId": 6,
     "ProductTypeId": 1,
-    "PictureUrl": "https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/07010112/07010112-3c6818-1650x1650.jpg"
+    "PictureUrl": "https://cdn.getir.com/product/5f354ac0377ed10f9a9a3f8d_tr_1604781836077.jpeg"
   },
   {
     "Name": "Ulker Napoliten",
@@ -53,39 +53,39 @@
     "Description": "Ulker Napoliten 33gram",
     "ProductBrandId": 7,
     "ProductTypeId": 1,
-    "PictureUrl": "https://cdn.cimri.io/market/260x260/ulker-napoliten-33-gr-cikolata-_458390.jpg"
+    "PictureUrl": "https://cdn.getir.com/product/574b2219dee8a90300f18d24_tr_1638269157710.jpeg"
   },
   {
-    "Name": "Ruffles with Ketchup Party",
+    "Name": "Ruffles Originals Potato Chips",
     "Price": 8,
-    "Description": "Ruffles with Ketchup Party 150 gram",
+    "Description": "Ruffles  Party 150 gram",
     "ProductBrandId": 8,
     "ProductTypeId": 1,
-    "PictureUrl": "https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/05087054/05087054-b7d4df-1650x1650.jpg"
+    "PictureUrl": "https://cdn.getir.com/product/5bc97caf9c76e6001268c0ac_tr_1631538784826.jpeg"
   },
   {
-    "Name": "Lays Potato Chips",
+    "Name": "Lay's Classic Potato Chips",
     "Price": 5,
-    "Description": "Lays Potato Chips Party",
+    "Description": "107 g Delivered products can be any of 3 packages. ",
     "ProductBrandId": 9,
     "ProductTypeId": 1,
-    "PictureUrl": "https://m.media-amazon.com/images/I/61FXwBMClcL._AC_SL1500_.jpg"
+    "PictureUrl": "https://cdn.getir.com/product/55983299b1dc700c006a71cc_c3067a17-4d9a-4f06-a7db-7b12bd20aa0b.jpeg"
   },
   {
-    "Name": "Domestos bleach",
+    "Name": "Domestos Practical Surface Spray",
     "Price": 15,
-    "Description": "mountain scented bleach 1.85 Liter",
+    "Description": "200 ml Does not contain bleach. Does not require rinsing.",
     "ProductBrandId": 10,
     "ProductTypeId": 5,
-    "PictureUrl": "https://productimages.hepsiburada.net/s/112/1500/110000059284678.jpg"
+    "PictureUrl": "https://cdn.getir.com/product/5fb37c033a7dd76c5d5e2a87_602bb75f-91d8-4d4b-a3e1-3c5cba05155d.jpeg"
   },
   {
-    "Name": "Elseve Shampoo",
+    "Name": "Clear Men",
     "Price": 27,
-    "Description": "Complete Repair Shampoo 360Ml",
+    "Description": "485 ml Helps prevent dandruff",
     "ProductBrandId": 11,
     "ProductTypeId": 4,
-    "PictureUrl": "https://cdn.dsmcdn.com/mnresize/1200/1800/ty76/product/media/images/20210220/2/65359313/143978031/1/1_org_zoom.jpg"
+    "PictureUrl": "https://cdn.getir.com/product/6194ac3dce90b2b3cd48873d_tr_1637242152391.jpeg"
   },
   {
     "Name": "Elseve Arginine",
@@ -96,20 +96,20 @@
     "PictureUrl": "https://cdn.dsmcdn.com/mnresize/1200/1800/ty7/product/media/images/20200730/13/6420961/79367122/1/1_org_zoom.jpg"
   },
   {
-    "Name": "Elseve Macassar",
+    "Name": "Pantene",
     "Price": 21,
-    "Description": "hair beautifying cream",
+    "Description": "200 ml Pantene 3 Minute Miracle Repair and Protect Conditioner",
     "ProductBrandId": 11,
     "ProductTypeId": 4,
-    "PictureUrl": "https://cdn.dsmcdn.com/mnresize/1200/1800/ty158/product/media/images/20210810/15/117338469/134947073/1/1_org_zoom.jpg"
+    "PictureUrl": "https://cdn.getir.com/product/5c4028fb0ee16a0001da65dc_tr_1616417356402.jpeg"
   },
   {
-    "Name": "Lipton Tea Bags",
+    "Name": "Lipton Green Tea Bags",
     "Price": 25,
     "Description": "Yellow Label Tea Bag 50 pieces",
     "ProductBrandId": 12,
     "ProductTypeId": 6,
-    "PictureUrl": "https://semtgida.com/wp-content/uploads/2019/05/yellow-label-50-pcs.jpg"
+    "PictureUrl": "https://cdn.getir.com/product/565c2826762af60c00796b91_tr_1585310725772.jpeg"
   },
   {
     "Name": "lipton ice tea",
@@ -117,15 +117,15 @@
     "Description": "lipton ice tea lemon 1.5L",
     "ProductBrandId": 12,
     "ProductTypeId": 6,
-    "PictureUrl": "https://migros-dali-storage-prod.global.ssl.fastly.net/sanalmarket/product/08059595/08059595-77e914.png"
+    "PictureUrl": "https://cdn.getir.com/product/5bcec8fd9c50285679ac15ab_tr_1634883023930.jpeg"
   },
   {
-    "Name": "Domestos Surface cleaner",
+    "Name": "Mr Muscle",
     "Price": 33,
-    "Description": "Surface cleaner 1.5L",
+    "Description": "2.5 LSuitable for hard surfaces such as marble, tiles, ceramics and all washable surfaces such as countertops and sinks.",
     "ProductBrandId": 10,
     "ProductTypeId": 5,
-    "PictureUrl": "https://productimages.hepsiburada.net/s/77/500/110000019298534.jpg"
+    "PictureUrl": "https://cdn.getir.com/product/5ce6581bfd9b330001c4a877_tr_1628239918701.jpeg"
   }
 
 ]
