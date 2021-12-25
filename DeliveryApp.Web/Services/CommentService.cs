@@ -1,4 +1,5 @@
-﻿using DeliveryApp.Web.HttpService;
+﻿using DeliveryApp.Core.Dtos;
+using DeliveryApp.Web.HttpService;
 using DeliveryApp.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -11,16 +12,19 @@ namespace DeliveryApp.Web.Services
     public class CommentService:ICommentService
     {
         private readonly HttpClient _client;
-        private readonly IApiService<Comment> _service;
+        private readonly IApiService<CommentDto> _service;
+        private readonly IApiService<Comment> _comments;
+        private readonly IApiService<CommentUpdate> _update;
 
-        public CommentService(HttpClient client, IApiService<Comment> service)
+        public CommentService(HttpClient client, IApiService<CommentDto> service, IApiService<CommentUpdate> update)
         {
 
             _client = client;
             _service = service;
+            _update = update;
         }
 
-        public async Task<string> AddAsync(Comment Comment, string url)
+        public async Task<string> AddAsync(CommentDto Comment, string url)
         {
             return await _service.AddAsync(Comment, url, _client);
         }
@@ -32,12 +36,12 @@ namespace DeliveryApp.Web.Services
 
         public async Task<Comment> GetAsync(string url)
         {
-            return await _service.GetAsync(url, _client);
+            return await _comments.GetAsync(url, _client);
         }
         
-        public async Task UpdateAsync(Comment comment, string url)
+        public async Task UpdateAsync(CommentUpdate update, string url)
         {
-            await _service.UpdateAsync(comment, url, _client);
+            await _update.UpdateAsync(update, url, _client);
         }
     }
 }

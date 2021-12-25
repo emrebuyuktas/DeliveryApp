@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.Web.HttpService
@@ -11,7 +8,6 @@ namespace DeliveryApp.Web.HttpService
         Task<T> GetAsync(string url, HttpClient httpClient);
         Task<string> AddAsync(T model, string url, HttpClient httpClient);
         Task DeleteAsync(string url, HttpClient httpClient);
-        Task UpdateAsync(T model, string url, HttpClient httpClient);
-        
+        Task UpdateAsync(T model,string url, HttpClient httpClient);
     }
 }

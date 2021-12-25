@@ -1,4 +1,5 @@
-﻿using DeliveryApp.Web.Models;
+﻿using DeliveryApp.Core.Dtos;
+using DeliveryApp.Web.Models;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.Web.Services
@@ -8,6 +9,6 @@ namespace DeliveryApp.Web.Services
         Task<Product> GetAsync(string url);
         Task<string> AddAsync(Product product, string url);
         Task DeleteAsync(string url, string id);
-        Task UpdateAsync(Product product, string url);
+        Task UpdateAsync(ProductUpdateDto productUpdateDto, string url);
     }
 }

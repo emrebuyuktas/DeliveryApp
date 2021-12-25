@@ -7,13 +7,10 @@
 </head>
 
 <body>
-    <div>@Html.Partial("Header", null)</div>
+    @await Html.PartialAsync("Header")
     <div>
         @RenderBody()
     </div>
-
-    <div>
-        @Html.Partial("Footer", null)
-    </div>
+    @await Html.PartialAsync("Footer")
 </body>
 </html>

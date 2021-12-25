@@ -1,4 +1,5 @@
-﻿using DeliveryApp.Web.Models;
+﻿using DeliveryApp.Core.Dtos;
+using DeliveryApp.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,10 @@ namespace DeliveryApp.Web.Services
     public interface IAuthService
     {
         Task<Auth> GetAsync(string url);
-        Task<string> AddAsync(Auth auth, string url);
+        Task<string> RegisterAsync(UserRegisterDto userRegisterDto, string url);
         Task DeleteAsync(string url, string id);
         Task UpdateAsync(Auth auth, string url);
+        Task<string> LoginAsync(UserLoginDto userLoginDto,string url);
 
     }
 }
