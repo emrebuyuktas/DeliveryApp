@@ -1,8 +1,6 @@
-﻿using DeliveryApp.Web.HttpService;
+﻿using DeliveryApp.Core.Dtos;
+using DeliveryApp.Web.HttpService;
 using DeliveryApp.Web.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -12,13 +10,16 @@ namespace DeliveryApp.Web.Services
     {
         private readonly HttpClient _client;
         private readonly IApiService<Category> _service;
+        private readonly IApiService<ProductTypeUpdateDto> _updateService;
+        private readonly IApiService<CategoryWithProducts> _categories;
 
-        public CategoryService(HttpClient client, IApiService<Category> service)
+        public CategoryService(HttpClient client, IApiService<Category> service, IApiService<ProductTypeUpdateDto> updateService, IApiService<CategoryWithProducts> categories)
         {
 
             _client = client;
             _service = service;
-
+            _updateService = updateService;
+            _categories = categories;
         }
 
         public async Task<string> AddAsync(Category category, string url)
@@ -36,9 +37,15 @@ namespace DeliveryApp.Web.Services
             return await _service.GetAsync(url, _client);
         }
 
-        public async Task UpdateAsync(Category category, string url)
+        public Task<CategoryWithProducts> GetWithProductsAsync(string url)
         {
-            await _service.UpdateAsync(category, url, _client);
+           return _categories.GetAsync(url, _client);
+            
+        }
+
+        public async Task UpdateAsync(ProductTypeUpdateDto productTypeUpdateDto, string url)
+        {
+            await _updateService.UpdateAsync(productTypeUpdateDto, url, _client);
         }
     }
 }

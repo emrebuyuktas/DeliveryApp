@@ -14,4 +14,8 @@
     <ProjectReference Include="..\DeliveryApp.Core\DeliveryApp.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Category\" />
+  </ItemGroup>
+
 </Project>
