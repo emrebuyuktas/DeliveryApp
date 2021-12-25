@@ -9,7 +9,7 @@ namespace DeliveryApp.Core.Services.Abstract
     {
         Task<IDataResult<ProductDto>> GetAsync(int productId);
         Task<IDataResult<IList<ProductDto>>> GetAllAsync();
-        Task<IDataResult<ProductListDto>> GetAllWithPagesAsync(int? productTypeId,int? productBrandId,int currentPage,int pageSize=5,bool isAscending=false);
+        Task<IDataResult<IList<ProductDto>>> GetAllWithPagesAsync(int? productTypeId,int? productBrandId,int currentPage,int pageSize=5,bool isAscending=false);
         Task<IDataResult<ProductDto>> GetProductWithComments(int productId);
         Task<IResult> AddAsync(ProductAddDto productAddDto);
         Task<IResult> AddRangeAsync(IList<ProductAddDto> products);

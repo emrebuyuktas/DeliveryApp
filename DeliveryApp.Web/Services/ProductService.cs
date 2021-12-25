@@ -1,4 +1,5 @@
 ﻿
+using DeliveryApp.Core.Dtos;
 using DeliveryApp.Web.HttpService;
 using DeliveryApp.Web.Models;
 using System;
@@ -29,7 +30,7 @@ namespace DeliveryApp.Web.Services
             await _service.DeleteAsync(url + id, _client);
         }
 
-        public async Task<Product> GetAsync(string url)
+        public async Task<Product> GetAsync(string url,PagginationDto pagginationDto)
         {
             return await _service.GetAsync(url, _client);
         }

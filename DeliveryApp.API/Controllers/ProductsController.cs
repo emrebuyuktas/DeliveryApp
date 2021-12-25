@@ -25,9 +25,9 @@ namespace DeliveryApp.API.Controllers
             return Ok(product);
         }
         [HttpGet]
-        public async Task<IActionResult> Product()
+        public async Task<IActionResult> Product(int? productTypeId, int? productBrandId, int currentPage, int pageSize, bool isAscending)
         {
-            var products = await _iproductService.GetAllAsync();
+            var products = await _iproductService.GetAllWithPagesAsync(productTypeId, productBrandId, currentPage, pageSize,isAscending);
             return Ok(products);
         }
         [HttpPost]

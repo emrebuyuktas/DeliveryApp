@@ -14,7 +14,7 @@ namespace DeliveryApp.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var model = await _product.GetAsync("https://localhost:44369/api/Products");
+            var model = await _product.GetAsync("https://localhost:44369/api/Products?currentPage=1&pageSize=10&isAscending=true");
             return View(model);
         }
     }
