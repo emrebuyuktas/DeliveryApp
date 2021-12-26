@@ -73,7 +73,8 @@ namespace DeliveryApp.Services.Concrete
                 return new DataResult<UserDto>(ResultStatus.Error, "User name or password incorrect",null);
             return new DataResult<UserDto>(ResultStatus.Succes, "Login successful",new UserDto 
             {
-                Name=user.UserName,
+                UserName=user.UserName,
+                UserSurname=user.UserSurname,
                 Email=user.Email,
                 Token=new TokenHandler(_configuration,_userManager).CreateToken(userLoginDto).Result
             });;;;
