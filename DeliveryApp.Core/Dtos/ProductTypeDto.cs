@@ -15,6 +15,10 @@ namespace DeliveryApp.Core.Dtos
         [Required(ErrorMessage = "Name can not be null.")]
         [MaxLength(100, ErrorMessage = "Name can not be longer than 100 character.")]
         [MinLength(1, ErrorMessage = "Name can not be shorter than 1 character.")]
-        public string Name { get; set; }      
+        public string Name { get; set; }
+
+        [DisplayName("Picture")]
+        [Required(ErrorMessage = "Picture can not be null.")]
+        public string PictureUrl { get; set; }
     }
 }

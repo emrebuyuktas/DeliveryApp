@@ -12,6 +12,7 @@ namespace DeliveryApp.Data.EntityFramework.Mappings
             builder.Property(p => p.Id).ValueGeneratedOnAdd();
             builder.Property(a => a.Name).HasMaxLength(100);
             builder.Property(a => a.Name).IsRequired();
+            builder.Property(p => p.PictureUrl).IsRequired();
         }
     }
 }

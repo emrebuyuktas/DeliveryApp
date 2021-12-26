@@ -1,22 +1,22 @@
-[
+Ôªø[
   {
     "Name": "Sultan Veal Cubes",
     "Price": 50,
-    "Description": "400 g Should be stored from 0∞ to 4∞C until expiry date.",
+    "Description": "400 g Should be stored from 0¬∞ to 4¬∞C until expiry date.",
     "ProductBrandId": 1,
     "ProductTypeId": 2,
     "PictureUrl": "https://cdn.getir.com/product/5f72e7dbbbc38dea7312bc35_tr_1607605436961.jpeg"
   },
   {
-    "Name": "S¸ta˛ Strained Cheese",
+    "Name": "S√ºta√æ Strained Cheese",
     "Price": 28,
-    "Description": "P˝nar 500 gram Feta Cheese",
+    "Description": "P√Ωnar 500 gram Feta Cheese",
     "ProductBrandId": 2,
     "ProductTypeId": 2,
     "PictureUrl": "https://cdn.getir.com/product/582337bb5b31d60004489be3_tr_1579699634031.jpeg"
   },
   {
-    "Name": "›Áim Lactose-Free Milk",
+    "Name": "√ù√ßim Lactose-Free Milk",
     "Price": 11,
     "Description": "1 L Produced without lactose.Easy to digest.",
     "ProductBrandId": 3,
@@ -32,7 +32,7 @@
     "PictureUrl": "https://cdn.getir.com/product/5f732abc256958314ff3e84d_tr_1612851563923.jpeg"
   },
   {
-    "Name": "Golf Mara˛˝m Sandwich",
+    "Name": "Golf Mara√æ√Ωm Sandwich",
     "Price": 8,
     "Description": "120 ml Superior flavor award-winning rich milk ice cream in between two chocolate cookies",
     "ProductBrandId": 5,
@@ -40,7 +40,7 @@
     "PictureUrl": "https://cdn.getir.com/product/5ef30b8a0b42fb64315f2f56_tr_1619507985229.jpeg"
   },
   {
-    "Name": "Eti BurÁak Whole Wheat Bakery Biscuit",
+    "Name": "Eti Bur√ßak Whole Wheat Bakery Biscuit",
     "Price": 3,
     "Description": "131 gram Eti Burcak",
     "ProductBrandId": 6,
