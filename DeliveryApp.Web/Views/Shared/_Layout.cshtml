@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    @await Html.PartialAsync("Header")
+    @await Component.InvokeAsync("Navbar")
     <div>
         @RenderBody()
     </div>
