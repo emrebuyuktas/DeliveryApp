@@ -24,16 +24,16 @@ namespace DeliveryApp.Web.Controllers
             return View(model);
         }
         [HttpGet]
-        public async Task<IActionResult> Category(int id)
+        public async Task<IActionResult> CategoryWithProducts(int id)
         {
             var model = await _category.GetAsync($"https://localhost:44369/api/Types/{id}/products");
            
             return View(model);
         }
         [HttpGet]
-        public async Task<IActionResult> ProductDetail(int id)
+        public async Task<IActionResult> Detail(int productId)
         {
-            var model = await _product.GetAsync($"https://localhost:44369/api/Products/{id}");
+            var model = await _product.GetAsync($"https://localhost:44369/api/Products/{productId}");
 
             return View(model);
         }

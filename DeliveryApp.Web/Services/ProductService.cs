@@ -10,16 +10,18 @@ namespace DeliveryApp.Web.Services
     public class ProductService:IProductService
     {
         private readonly HttpClient _client;
-        private readonly IApiService<Product> _service;
+        private readonly IApiService<ProductList> _service;
+        private readonly IApiService<Product> _singleProduct;
         private readonly IApiService<ProductUpdateDto> _updateService;
-        public ProductService(HttpClient client, IApiService<Product> service, IApiService<ProductUpdateDto> updateService)
+        public ProductService(HttpClient client, IApiService<ProductList> service, IApiService<ProductUpdateDto> updateService, IApiService<Product> singleProduct)
         {
             _client = client;
             _service = service;
             _updateService = updateService;
+            _singleProduct = singleProduct;
         }
 
-        public async Task<string> AddAsync(Product product,string url)
+        public async Task<string> AddAsync(ProductList product,string url)
         {
             return await _service.AddAsync(product,url,_client);
         }
@@ -29,9 +31,14 @@ namespace DeliveryApp.Web.Services
             await _service.DeleteAsync(url + id, _client);
         }
 
-        public async Task<Product> GetAsync(string url)
+        public async Task<ProductList> GetAllAsync(string url)
         {
             return await _service.GetAsync(url, _client);
+        }
+
+        public async Task<Product> GetAsync(string url)
+        {
+            return await _singleProduct.GetAsync(url, _client);
         }
 
         public async Task UpdateAsync(ProductUpdateDto productUpdateDto, string url)

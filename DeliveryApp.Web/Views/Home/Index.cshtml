@@ -1,4 +1,4 @@
-﻿@model DeliveryApp.Web.Models.Product
+﻿@model DeliveryApp.Web.Models.ProductList
     @{ Layout = "_Layout"; }
 
 
@@ -38,7 +38,7 @@
                         <span class="actual">@data.Price&#x20BA</span><br>
                         <ul class="buttons">
                             <li class="cart"><a href="#">Add To Basket</a></li>
-                            <li class="shop_btn"><a href="#">Read More</a></li>
+                            <li class="shop_btn"><a  asp-controller="Product" asp-action="Detail" asp-route-productId="@data.Id">Read More</a></li>
                             <div class="clear"> </div>
                         </ul>
                     </div>
