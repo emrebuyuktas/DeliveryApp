@@ -10,12 +10,13 @@ namespace DeliveryApp.Web.Services
     {
 
         private readonly HttpClient _client;
-        private readonly IApiService<Auth> _service;
+        private readonly IApiService<User> _service;
+        private readonly IApiService<UserUpdateDto> _update;
         private readonly IApiService<UserRegisterDto> _register;
         private readonly IApiService<UserLoginDto> _login;
 
 
-        public AuthService(IApiService<Auth> service, HttpClient client, IApiService<UserRegisterDto> register, IApiService<UserLoginDto> login)
+        public AuthService(IApiService<User> service, HttpClient client, IApiService<UserRegisterDto> register, IApiService<UserLoginDto> login)
         {
 
             _service = service;
@@ -34,7 +35,7 @@ namespace DeliveryApp.Web.Services
             await _service.DeleteAsync(url + id, _client);
         }
 
-        public async Task<Auth> GetAsync(string url)
+        public async Task<User> GetAsync(string url)
         {
             return await _service.GetAsync(url, _client);
         }
@@ -43,9 +44,9 @@ namespace DeliveryApp.Web.Services
             return await _login.AddAsync(userLoginDto,url, _client);
         }
 
-        public async Task UpdateAsync(Auth auth, string url)
+        public async Task UpdateAsync(UserUpdateDto userUpdateDto, string url)
         {
-            await _service.UpdateAsync(auth, url, _client);
+            await _update.UpdateAsync(userUpdateDto, url, _client);
         }
     }
 }

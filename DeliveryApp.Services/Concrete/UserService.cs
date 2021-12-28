@@ -29,17 +29,16 @@ namespace DeliveryApp.Services.Concrete
             _configuration = configuration;
         }
 
-        public async Task<IDataResult<UserListDto>> GetUserAsync(int id)
+        public async Task<IDataResult<UserDto>> GetUserAsync(int id)
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
             var roles = await _userManager.GetRolesAsync(user);
             if (user != null)
             {
-               var userToreturn= _mapper.Map<UserListDto>(user);
-               userToreturn.Roles = roles;
-               return new DataResult<UserListDto>(ResultStatus.Succes, userToreturn);
+               var userToreturn= _mapper.Map<UserDto>(user);
+               return new DataResult<UserDto>(ResultStatus.Succes, userToreturn);
             }
-            return new DataResult<UserListDto>(ResultStatus.Error, null);
+            return new DataResult<UserDto>(ResultStatus.Error, null);
         }
 
         public async Task<IDataResult<IList<UserListDto>>> GetUserListAsync()
@@ -73,11 +72,12 @@ namespace DeliveryApp.Services.Concrete
                 return new DataResult<UserDto>(ResultStatus.Error, "User name or password incorrect",null);
             return new DataResult<UserDto>(ResultStatus.Succes, "Login successful",new UserDto 
             {
+                Id=user.Id,
                 UserName=user.UserName,
                 UserSurname=user.UserSurname,
                 Email=user.Email,
                 Token=new TokenHandler(_configuration,_userManager).CreateToken(userLoginDto).Result
-            });;;;
+            });;;;;
 
         }
 
@@ -101,15 +101,29 @@ namespace DeliveryApp.Services.Concrete
             return new Result(ResultStatus.Succes, "Check your information");
         }
 
-        public async Task<IResult> UserRegisterAsync(UserRegisterDto userRegisterDto)
+        public async Task<IDataResult<UserDto>> UserRegisterAsync(UserRegisterDto userRegisterDto)
         {
             var user = _mapper.Map<User>(userRegisterDto);
             var result = await _userManager.CreateAsync(user,userRegisterDto.Password);
             if(!result.Succeeded)
             {
-                return new Result(ResultStatus.Error, "Check your information");
+                return new DataResult<UserDto>(ResultStatus.Error,"Check your information",null);
             }
-            return new Result(ResultStatus.Succes, "Registration Successful");
+            var returnedUser = await _userManager.FindByEmailAsync(userRegisterDto.Email);
+            UserLoginDto userLoginDto = new UserLoginDto
+            {
+                E_mail = userRegisterDto.Email,
+                Password = userRegisterDto.Password
+            };
+            return new DataResult<UserDto>(ResultStatus.Succes, "Resgister successful", new UserDto
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                UserSurname = user.UserSurname,
+                Email = user.Email,
+                Token = new TokenHandler(_configuration, _userManager).CreateToken(userLoginDto).Result
+            }); ; ; ; ;
+
 
         }
 

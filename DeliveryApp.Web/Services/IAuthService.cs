@@ -9,10 +9,10 @@ namespace DeliveryApp.Web.Services
 {
     public interface IAuthService
     {
-        Task<Auth> GetAsync(string url);
+        Task<User> GetAsync(string url);
         Task<string> RegisterAsync(UserRegisterDto userRegisterDto, string url);
         Task DeleteAsync(string url, string id);
-        Task UpdateAsync(Auth auth, string url);
+        Task UpdateAsync(UserUpdateDto userUpdateDto, string url);
         Task<string> LoginAsync(UserLoginDto userLoginDto,string url);
 
     }

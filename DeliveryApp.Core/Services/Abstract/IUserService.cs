@@ -9,12 +9,12 @@ namespace DeliveryApp.Core.Services.Abstract
 {
     public interface IUserService
     {
-        Task<IResult> UserRegisterAsync(UserRegisterDto userRegisterDto);
+        Task<IDataResult<UserDto>> UserRegisterAsync(UserRegisterDto userRegisterDto);
         Task<IDataResult<UserDto>> UserLoginAsync(UserLoginDto userLoginDto);
         Task<IResult> UserUpdateAsync(UserUpdateDto userRegisterDto);
         Task<IResult> UserDeleteAsync(int id);
         Task<IResult> UserPaswordChangeAsync(PasswordChangeDto passwordChangeDto, ClaimsPrincipal user);
-        Task<IDataResult<UserListDto>> GetUserAsync(int id);
+        Task<IDataResult<UserDto>> GetUserAsync(int id);
         Task<IDataResult<IList<UserListDto>>> GetUserListAsync();
 
     }
