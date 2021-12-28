@@ -2,12 +2,14 @@
 using DeliveryApp.Shared.Result.ComplexTypes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DeliveryApp.Web.Models
 {
-    public class CategoryWithProducts
+    public class Search
     {
-        public ProductTypeWithProductsDto Data { get; set; }
+        public IList<ProductDto> Data { get; set; }
 
         public ResultStatus ResultStatus { get; set; }
 

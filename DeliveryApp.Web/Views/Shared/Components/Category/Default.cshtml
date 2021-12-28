@@ -72,12 +72,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 @foreach (var item in Model.Data)
 {
                 <div class="col-md-2 team1">
-				<div class="img_section magnifier2">
-				  <a class="fancybox" href="@item.PictureUrl" data-fancybox-group="gallery" title="Lorem ipsum dolor sit amet"><img src="@item.PictureUrl" class="img-responsive" alt=""><span> </span>
-					<div class="img_section_txt">
-						@item.Name
-					</div>
-				</a></div>
+                    <div class="img_section magnifier2">
+                        <a class="fancybox" asp-controller="Product" asp-action="CategoryWithProducts" asp-route-categoryId="@item.Id" data-fancybox-group="gallery" title="Lorem ipsum dolor sit amet">
+                            <img src="@item.PictureUrl" class="img-responsive" alt=""><span> </span>
+                            <div class="img_section_txt">
+                                @item.Name
+                            </div>
+                        </a>
+                    </div>
 				</div>
 }
 

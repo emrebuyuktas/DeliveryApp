@@ -24,10 +24,9 @@ namespace DeliveryApp.Web.Controllers
             return View(model);
         }
         [HttpGet]
-        public async Task<IActionResult> CategoryWithProducts(int id)
+        public async Task<IActionResult> CategoryWithProducts(int categoryId)
         {
-            var model = await _category.GetAsync($"https://localhost:44369/api/Types/{id}/products");
-           
+            var model = await _category.GetWithProductsAsync($"https://localhost:44369/api/Types/{categoryId}/products");
             return View(model);
         }
         [HttpGet]
@@ -37,7 +36,11 @@ namespace DeliveryApp.Web.Controllers
 
             return View(model);
         }
-
-
+        [HttpGet]
+        public async Task<IActionResult> Search(string keyword)
+        {
+            var model = await _product.GetAllAsync($"https://localhost:44369/api/Products/Search?keyword={keyword}&currentPage=1&pageSize=1000&isAscending=true");
+            return View(model);
+        }
     }
 }
