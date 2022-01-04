@@ -3,24 +3,31 @@ using DeliveryApp.Web.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DeliveryApp.Web.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace DeliveryApp.Web.ViewComponents
 {
     public class Navbar : ViewComponent
     {
         private readonly IAuthService _auth;
-
-        public Navbar(IAuthService auth)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public Navbar(IAuthService auth, IHttpContextAccessor httpContextAccessor)
         {
             _auth = auth;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
+            var token = _httpContextAccessor.HttpContext.Request
+                    .Cookies["DeliveryApp"];
+            if(!string.IsNullOrEmpty(token))
+            {
+                var auth = await _auth.GetCurrentUserAsync($"https://localhost:44369/api/User/current", token);
+                return View(auth);
+            }
 
-            var auth = await _auth.GetAsync($"https://localhost:44369/api/User/1");
-
-            return View(auth);
+            return View(new User { Data=null,ResultStatus=Shared.Result.ComplexTypes.ResultStatus.Error});
         }
 
 

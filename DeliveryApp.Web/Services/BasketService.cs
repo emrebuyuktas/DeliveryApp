@@ -1,9 +1,11 @@
 ﻿using DeliveryApp.Web.HttpService;
 using DeliveryApp.Web.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.Web.Services
@@ -12,12 +14,15 @@ namespace DeliveryApp.Web.Services
     {
         private readonly HttpClient _client;
         private readonly IApiService<Basket> _service;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public BasketService(IApiService<Basket> service, HttpClient client)
+        public BasketService(IApiService<Basket> service, HttpClient client, IHttpContextAccessor httpContextAccessor)
         {
             _client = client;
             _service = service;
-
+            _httpContextAccessor = httpContextAccessor;
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_httpContextAccessor.HttpContext.Request
+                    .Cookies["DeliveryApp"]);
         }
 
         public async Task<string> AddAsync(Basket basket, string url)

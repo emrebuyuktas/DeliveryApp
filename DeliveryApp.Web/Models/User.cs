@@ -1,9 +1,6 @@
 ﻿using DeliveryApp.Core.Dtos;
 using DeliveryApp.Shared.Result.ComplexTypes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DeliveryApp.Web.Models
 {

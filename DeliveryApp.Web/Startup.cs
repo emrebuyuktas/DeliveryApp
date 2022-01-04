@@ -1,7 +1,9 @@
 using DeliveryApp.Web.HttpService;
 using DeliveryApp.Web.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -58,6 +60,8 @@ namespace DeliveryApp.Web
             services.AddHttpClient<AuthService>(opt => {
                 opt.BaseAddress = new Uri(Configuration["baseUrl"]);
             });
+            services.AddHttpContextAccessor();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

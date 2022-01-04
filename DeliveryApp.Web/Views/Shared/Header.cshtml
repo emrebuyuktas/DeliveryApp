@@ -71,22 +71,17 @@
                     </div>
                     <div class="header_right">
                         <!-- start search-->
-                        <div class="search-box">
-                            <div id="sb-search" class="sb-search">
-                                <form asp-controller="Product" asp-action="Search" method="get">
+                        <form asp-controller="Product" asp-action="Search" method="get" enctype="multipart/form-data">
+                            <div class="search-box">
+                                <div id="sb-search" class="sb-search">
+
                                     <input class="sb-search-input" placeholder="Enter your search term..." type="text" name="keyword">
                                     <input class="sb-search-submit" type="submit" value="Filter">
                                     <span class="sb-icon-search"> </span>
-                                </form>
+
+                                </div>
                             </div>
-                        </div>
-                        <!----search-scripts---->
-                        @*<script src="~/js/classie.js"></script>
-                        <script src="~/js/uisearch.js"></script>
-                        <script>
-                            new UISearch(document.getElementById('sb-search'));
-                        </script>*@
-                        <!----//search-scripts---->
+                        </form>
                         <ul class="icon1 sub-icon1 profile_img">
                             <li>
                                 <a class="active-icon c1" href="#"> </a>

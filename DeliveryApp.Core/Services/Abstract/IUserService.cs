@@ -15,6 +15,7 @@ namespace DeliveryApp.Core.Services.Abstract
         Task<IResult> UserDeleteAsync(int id);
         Task<IResult> UserPaswordChangeAsync(PasswordChangeDto passwordChangeDto, ClaimsPrincipal user);
         Task<IDataResult<UserDto>> GetUserAsync(int id);
+        Task<IDataResult<UserDto>> GetCurrentUserAsync(string email);
         Task<IDataResult<IList<UserListDto>>> GetUserListAsync();
 
     }

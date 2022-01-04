@@ -3,14 +3,19 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Http;
+using System.Text;
 
 namespace DeliveryApp.Web.HttpService
 {
     public class ApiService<T> : IApiService<T> where T: class
     {
+
         public async Task<string> AddAsync(T model,string url, HttpClient httpClient)
         {
-            StringContent queryString = new StringContent(JsonSerializer.Serialize(model));
+            StringContent queryString = new StringContent(JsonSerializer.Serialize(model), Encoding.UTF8,
+                                    "application/json");
             var reponse = await httpClient.PostAsync(url, queryString);
             return await reponse.Content.ReadAsStringAsync();
         }

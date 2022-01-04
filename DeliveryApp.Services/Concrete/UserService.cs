@@ -40,6 +40,17 @@ namespace DeliveryApp.Services.Concrete
             }
             return new DataResult<UserDto>(ResultStatus.Error, null);
         }
+        public async Task<IDataResult<UserDto>> GetCurrentUserAsync(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            var roles = await _userManager.GetRolesAsync(user);
+            if (user != null)
+            {
+                var userToreturn = _mapper.Map<UserDto>(user);
+                return new DataResult<UserDto>(ResultStatus.Succes, userToreturn);
+            }
+            return new DataResult<UserDto>(ResultStatus.Error, null);
+        }
 
         public async Task<IDataResult<IList<UserListDto>>> GetUserListAsync()
         {

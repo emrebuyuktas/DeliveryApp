@@ -1,7 +1,9 @@
 ﻿using DeliveryApp.Core.Dtos;
 using DeliveryApp.Web.HttpService;
 using DeliveryApp.Web.Models;
+using Microsoft.AspNetCore.Http;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.Web.Services
@@ -12,13 +14,16 @@ namespace DeliveryApp.Web.Services
         private readonly IApiService<Brand> _service;
         private readonly IApiService<ProductBrandUpdateDto> _update;
         private readonly IApiService<BrandWithProducts> _brands;
-
-        public BrandService(IApiService<Brand> service, HttpClient client, IApiService<ProductBrandUpdateDto> update, IApiService<BrandWithProducts> brands)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public BrandService(IApiService<Brand> service, HttpClient client, IApiService<ProductBrandUpdateDto> update, IApiService<BrandWithProducts> brands, IHttpContextAccessor httpContextAccessor)
         {
             _service = service;
             _client = client;
             _update = update;
             _brands = brands;
+            _httpContextAccessor = httpContextAccessor;
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_httpContextAccessor.HttpContext.Request
+                    .Cookies["DeliveryApp"]);
         }
 
         public async Task<string> AddAsync(Brand brand, string url)

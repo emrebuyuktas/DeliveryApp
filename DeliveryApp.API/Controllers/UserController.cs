@@ -1,26 +1,39 @@
 ﻿using DeliveryApp.Core.Dtos;
 using DeliveryApp.Core.Services.Abstract;
 using DeliveryApp.Shared.Result.ComplexTypes;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IHttpContextAccessor _contextAccessor;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IHttpContextAccessor contextAccessor)
         {
             _userService = userService;
+            _contextAccessor = contextAccessor;
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> User(int id)
         {
             var user = await _userService.GetUserAsync(id);
+            return Ok(user);
+        }
+        [HttpGet("current")]
+        public async Task<IActionResult> CurrentUser()
+        {
+            var userEmail = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+            var user = await _userService.GetCurrentUserAsync(userEmail);
             return Ok(user);
         }
         [HttpGet]
