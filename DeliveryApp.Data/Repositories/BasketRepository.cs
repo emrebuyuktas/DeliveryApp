@@ -20,6 +20,26 @@ namespace DeliveryApp.Data.Repositories
             return await _database.KeyDeleteAsync(id);
         }
 
+        public async Task<bool> DeleteProductFromBasketAsync(string basketId, int productId)
+        {
+            var data = await _database.StringGetAsync(basketId);
+            if(!data.IsNullOrEmpty)
+            {
+                var basket= JsonSerializer.Deserialize<CustomerBasket>(data);
+                foreach (var item in basket.Items)
+                {
+                    if(item.Id==productId)
+                    {
+                        basket.Items.Remove(item);
+                        await UpdateBasketAsync(basket);
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            return false;
+        }
+
         public async Task<CustomerBasket> GetBasketAsync(string id)
         {
             var data = await _database.StringGetAsync(id);

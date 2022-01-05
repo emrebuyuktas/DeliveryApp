@@ -32,9 +32,9 @@ namespace DeliveryApp.Web.Services
             return await _service.AddAsync(basket, url, _client);
         }
 
-        public async Task DeleteAsync(string url, string id)
+        public async Task DeleteAsync(string url)
         {
-            await _service.DeleteAsync(url + id, _client);
+            await _service.DeleteAsync(url, _client);
         }
 
         public async Task<CustomerBasket> GetAsync(string url)

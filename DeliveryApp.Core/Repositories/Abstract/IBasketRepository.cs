@@ -13,5 +13,6 @@ namespace DeliveryApp.Core.Repositories.Abstract
         Task<CustomerBasket> GetBasketAsync(string id);
         Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket);
         Task<bool> DeleteBasketAsync(string id);
+        Task<bool> DeleteProductFromBasketAsync(string basketId,int productId);
     }
 }

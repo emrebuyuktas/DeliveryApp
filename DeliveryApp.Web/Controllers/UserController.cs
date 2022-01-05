@@ -1,10 +1,8 @@
-﻿using DeliveryApp.Web.Models;
+﻿using DeliveryApp.Core.Dtos;
+using DeliveryApp.Web.Models;
 using DeliveryApp.Web.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.Web.Controllers
@@ -29,6 +27,12 @@ namespace DeliveryApp.Web.Controllers
             var adress =await _address.GetUserAddressAsync($"https://localhost:44369/api/Address/user/{userId}");
             UserProfile userProfile = new UserProfile { Data = user.Data, Address = adress.Data };
             return View(userProfile);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(UserUpdateDto userUpdateDto)
+        {
+            await _authService.UpdateAsync(userUpdateDto, "https://localhost:44369/api/User");
+            return RedirectToAction("UserProfile", "User");
         }
     }
 }

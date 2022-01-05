@@ -37,7 +37,8 @@ namespace DeliveryApp.Web.HttpService
 
         public async Task UpdateAsync(T model, string url, HttpClient httpClient)
         {
-            StringContent queryString = new StringContent(JsonSerializer.Serialize(model));
+            StringContent queryString = new StringContent(JsonSerializer.Serialize(model), Encoding.UTF8,
+                                    "application/json");
             await httpClient.PutAsync(url,queryString);
         }
     }
