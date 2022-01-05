@@ -15,11 +15,16 @@
         <script src="~/js/jquery.min.js"></script>
 
     </head>
-    @await Html.PartialAsync("Banner")
-
-    @await Component.InvokeAsync("Category")
+    
+    
 
     <body>
+        <div>
+    @await Html.PartialAsync("Banner")
+    </div>
+    <div>
+        @await Component.InvokeAsync("Category")
+    </div>
 
         <div class="main">
             <div class="shop_top">
