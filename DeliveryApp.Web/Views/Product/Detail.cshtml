@@ -126,7 +126,7 @@
                 </div>
                 <div class="col-md-3" style="position:relative; bottom:465px;left:720px">
                     <div class="box-info-product">
-                        <form asp-controller="Basket" asp-action="Update" method="post" enctype="multipart/form-data">
+                        <form asp-controller="Basket" asp-action="Add" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="Id" value="@Model.Data.Id" />
                             <input type="hidden" name="Name" value="@Model.Data.Name" />
                             <input type="hidden" name="Price" value="@Model.Data.Price" />

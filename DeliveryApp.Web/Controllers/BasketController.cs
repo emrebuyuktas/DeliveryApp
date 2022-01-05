@@ -20,7 +20,7 @@ namespace DeliveryApp.Web.Controllers
             var basket = await _basketService.GetAsync("https://localhost:44369/api/Basket");
             return View(basket);
         }
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> AddSingle(int productId)
         {
             var basket = await _basketService.GetAsync("https://localhost:44369/api/Basket");
@@ -36,7 +36,13 @@ namespace DeliveryApp.Web.Controllers
                 ProductType=product.Data.ProductType
             }) ;
             await _basketService.UpdateAsync(basket, "https://localhost:44369/api/Basket");
-            return View(basket);
+            return View("Index",basket);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(int productId)
+        {
+            await _basketService.DeleteAsync($"https://localhost:44369/api/Basket/product?id={productId}");
+            return RedirectToAction("Index", "Basket");
         }
         [HttpPost]
         public async Task<IActionResult> Add(BasketItem item)
@@ -44,7 +50,7 @@ namespace DeliveryApp.Web.Controllers
             var basket = await _basketService.GetAsync("https://localhost:44369/api/Basket");
             basket.Items.Add(item);
             await _basketService.UpdateAsync(basket, "https://localhost:44369/api/Basket");
-            return View(basket);
+            return View("Index",basket);
         }
 
     }

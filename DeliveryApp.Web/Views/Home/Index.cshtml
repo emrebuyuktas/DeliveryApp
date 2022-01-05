@@ -29,7 +29,7 @@
                         @foreach (var data in Model.Data)
                         {
             <div   class="col-md-3 shop_box">
-                <a href="single.html">
+                <a asp-controller="Product" asp-action="Detail" asp-route-productId="@data.Id">
                     <img style="width:300px; height:200px;" src=@data.PictureUrl class="img-responsive" alt="" />
 
                     <div class="shop_desc">

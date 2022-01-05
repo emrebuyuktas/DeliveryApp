@@ -43,9 +43,22 @@ namespace DeliveryApp.API.Controllers
             return Ok(updatedBasket);
         }
         [HttpDelete]
-        public async Task DeleteBasketAsync(string id)
+        public async Task<IActionResult> DeleteBasketAsync(string id)
         {
             await _basket.DeleteBasketAsync(id);
+            return NoContent();
+        }
+        [HttpDelete("product")]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            var userEmail = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+            var userId = (await _userManager.FindByEmailAsync(userEmail)).Id;
+            var deleted = await _basket.DeleteProductFromBasketAsync(userId.ToString(), id);
+            if(deleted==true)
+            {
+                return NoContent();
+            }
+            return BadRequest();
         }
     }
 }

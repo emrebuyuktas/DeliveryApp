@@ -1,8 +1,5 @@
 ﻿using DeliveryApp.Core.Entities.Concrete;
 using DeliveryApp.Web.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.Web.Services
@@ -11,7 +8,7 @@ namespace DeliveryApp.Web.Services
     {
         Task<CustomerBasket> GetAsync(string url);
         Task<string> AddAsync(Basket basket, string url);
-        Task DeleteAsync(string url, string id);
+        Task DeleteAsync(string url);
         Task UpdateAsync(CustomerBasket basket, string url);
 
     }
