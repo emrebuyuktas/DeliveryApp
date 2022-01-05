@@ -1,8 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model DeliveryApp.Core.Entities.Concrete.CustomerBasket
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -150,7 +146,7 @@ button:focus {
     float: right
 }
 
-@media screen and (max-width: 768px) {
+@@media screen and (max-width: 768px) {
 
     .book,
     .book-img {
@@ -182,69 +178,56 @@ button:focus {
             <div class="col-7">
                 <div class="row text-right">
                     <div class="col-4">
-                        <h6 class="mt-2">Format</h6>
+                        <h6 class="mt-2">Category</h6>
                     </div>
-                   
+
                     <div class="col-4">
                         <h6 class="mt-2">Price</h6>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row d-flex justify-content-center border-top">
-            <div class="col-5">
-                <div class="row d-flex">
-                    <div class="book"> <img src="https://i.imgur.com/2DsA49b.jpg" class="book-img"> </div>
-                    <div class="my-auto flex-column d-flex pad-left">
-                        <h6 class="mob-text">Thinking, Fast and Slow</h6>
-                        <p class="mob-text">Daniel Kahneman</p>
+        @{
+            foreach (var item in Model.Items)
+            {
+                <div class="row d-flex justify-content-center border-top">
+                    <div class="col-5">
+                        <div class="row d-flex">
+                            <div class="book"> <img src=@item.PictureUrl class="book-img"> </div>
+                            <div class="my-auto flex-column d-flex pad-left">
+                                <h6 class="mob-text">@item.Name</h6>
+                                <p class="mob-text">@item.ProductBrand</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="my-auto col-7">
+                        <div class="row text-right">
+                            <div class="col-4">
+                                <p class="mob-text">@item.ProductType</p>
+                            </div>
+                            <div class="col-4">
+                                <h6 class="mob-text">@item.Price&#x20BA</h6>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="my-auto col-7">
-                <div class="row text-right">
-                    <div class="col-4">
-                        <p class="mob-text">Digital</p>
-                    </div>                 
-                    <div class="col-4">
-                        <h6 class="mob-text">$9.99</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row d-flex justify-content-center border-top">
-            <div class="col-5">
-                <div class="row d-flex">
-                    <div class="book"> <img src="https://i.imgur.com/Oj1iQUX.jpg" class="book-img"> </div>
-                    <div class="my-auto flex-column d-flex pad-left">
-                        <h6 class="mob-text">Homo Deus: A Brief<br>History of Tomorrow</h6>
-                        <p class="mob-text">Yuval Noah Harari</p>
-                    </div>
-                </div>
-            </div>
-            <div class="my-auto col-7">
-                <div class="row text-right">
-                    <div class="col-4">
-                        <p class="mob-text">Paperback</p>
-                    </div>                 
-                    <div class="col-4">
-                        <h6 class="mob-text">$13.50</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
+            }
+        }
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="row">
                         <div class="col-lg-3 radio-group">
-                            <div class="row d-flex px-3 radio"> <img class="pay" src="https://i.imgur.com/WIAP9Ku.jpg">
+                            <div class="row d-flex px-3 radio">
+                                <img class="pay" src="https://i.imgur.com/WIAP9Ku.jpg">
                                 <p class="my-auto">Credit Card</p>
                             </div>
-                            <div class="row d-flex px-3 radio gray"> <img class="pay" src="https://i.imgur.com/OdxcctP.jpg">
+                            <div class="row d-flex px-3 radio gray">
+                                <img class="pay" src="https://i.imgur.com/OdxcctP.jpg">
                                 <p class="my-auto">Debit Card</p>
                             </div>
-                            <div class="row d-flex px-3 radio gray mb-3"> <img class="pay" src="https://i.imgur.com/cMk1MtK.jpg">
+                            <div class="row d-flex px-3 radio gray mb-3">
+                                <img class="pay" src="https://i.imgur.com/cMk1MtK.jpg">
                                 <p class="my-auto">PayPal</p>
                             </div>
                         </div>

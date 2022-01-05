@@ -25,17 +25,20 @@ namespace DeliveryApp.API.Controllers
             _userManager = userManager;
         }
         [HttpGet]
-        public async Task<IActionResult> GetBasket(string id)
+        public async Task<IActionResult> GetBasket()
         {
-            var basket = await _basket.GetBasketAsync(id);
-            Guid g = Guid.NewGuid();
+            
             var userEmail = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
-            var userId = await _userManager.FindByEmailAsync(userEmail);
-            return Ok(basket ?? new CustomerBasket(g.ToString()+userId));
+            var userId = (await _userManager.FindByEmailAsync(userEmail)).Id;
+            var basket = await _basket.GetBasketAsync(userId.ToString());
+            return Ok(basket ?? new CustomerBasket(userId.ToString()));
         }
         [HttpPut]
         public async Task<IActionResult> UpdateBasket(CustomerBasket basket)
         {
+            var userEmail = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+            var userId = (await _userManager.FindByEmailAsync(userEmail)).Id;
+            basket.Id = userId.ToString();
             var updatedBasket = await _basket.UpdateBasketAsync(basket);
             return Ok(updatedBasket);
         }

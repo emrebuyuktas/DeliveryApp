@@ -60,12 +60,12 @@
                 <div class="col-md-12">
                     <div class="header-left">
                         <div class="logo">
-                            <a href="index.html"><img src="~/images/logo.png" alt="" /></a>
+                            <a asp-controller="Home" asp-action="Index"><img src="~/images/logo.png" alt="" /></a>
                         </div>
                         <div class="menu">
                             <a class="toggleMenu" href="#"><img src="~/images/nav.png" alt="" /></a>
                             <ul class="nav" id="nav">
-                                <li><a href="shop.html">HomePage</a></li>
+                                <li><a asp-controller="Home" asp-action="Index">HomePage</a></li>
                                 <li><a href="experiance.html">Categories</a></li>
                                 <li><a></a></li>
                                 <li><a></a></li>
@@ -73,7 +73,7 @@
                                 @{
                                     if (Model.Data != null)
                                     {
-                                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> @Model.Data.UserName</a></li>
+                                        <li><a asp-controller="User" asp-action="UserProfile" asp-route-userId="@Model.Data.Id"><span class="glyphicon glyphicon-user"></span> @Model.Data.UserName</a></li>
                                     }
                                     else
                                     {
@@ -111,7 +111,7 @@
                         <!----//search-scripts---->
                         <ul class="icon1 sub-icon1 profile_img">
                             <li>
-                                <a class="active-icon c1" href="#"> </a>
+                                <a class="active-icon c1" asp-controller="Basket" asp-action="Index"> </a>
                                 <ul class="sub-icon1 list">
                                     <div class="product_control_buttons">
                                         <a href="#"><img src="~/images/edit.png" alt="" /></a>

@@ -34,6 +34,14 @@ namespace DeliveryApp.API.Controllers
                 return BadRequest(address);
             return Ok(address);
         }
+        [HttpGet("user/{id}")]
+        public async Task<IActionResult> GetUserAdress(int id)
+        {
+            var address = await _addressService.GetWithUserIdAsync(id);
+            if (address.ResultStatus == ResultStatus.Error)
+                return BadRequest(address);
+            return Ok(address);
+        }
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {

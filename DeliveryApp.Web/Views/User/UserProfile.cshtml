@@ -1,14 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+﻿@model DeliveryApp.Web.Models.UserProfile
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -87,22 +77,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				    <div  id="small-dialog3" class="mfp-hide">
 					   <div class="pop_up2">
                         <h4  class="m_4"><a href="#">Name</a></h4>
-							<p class="m_6">Emre</p>
+							<p class="m_6">@Model.Data.UserName</p>
 						 
 					   </div>
                        <div class="pop_up2">
                         <h4 class="m_4"><a href="#">Surname</a></h4>
-                        <p class="m_4">Eskimez</p> 
+                        <p class="m_4">@Model.Data.UserSurname</p> 
 						 
 					   </div>
                        <div class="pop_up2">
                         <h4 class="m_4"><a href="#">E-Mail</a></h4>
-				    <p class="m_4">omerkılıcceker@gmail.com</p> 
+                        <p class="m_4">@Model.Data.Email</p> 
                      
                    </div>
                    <div class="pop_up2">
                     <h4 class="m_4"><a href="#">Phone</a></h4>
-				    <p class="m_4">05055050505</p> 
+                    <p class="m_4">@Model.Data.PhoneNumber</p> 
                  
                </div>
                <div class="pop_up2">
@@ -112,13 +102,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
              </div>
              <div class="pop_up2">
                 <h4 class="m_4"><a href="#">Adress</a></h4>
-				    <p class="m_4">Sarıçam</p> 
+                <p class="m_4">@Model.Address.Neighbourhood @Model.Address.Street @Model.Address.DoorNumber @Model.Address.City</p> 
              <button style="margin-left: 480px;" type="button" class="btn btn-danger">Update</button>
            </div>
 					</div>
 					<div>
 					<h4 class="m_4"><a href="#">Name </a></h4>
-				    <p class="m_4">Emre </p> <br>
+                    <p class="m_4">@Model.Data.UserName </p> <br>
 					<a  class="popup-with-zoom-anim" href="#small-dialog3"><button style="margin-left: 100px;"  type="button" class="btn btn-danger">Update</button></a>
 				</div>
 				</div>
@@ -130,7 +120,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</div>
 					<div>
 					<h4 class="m_4"><a href="#">Surname</a></h4>
-				    <p class="m_4">Eskimez</p> <br>
+                    <p class="m_4">@Model.Data.UserSurname</p> <br>
 					<a  class="popup-with-zoom-anim" href="#small-dialog3"><button style="margin-left: 130px;" type="button" class="btn btn-danger">Update</button></a>
 				</div>
 				</div>
@@ -141,7 +131,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</div>
 					<div>
 					<h4 class="m_4"><a href="#">E-Mail</a></h4>
-				    <p class="m_4">omerkılıcceker@gmail.com</p> <br>
+                    <p class="m_4">@Model.Data.Email</p> <br>
 					<a  class="popup-with-zoom-anim" href="#small-dialog3"><button style="margin-left: 130px;" type="button" class="btn btn-danger">Update</button></a>
 				</div>
 				</div>
@@ -152,7 +142,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</div>
 					<div>
 					<h4 class="m_4"><a href="#">Phone</a></h4>
-				    <p class="m_4">05055050505</p> <br>
+                    <p class="m_4">@Model.Data.PhoneNumber</p> <br>
 					<a  class="popup-with-zoom-anim" href="#small-dialog3"><button style="margin-left: 100px;" type="button" class="btn btn-danger">Update</button></a>
 				</div>
 				</div>
@@ -174,7 +164,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</div>
 					<div>
 					<h4 class="m_4"><a href="#">Adress</a></h4>
-				    <p class="m_4">Sarıçam</p> <br>
+                    <p class="m_4">@Model.Address.Neighbourhood @Model.Address.Street @Model.Address.DoorNumber @Model.Address.City</p> <br>
 					<a  class="popup-with-zoom-anim" href="#small-dialog3"><button style="margin-left: 130px;" type="button" class="btn btn-danger">Update</button></a>
 				</div>
 				</div>

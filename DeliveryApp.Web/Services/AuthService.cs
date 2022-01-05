@@ -19,15 +19,19 @@ namespace DeliveryApp.Web.Services
         private readonly IApiService<UserUpdateDto> _update;
         private readonly IApiService<UserRegisterDto> _register;
         private readonly IApiService<UserLoginDto> _login;
-        
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AuthService(IApiService<User> service, HttpClient client, IApiService<UserRegisterDto> register, IApiService<UserLoginDto> login)
+        public AuthService(IApiService<User> service, HttpClient client, IApiService<UserRegisterDto> register, IApiService<UserLoginDto> login, IHttpContextAccessor httpContextAccessor)
         {
 
             _service = service;
             _client = client;
             _register = register;
             _login = login;
+            _httpContextAccessor = httpContextAccessor;
+            var token = _httpContextAccessor.HttpContext.Request
+        .Cookies["DeliveryApp"];
+            _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
         }
 
         public async Task<User> RegisterAsync(UserRegisterDto userRegisterDto, string url)
@@ -43,13 +47,13 @@ namespace DeliveryApp.Web.Services
             await _service.DeleteAsync(url + id, _client);
         }
 
-        public async Task<User> GetAsync(string url)
+        public async Task<User> GetAsync(string url,string token)
         {
+            
             return await _service.GetAsync(url, _client);
         }
         public async Task<User> GetCurrentUserAsync(string url,string token)
         {
-            _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
            // _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",token);
             return await _service.GetAsync(url, _client);
         }

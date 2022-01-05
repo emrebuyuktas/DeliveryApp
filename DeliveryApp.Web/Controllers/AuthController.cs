@@ -21,7 +21,7 @@ namespace DeliveryApp.Web.Controllers
 
         }
         [HttpGet]
-        public async Task<IActionResult> Login()
+        public IActionResult Login()
         {
             return View();
         }
@@ -36,12 +36,18 @@ namespace DeliveryApp.Web.Controllers
             Response.Cookies.Append("DeliveryApp", token, new Microsoft.AspNetCore.Http.CookieOptions
             {
                 HttpOnly = true,
-                SameSite = SameSiteMode.Strict
-            });
+                SameSite = SameSiteMode.Strict,
+                Expires= DateTimeOffset.Now.AddHours(1)
+            });;
             return RedirectToAction("Index", "Home");
         }
-         [HttpPost] 
-         public async Task<IActionResult> Register(UserRegisterDto userRegisterDto)
+        [HttpGet]
+        public IActionResult Register()
+        {
+                return RedirectToAction("Auth", "Login");
+        }
+        [HttpPost] 
+         public async Task<IActionResult> Register([FromForm] UserRegisterDto userRegisterDto)
          {
              var response = await _auth.RegisterAsync(userRegisterDto, "https://localhost:44369/api/Auth/Register");
              if (response.ResultStatus == ResultStatus.Succes)
@@ -50,7 +56,8 @@ namespace DeliveryApp.Web.Controllers
                 Response.Cookies.Append("DeliveryApp", token, new Microsoft.AspNetCore.Http.CookieOptions
                 {
                     HttpOnly = true,
-                    SameSite = SameSiteMode.Strict
+                    SameSite = SameSiteMode.Strict,
+                    Expires = DateTimeOffset.Now.AddHours(1)
                 });
                 return RedirectToAction("Index", "Home");
             }

@@ -37,7 +37,7 @@
                         <p>@(data.Description.Length>30 ? data.Description.Substring(0,30) : data.Description)...</p>
                         <span class="actual">@data.Price&#x20BA</span><br>
                         <ul class="buttons">
-                            <li class="cart"><a href="#">Add To Basket</a></li>
+                            <li class="cart"><a asp-controller="Basket" asp-action="AddSingle" asp-route-productId="@data.Id">Add To Basket</a></li>
                             <li class="shop_btn"><a  asp-controller="Product" asp-action="Detail" asp-route-productId="@data.Id">Read More</a></li>
                             <div class="clear"> </div>
                         </ul>

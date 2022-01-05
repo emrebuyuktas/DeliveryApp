@@ -1,4 +1,5 @@
 ﻿@model DeliveryApp.Web.Models.Product
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 @{ Layout = "_Layout"; }
 <!DOCTYPE HTML>
 <html>
@@ -67,6 +68,37 @@
         });
     </script>
     <!----//details-product-slider--->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".dropdown img.flag").addClass("flagvisibility");
+
+            $(".dropdown dt a").click(function () {
+                $(".dropdown dd ul").toggle();
+            });
+
+            $(".dropdown dd ul li a").click(function () {
+                var text = $(this).html();
+                $(".dropdown dt a span").html(text);
+                $(".dropdown dd ul").hide();
+                $("#result").html("Selected value is: " + getSelectedValue("sample"));
+            });
+
+            function getSelectedValue(id) {
+                return $("#" + id).find("dt a span.value").html();
+            }
+
+            $(document).bind('click', function (e) {
+                var $clicked = $(e.target);
+                if (!$clicked.parents().hasClass("dropdown"))
+                    $(".dropdown dd ul").hide();
+            });
+
+
+            $("#flagSwitcher").click(function () {
+                $(".dropdown img.flag").toggleClass("flagvisibility");
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="main">
@@ -88,88 +120,110 @@
                         <div class="single_right">
                             <h3>@Model.Data.Name</h3>
                             <p class="m_10">@Model.Data.Description</p>
-                            </div>
                         </div>
-                        <div class="clear"> </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="box-info-product">
-                            <form asp-controller="Basket" asp-action="Update" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="Id" value="@Model.Data.Id" />
-                                <input type="hidden" name="Name" value="@Model.Data.Name" />
-                                <input type="hidden" name="Price" value="@Model.Data.Price" />
-                                <input type="hidden" name="PictureUrl" value="@Model.Data.PictureUrl" />
-                                <input type="hidden" name="ProductBrand" value="@Model.Data.ProductBrand" />
-                                <input type="hidden" name="ProductType" value="@Model.Data.ProductType" />
+                    <div class="clear"> </div>
+                </div>
+                <div class="col-md-3" style="position:relative; bottom:465px;left:720px">
+                    <div class="box-info-product">
+                        <form asp-controller="Basket" asp-action="Update" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="Id" value="@Model.Data.Id" />
+                            <input type="hidden" name="Name" value="@Model.Data.Name" />
+                            <input type="hidden" name="Price" value="@Model.Data.Price" />
+                            <input type="hidden" name="PictureUrl" value="@Model.Data.PictureUrl" />
+                            <input type="hidden" name="ProductBrand" value="@Model.Data.ProductBrand" />
+                            <input type="hidden" name="ProductType" value="@Model.Data.ProductType" />
 
-                                <p class="price2">@Model.Data.Price&#x20BA</p>
-                                <ul class="prosuct-qty">
-                                    <span>Quantity:</span>
-                                    <select name="Quantity">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                    </select>
-                                </ul>
-                                <button type="submit" name="Submit" class="exclusive">
-                                    <span>Add to cart</span>
-                                </button>
-                            </form>
-                        </div>
+                            <p class="price2">@Model.Data.Price&#x20BA</p>
+                            <ul class="prosuct-qty">
+                                <span>Quantity:</span>
+                                <select name="Quantity">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </ul>
+                            <button type="submit" name="Submit" class="exclusive">
+                                <span>Add to cart</span>
+                            </button>
+                        </form>
                     </div>
                 </div>
-                <div class="row">
-                    <h4 class="m_11">Related Products in the same Category</h4>
-                    <div class="col-md-4 product1">
-                        <img src="images/s1.jpg" class="img-responsive" alt="" />
-                        <div class="shop_desc">
-                            <a href="single.html">
-                            </a><h3><a href="single.html"></a><a href="#">aliquam volutp</a></h3>
-                            <p>Lorem ipsum consectetuer adipiscing </p>
-                            <span class="reducedfrom">$66.00</span>
-                            <span class="actual">$12.00</span><br>
-                            <ul class="buttons">
-                                <li class="cart"><a href="#">Add To Cart</a></li>
-                                <li class="shop_btn"><a href="#">Read More</a></li>
-                                <div class="clear"> </div>
-                            </ul>
+                @{
+                    if (HttpContextAccessor.HttpContext.Request
+                    .Cookies["DeliveryApp"] != null)
+                    {
+                        <div class="row">
+                            <div class="col-md-12 contact">
+                                <form asp-controller="Comment" asp-action="Add" method="post">
+                                    <div class="text">
+                                        <input type="hidden" value="@Model.Data.Id" name="ProductId" />
+                                        <textarea name="Text" value="Message:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message:</textarea>
+                                        <div class="form-submit">
+                                            <input name="submit" type="submit" id="submit" value="Submit"><br>
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                </form>
+                            </div>
                         </div>
+                    }
+                }
+            </div>
+  
+
+            <div class="row">
+                <h4 class="m_11">Related Products in the same Category</h4>
+                <div class="col-md-4 product1">
+                    <img src="images/s1.jpg" class="img-responsive" alt="" />
+                    <div class="shop_desc">
+                        <a href="single.html">
+                        </a><h3><a href="single.html"></a><a href="#">aliquam volutp</a></h3>
+                        <p>Lorem ipsum consectetuer adipiscing </p>
+                        <span class="reducedfrom">$66.00</span>
+                        <span class="actual">$12.00</span><br>
+                        <ul class="buttons">
+                            <li class="cart"><a href="#">Add To Cart</a></li>
+                            <li class="shop_btn"><a href="#">Read More</a></li>
+                            <div class="clear"> </div>
+                        </ul>
                     </div>
-                    <div class="col-md-4 product1">
-                        <img src="images/s2.jpg" class="img-responsive" alt="" />
-                        <div class="shop_desc">
-                            <a href="single.html">
-                            </a><h3><a href="single.html"></a><a href="#">aliquam volutp</a></h3>
-                            <p>Lorem ipsum consectetuer adipiscing </p>
-                            <span class="reducedfrom">$66.00</span>
-                            <span class="actual">$12.00</span><br>
-                            <ul class="buttons">
-                                <li class="cart"><a href="#">Add To Cart</a></li>
-                                <li class="shop_btn"><a href="#">Read More</a></li>
-                                <div class="clear"> </div>
-                            </ul>
-                        </div>
+                </div>
+                <div class="col-md-4 product1">
+                    <img src="images/s2.jpg" class="img-responsive" alt="" />
+                    <div class="shop_desc">
+                        <a href="single.html">
+                        </a><h3><a href="single.html"></a><a href="#">aliquam volutp</a></h3>
+                        <p>Lorem ipsum consectetuer adipiscing </p>
+                        <span class="reducedfrom">$66.00</span>
+                        <span class="actual">$12.00</span><br>
+                        <ul class="buttons">
+                            <li class="cart"><a href="#">Add To Cart</a></li>
+                            <li class="shop_btn"><a href="#">Read More</a></li>
+                            <div class="clear"> </div>
+                        </ul>
                     </div>
-                    <div class="col-md-4">
-                        <img src="images/s3.jpg" class="img-responsive" alt="" />
-                        <div class="shop_desc">
-                            <a href="single.html">
-                            </a><h3><a href="single.html"></a><a href="#">aliquam volutp</a></h3>
-                            <p>Lorem ipsum consectetuer adipiscing </p>
-                            <span class="reducedfrom">$66.00</span>
-                            <span class="actual">$12.00</span><br>
-                            <ul class="buttons">
-                                <li class="cart"><a href="#">Add To Cart</a></li>
-                                <li class="shop_btn"><a href="#">Read More</a></li>
-                                <div class="clear"> </div>
-                            </ul>
-                        </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="images/s3.jpg" class="img-responsive" alt="" />
+                    <div class="shop_desc">
+                        <a href="single.html">
+                        </a><h3><a href="single.html"></a><a href="#">aliquam volutp</a></h3>
+                        <p>Lorem ipsum consectetuer adipiscing </p>
+                        <span class="reducedfrom">$66.00</span>
+                        <span class="actual">$12.00</span><br>
+                        <ul class="buttons">
+                            <li class="cart"><a href="#">Add To Cart</a></li>
+                            <li class="shop_btn"><a href="#">Read More</a></li>
+                            <div class="clear"> </div>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </body>
 </html>
