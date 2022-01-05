@@ -15,9 +15,9 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <script src="~/js/jquery.min.js"></script>
-    <!--<script src="js/jquery.easydropdown.js"></script>-->
+    <script src="~/js/jquery.easydropdown.js"></script>
     <!--start slider -->
-    <link rel="stylesheet" href="css/fwslider.css" media="all">
+    <link rel="stylesheet" href="~/css/fwslider.css" media="all">
     <script src="~/js/jquery-ui.min.js"></script>
     <script src="~/js/fwslider.js"></script>
     <!--end slider -->
@@ -67,21 +67,19 @@
                             <ul class="nav" id="nav">
                                 <li><a asp-controller="Home" asp-action="Index">HomePage</a></li>
                                 <li><a href="experiance.html">Categories</a></li>
-                                <li><a></a></li>
-                                <li><a></a></li>
-                                <li><a></a></li>
+                                
                                 @{
                                     if (Model.Data != null)
                                     {
-                                        <li><a asp-controller="User" asp-action="UserProfile" asp-route-userId="@Model.Data.Id"><span class="glyphicon glyphicon-user"></span> @Model.Data.UserName</a></li>
+                                        <li style="margin-left:200px" ><a asp-controller="User" asp-action="UserProfile" asp-route-userId="@Model.Data.Id"><span class="glyphicon glyphicon-user"></span> @Model.Data.UserName</a></li>
                                     }
                                     else
                                     {
-                                        <li><a asp-controller="Auth" asp-action="Login" enctype="multipart/form-data"><span class="glyphicon glyphicon-log-in"></span> Login or Sign Up</a></li>
+                                        <li style="margin-left:200px"  ><a asp-controller="Auth" asp-action="Login" enctype="multipart/form-data"><span class="glyphicon glyphicon-log-in"></span> Login or Sign Up</a></li>
                                     }
                                 }
                             </ul>
-                            <script type="text/javascript" src="~/js/responsive-nav.js"></script>
+                            <script type="~/text/javascript" src="~/js/responsive-nav.js"></script>
                         </div>
                         <div>
 
