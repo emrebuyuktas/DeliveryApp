@@ -190,6 +190,48 @@ a {
 	line-height: 30px;
 	font-weight: 800;
 }
+   @@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
+
+
+
+.rating {
+    display: flex;
+    margin-top: -10px;
+    flex-direction: row-reverse;
+    margin-left: -4px;
+    float: left
+}
+
+.rating>input {
+    display: none
+}
+
+.rating>label {
+    position: relative;
+    width: 19px;
+    font-size: 25px;
+    color:gold;
+    cursor: pointer
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+    opacity: 1
+}
+
+.rating:hover>input:checked~label:before {
+    opacity: 0.4
+}
     </style>
 </head>
 <body>
@@ -269,8 +311,22 @@ a {
                 </div>
             
         </div></div>
-
-
+        <div class="row">
+             <div  class="col-md-9 single_left"> 
+         <div class="card">
+        
+           
+            <div class="col-10">
+                <div class="comment-box ml-2">
+                    
+                    <div style="margin-top: -50px;" class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label> </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
         
 		      
                  <div class="row">
@@ -286,7 +342,9 @@ a {
                                         <input  type="hidden" value="@Model.Data.Id" name="ProductId" />
                                         </div>
                                         <div  class="text">
-                                        <textarea style="width: 848px;margin-top: -50px;" name="Text" value="Message:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message:</textarea>
+                                        <textarea style="width: 848px;" name="Text" value="Message:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message:</textarea>
+                                        </div>
+                                        <div style="margin-left: 425px;" class="text">
                                         <div  class="form-submit">
                                             <input  name="submit" type="submit" id="submit" value="Submit">
                                         </div>
