@@ -264,55 +264,45 @@ a {
                           </p>
                       </div>
                     </li>
-                    <li class="clearfix">
-                      <img src="https://bootdey.com/img/Content/user_2.jpg" class="avatar" alt="">
-                      <div class="post-comments">
-                          <p class="meta">Dec 19, 2014 <a style="color: #E25050;" href="#">User2</a> says : <i class="pull-right"><a style="color: #E25050;" href="#"><small>Reply</small></a></i></p>
-                          <p>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                              Etiam a sapien odio, sit amet
-                          </p>
-                      </div>
                     
-                     
-                    </li>
                     </ul>
                 </div>
             </div>
-        </div></div></div></div></div>
+        </div></div>
 
 
-         <div class="main">
-      <div class="shop_top">
-		<div class="container">
-            <div class="row">
+        
+		      
+                 <div class="row">
+                   <div style="float: right;"  class="col-md-9 single_left">    
+                  
                 @{
                     if (HttpContextAccessor.HttpContext.Request
                     .Cookies["DeliveryApp"] != null)
-                    {
-                        <div class="row">
-                            <div  class="col-md-12 contact">
+                    {                    
                                 <form asp-controller="Comment" asp-action="Add" method="post">
-                                    <div style="margin-top: -260px;margin-left: 140px" class="text">
+                                    
+                                    <div class="to">
                                         <input type="hidden" value="@Model.Data.Id" name="ProductId" />
+                                        </div>
+                                        <div class="text">
                                         <textarea name="Text" value="Message:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message:</textarea>
                                         <div class="form-submit">
-                                            <input name="submit" type="submit" id="submit" value="Submit"><br>
+                                            <input name="submit" type="submit" id="submit" value="Submit">
                                         </div>
                                     </div>
                                     <div class="clear"></div>
                                 </form>
-                            </div>
-                        </div>
+                            
+                        
                     }
                 }
-            </div>
-    </div></div></div>
-     <div class="main">
-      <div class="shop_top">
-		<div class="container">
+            </div></div>
+    
+     
+		
             <div class="row">
-                <div style="margin-top: -130px;" class="col-md-9 single_left">
+                <div  class="col-md-9 single_left">
                 <h4 class="m_11">Related Products in the same Category</h4>
                 <div class="col-md-4 product1">
                     <img src="~/images/s1.jpg" class="img-responsive" alt="" />
