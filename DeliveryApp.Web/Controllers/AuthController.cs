@@ -4,8 +4,6 @@ using DeliveryApp.Web.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.Web.Controllers
@@ -62,6 +60,12 @@ namespace DeliveryApp.Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View();
+        }
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("DeliveryApp");
+            return RedirectToAction("Index", "Home");
         }
     }
 

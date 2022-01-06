@@ -29,9 +29,45 @@ namespace DeliveryApp.Web.Controllers
             return View(userProfile);
         }
         [HttpPost]
-        public async Task<IActionResult> Update(UserUpdateDto userUpdateDto)
+        public async Task<IActionResult> Update(UserUpdateModelView userUpdateModelView)
         {
+            UserUpdateDto userUpdateDto = new UserUpdateDto
+            {
+                Id = userUpdateModelView.Id,
+                Email=userUpdateModelView.Email,
+                PhoneNumber=userUpdateModelView.PhoneNumber,
+                UserName= userUpdateModelView.UserName,
+                UserSurname = userUpdateModelView.UserSurname
+
+            };
             await _authService.UpdateAsync(userUpdateDto, "https://localhost:44369/api/User");
+            var adress = await _address.GetUserAddressAsync($"https://localhost:44369/api/Address/user/{userUpdateDto.Id}");
+            if (adress.Data == null)
+            {
+                AddressAddDto addressAddDto = new AddressAddDto
+                {
+                    Street = userUpdateModelView.Street,
+                    City = userUpdateModelView.City,
+                    Neighbourhood = userUpdateModelView.Neighbourhood,
+                    Defination = userUpdateModelView.Defination,
+                    DoorNumber = userUpdateModelView.Defination
+                };
+                var result = await _address.AddAsync(addressAddDto, "https://localhost:44369/api/Address");
+                return RedirectToAction("UserProfile", "User");
+            }
+            else
+            {
+                AddressUpdateDto addressUpdateDto = new AddressUpdateDto
+                {
+                    Id = userUpdateModelView.AddressId,
+                    Street = userUpdateModelView.Street,
+                    City = userUpdateModelView.City,
+                    Neighbourhood = userUpdateModelView.Neighbourhood,
+                    Defination = userUpdateModelView.Defination,
+                    DoorNumber = userUpdateModelView.Defination
+                };
+                await _address.UpdateAsync(addressUpdateDto, "https://localhost:44369/api/Address");
+            }
             return RedirectToAction("UserProfile", "User");
         }
     }

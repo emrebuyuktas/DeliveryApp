@@ -67,15 +67,17 @@
                             <ul class="nav" id="nav">
                                 <li><a asp-controller="Home" asp-action="Index">HomePage</a></li>
                                 <li><a href="experiance.html">Categories</a></li>
-                                
+
                                 @{
                                     if (Model.Data != null)
                                     {
-                                        <li style="margin-left:200px" ><a asp-controller="User" asp-action="UserProfile" asp-route-userId="@Model.Data.Id"><span class="glyphicon glyphicon-user"></span> @Model.Data.UserName</a></li>
+                                        <li style="margin-left:100px"><a asp-controller="User" asp-action="UserProfile" asp-route-userId="@Model.Data.Id"><span class="glyphicon glyphicon-user"></span> @Model.Data.UserName</a></li>
+                                        <li><a asp-controller="Auth" asp-action="Logout" ><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+
                                     }
                                     else
                                     {
-                                        <li style="margin-left:150px"  ><a asp-controller="Auth" asp-action="Login" enctype="multipart/form-data"><span class="glyphicon glyphicon-log-in"></span> Login or Sign Up</a></li>
+                                        <li style="margin-left:150px"><a asp-controller="Auth" asp-action="Login" enctype="multipart/form-data"><span class="glyphicon glyphicon-log-in"></span> Login or Sign Up</a></li>
                                     }
                                 }
                             </ul>

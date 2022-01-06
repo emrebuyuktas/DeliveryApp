@@ -2,6 +2,7 @@
 using DeliveryApp.Web.HttpService;
 using DeliveryApp.Web.Models;
 using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -21,7 +22,7 @@ namespace DeliveryApp.Web.Services
         private readonly IApiService<UserLoginDto> _login;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AuthService(IApiService<User> service, HttpClient client, IApiService<UserRegisterDto> register, IApiService<UserLoginDto> login, IHttpContextAccessor httpContextAccessor)
+        public AuthService(IApiService<User> service, HttpClient client, IApiService<UserRegisterDto> register, IApiService<UserLoginDto> login, IHttpContextAccessor httpContextAccessor, IApiService<UserUpdateDto> update)
         {
 
             _service = service;
@@ -32,6 +33,7 @@ namespace DeliveryApp.Web.Services
             var token = _httpContextAccessor.HttpContext.Request
         .Cookies["DeliveryApp"];
             _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+            _update = update;
         }
 
         public async Task<User> RegisterAsync(UserRegisterDto userRegisterDto, string url)

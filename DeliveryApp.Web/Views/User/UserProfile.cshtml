@@ -60,8 +60,6 @@
 		</script>
 </head>
 <body>
-    
-
         <div style="margin-top: -150px;" class="main">
             <div class="shop_top">
                 <div class="container">
@@ -69,9 +67,8 @@
 
                         <div class="content-top">
                             <h3 style="margin-bottom: -150px;" style="margin-top: -150px;" class="m_3">Profile</h3>
-
                         </div>
-
+                        
                         <div class="col-md-4 team1">
                             
                             <div id="small-dialog3" class="mfp-hide">
@@ -105,13 +102,31 @@
                                     <div class="pop_up2">
                                         <h4 class="m_4"><a href="#">Adress</a></h4>
                                         <p class="m_4">
-                                            <div class="to">
-                                                <input style="width: 100px;" type="text" class="text" value="@Model.Address.City" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '@Model.Address.City';}">
-                                                <input name="Street" style="width: 100px;" type="text" class="text" value="@Model.Address.Street" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '@Model.Address.Street';}">
-                                                <input name="DoorNumber" style="width: 100px;" type="text" class="text" value="@Model.Address.DoorNumber" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '@Model.Address.DoorNumber';}">
-                                                <input name="Neighbourhood" style="width: 100px;" type="text" class="text" value="@Model.Address.Neighbourhood" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '@Model.Address.Neighbourhood';}">
-                                                <input name="Defination" style="width: 200px;" type="text" class="text" value="@Model.Address.Defination" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '@Model.Address.Defination';}">
-                                            </div>
+                                            @{
+                                                if (Model.Address != null)
+                                                {
+                                                    <div class="to">
+                                                        <input type="hidden" name="AddressId" value="@Model.Address.Id" />
+                                                        <input name="city" style="width: 100px;" type="text" class="text" value="@Model.Address.City" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '@Model.Address.City';}">
+                                                        <input name="Street" style="width: 100px;" type="text" class="text" value="@Model.Address.Street" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '@Model.Address.Street';}">
+                                                        <input name="DoorNumber" style="width: 100px;" type="text" class="text" value="@Model.Address.DoorNumber" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '@Model.Address.DoorNumber';}">
+                                                        <input name="Neighbourhood" style="width: 100px;" type="text" class="text" value="@Model.Address.Neighbourhood" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '@Model.Address.Neighbourhood';}">
+                                                        <input name="Defination" style="width: 200px;" type="text" class="text" value="@Model.Address.Defination" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '@Model.Address.Defination';}">
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="to">
+                                                        <input type="hidden" name="AddressId" value="0" />
+                                                        <input name="city" style="width: 100px;" type="text" class="text" value="City" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'City';}">
+                                                        <input name="Street" style="width: 100px;" type="text" class="text" value="Street" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Street';}">
+                                                        <input name="DoorNumber" style="width: 100px;" type="text" class="text" value="DoorNunber" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'DoorNumber';}">
+                                                        <input name="Neighbourhood" style="width: 100px;" type="text" class="text" value="Neighbourhood" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Neighbourhood';}">
+                                                        <input name="Defination" style="width: 200px;" type="text" class="text" value="Defination" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Defination';}">
+                                                    </div>
+                                                }
+                                            }
+
                                         </p> <br>
 
 
@@ -185,9 +200,18 @@
 
         </div>
         <div>
-            <h4 class="m_4"><a href="#">Adress</a></h4>
-            <p class="m_4">@Model.Address.City</p> <br>
-            <a class="popup-with-zoom-anim" href="#small-dialog3"><button style="margin-left: 130px;" type="button" class="btn btn-danger">Update</button></a>
+            @{
+                if (Model.Address != null)
+                {
+                    <h4 class="m_4"><a href="#">Adress</a></h4>
+                    <p class="m_4">@Model.Address.Street @Model.Address.Neighbourhood @Model.Address.DoorNumber @Model.Address.City</p><br><a class="popup-with-zoom-anim" href="#small-dialog3"><button style="margin-left: 130px;" type="button" class="btn btn-danger">Update</button></a>
+                }
+                else
+                {
+                    <h4 class="m_4"><a href="#">Adress</a></h4>
+                    <p class="m_4">Update address informations</p><br><a class="popup-with-zoom-anim" href="#small-dialog3"><button style="margin-left: 130px;" type="button" class="btn btn-danger">Update</button></a>
+                }
+            }
         </div>
     </div>
 
