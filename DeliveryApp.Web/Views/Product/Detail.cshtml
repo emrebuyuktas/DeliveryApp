@@ -120,8 +120,8 @@ a {
 }
 
 .blog-comment{
-    padding-left: 15%;
-	padding-right: 15%;
+    padding-left: 0%;
+	padding-right: 0%;
 }
 
 .blog-comment ul{
@@ -247,10 +247,10 @@ a {
                
 
              <div class="row">
-                <div class="col-md-9 single_left">
+                <div style="margin-top: -250px;float:left;" class="col-md-9 single_left">
                  
-                   <div class="col-md-12">
-                    <div style="margin-top: -250px;margin-left: -120px;" class="blog-comment">
+                   
+                    <div  class="blog-comment">
                     <h3 style="color:#E25050;" class="text-success">Comments</h3>
                     <hr/>
                     <ul  class="comments">
@@ -267,14 +267,14 @@ a {
                     
                     </ul>
                 </div>
-            </div>
+            
         </div></div>
 
 
         
 		      
                  <div class="row">
-                   <div style="float: right;"  class="col-md-9 single_left">    
+                   <div  class="col-md-9 single_left">    
                   
                 @{
                     if (HttpContextAccessor.HttpContext.Request
@@ -282,13 +282,13 @@ a {
                     {                    
                                 <form asp-controller="Comment" asp-action="Add" method="post">
                                     
-                                    <div class="to">
-                                        <input type="hidden" value="@Model.Data.Id" name="ProductId" />
+                                    <div  class="to">
+                                        <input  type="hidden" value="@Model.Data.Id" name="ProductId" />
                                         </div>
-                                        <div class="text">
-                                        <textarea name="Text" value="Message:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message:</textarea>
-                                        <div class="form-submit">
-                                            <input name="submit" type="submit" id="submit" value="Submit">
+                                        <div  class="text">
+                                        <textarea style="width: 848px;margin-top: -50px;" name="Text" value="Message:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message:</textarea>
+                                        <div  class="form-submit">
+                                            <input  name="submit" type="submit" id="submit" value="Submit">
                                         </div>
                                     </div>
                                     <div class="clear"></div>
@@ -299,7 +299,7 @@ a {
                 }
             </div></div>
     
-     
+     <br>
 		
             <div class="row">
                 <div  class="col-md-9 single_left">
