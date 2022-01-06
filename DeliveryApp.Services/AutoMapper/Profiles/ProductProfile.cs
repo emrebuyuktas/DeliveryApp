@@ -10,7 +10,9 @@ namespace DeliveryApp.Services.AutoMapper.Profiles
         {
             CreateMap<Product, ProductDto>()
            .ForMember(d => d.ProductBrand, o => o.MapFrom(s => s.ProductBrand.Name))
-           .ForMember(d => d.ProductType, o => o.MapFrom(s => s.ProductType.Name));
+           .ForMember(d => d.ProductType, o => o.MapFrom(s => s.ProductType.Name))
+           .ForMember(d => d.ProductTypeId, o => o.MapFrom(s => s.ProductType.Id))
+           .ForMember(d => d.ProductBrandId, o => o.MapFrom(s => s.ProductBrand.Id));
 
             CreateMap<Product, ProductUpdateDto>().ReverseMap();
             CreateMap<Product, ProductAddDto>().ReverseMap();

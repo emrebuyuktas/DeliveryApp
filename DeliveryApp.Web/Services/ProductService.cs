@@ -15,15 +15,16 @@ namespace DeliveryApp.Web.Services
         private readonly IApiService<ProductList> _service;
         private readonly IApiService<Product> _singleProduct;
         private readonly IApiService<ProductUpdateDto> _updateService;
+        private readonly IApiService<Rating> _updateRating;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public ProductService(HttpClient client, IApiService<ProductList> service, IApiService<ProductUpdateDto> updateService, IApiService<Product> singleProduct, IHttpContextAccessor httpContextAccessor)
+        public ProductService(HttpClient client, IApiService<ProductList> service, IApiService<ProductUpdateDto> updateService, IApiService<Product> singleProduct, IHttpContextAccessor httpContextAccessor, IApiService<Rating> updateRating)
         {
             _client = client;
             _service = service;
             _updateService = updateService;
             _singleProduct = singleProduct;
             _httpContextAccessor = httpContextAccessor;
-
+            _updateRating = updateRating;
         }
 
         public async Task<string> AddAsync(ProductList product,string url)
@@ -55,6 +56,11 @@ namespace DeliveryApp.Web.Services
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_httpContextAccessor.HttpContext.Request
         .Cookies["DeliveryApp"]);
             await _updateService.UpdateAsync(productUpdateDto, url, _client);
+        }
+
+        public async Task UpdateRating(Rating rating,string url)
+        {
+            await _updateRating.UpdateAsync(rating, url, _client);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model DeliveryApp.Web.Models.Product
+﻿@model DeliveryApp.Web.Models.ProductWithRecomendedModelView
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 @{ Layout = "_Layout"; }
 <!DOCTYPE HTML>
@@ -244,16 +244,21 @@ a {
                             <ul id="etalage">
                                 <li>
                                     <a href="optionallink.html">
-                                        <img class="etalage_thumb_image" src="@Model.Data.PictureUrl" />
-                                        <img class="etalage_source_image" src="@Model.Data.PictureUrl" />
+                                        <img class="etalage_thumb_image" src="@Model.Product.PictureUrl" />
+                                        <img class="etalage_source_image" src="@Model.Product.PictureUrl" />
                                     </a>
                                 </li>
                             </ul>
                         </div>
                         <!-- end product_slider -->
                         <div class="single_right">
-                            <h3>@Model.Data.Name</h3>
-                            <p class="m_10">@Model.Data.Description</p>
+                            <h3>@Model.Product.Name</h3>
+                            <p class="m_10">@Model.Product.Description</p>
+                            <br />
+                            <p class="m_10">Rating: @Model.Product.Rating</p>
+                            <br />
+                            <a asp-action="CategoryWithProducts" asp-controller="Product" asp-route-categoryId="@Model.Product.ProductTypeId" style="margin-right:15px;"><button type="button" class="btn btn-dark">@Model.Product.ProductType</button></a>
+                            <a asp-action="BrandWithProducts" asp-controller="Product" asp-route-brandId="@Model.Product.ProductBrandId"><button type="button" class="btn btn-dark">@Model.Product.ProductBrand</button></a>
                         </div>
                     </div>
                     <div class="clear"> </div>
@@ -261,14 +266,14 @@ a {
                 <div class="col-md-3" style="position:relative; bottom:465px;left:720px">
                     <div class="box-info-product">
                         <form asp-controller="Basket" asp-action="Add" method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="Id" value="@Model.Data.Id" />
-                            <input type="hidden" name="Name" value="@Model.Data.Name" />
-                            <input type="hidden" name="Price" value="@Model.Data.Price" />
-                            <input type="hidden" name="PictureUrl" value="@Model.Data.PictureUrl" />
-                            <input type="hidden" name="ProductBrand" value="@Model.Data.ProductBrand" />
-                            <input type="hidden" name="ProductType" value="@Model.Data.ProductType" />
+                            <input type="hidden" name="Id" value="@Model.Product.Id" />
+                            <input type="hidden" name="Name" value="@Model.Product.Name" />
+                            <input type="hidden" name="Price" value="@Model.Product.Price" />
+                            <input type="hidden" name="PictureUrl" value="@Model.Product.PictureUrl" />
+                            <input type="hidden" name="ProductBrand" value="@Model.Product.ProductBrand" />
+                            <input type="hidden" name="ProductType" value="@Model.Product.ProductType" />
 
-                            <p class="price2">@Model.Data.Price&#x20BA</p>
+                            <p class="price2">@Model.Product.Price&#x20BA</p>
                             <ul class="prosuct-qty">
                                 <span>Quantity:</span>
                                 <select name="Quantity">
@@ -289,42 +294,56 @@ a {
                
 
              <div class="row">
-                <div style="margin-top: -250px;float:left;" class="col-md-9 single_left">
-                 
-                   
-                    <div  class="blog-comment">
-                    <h3 style="color:#E25050;" class="text-success">Comments</h3>
-                    <hr/>
-                    <ul  class="comments">
-                    <li class="clearfix">
-                      <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
-                      <div class="post-comments">
-                          <p class="meta">Dec 18, 2014 <a style="color: #E25050;" href="#">User1</a> says : <i class="pull-right"><a style="color: #E25050;" href="#"><small>Reply</small></a></i></p>
-                          <p>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                              Etiam a sapien odio, sit amet
-                          </p>
-                      </div>
-                    </li>
-                    
-                    </ul>
-                </div>
-            
-        </div></div>
+                 <div style="margin-top: -250px;float:left;" class="col-md-9 single_left">
+
+
+                     @if (Model.Product.Comments != null)
+                     {
+                     <div class="blog-comment">
+                         <ul class="comments">
+                             <h3 style="color:#E25050;" class="text-success">Comments</h3>
+                             @foreach (var item in Model.Product.Comments)
+                             {
+
+                                 <hr />
+
+                                 <li class="clearfix">
+                                     <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
+                                     <div class="post-comments">
+                                         <p class="meta">@item.Date <a style="color: #E25050;" href="#">User</a> says : <i class="pull-right"><a style="color: #E25050;" href="#"></a></i></p>
+                                         <p>
+                                             @item.Text
+                                         </p>
+                                     </div>
+                                 </li>
+
+                             }
+                         </ul>
+                         </div>
+                         <br />
+                         <br />
+                     }
+
+                 </div></div>
         <div class="row">
              <div  class="col-md-9 single_left"> 
-         <div class="card">
-        
-           
-            <div class="col-10">
-                <div class="comment-box ml-2">
-                    
-                    <div style="margin-top: -50px;" class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label> </div>
-                    
-                    
-                </div>
-            </div>
-        </div>
+                 <div class="card">
+
+
+                     <form method="post" asp-action="UpdateRating" asp-controller="Product">
+                         <div class="col-10">
+                             <div class="comment-box ml-2">
+
+                                 <div style="margin-top: -50px;" class="rating">
+                                     <input type="hidden" value="@Model.Product.Id" name="ProductId" />
+                                     <input type="radio" name="RatingValue" value="5" id="5"><label for="5">☆</label> <input type="radio" name="RatingValue" value="4" id="4"><label for="4">☆</label> <input type="radio" name="RatingValue" value="3" id="3"><label for="3">☆</label> <input type="radio" name="RatingValue" value="2" id="2"><label for="2">☆</label> <input type="radio" name="RatingValue" value="1" id="1"><label for="1">☆</label>
+                                 </div>
+                                 <button style="background-color: #E25050;" type="submit" class="btn">Give Rating</button>
+
+                             </div>
+                         </div>
+                     </form>
+                 </div>
     </div>
     </div>
         
@@ -339,7 +358,7 @@ a {
                                 <form asp-controller="Comment" asp-action="Add" method="post">
                                     
                                     <div  class="to">
-                                        <input  type="hidden" value="@Model.Data.Id" name="ProductId" />
+                                        <input  type="hidden" value="@Model.Product.Id" name="ProductId" />
                                         </div>
                                         <div  class="text">
                                         <textarea style="width: 848px;" name="Text" value="Message:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message:</textarea>
@@ -360,54 +379,26 @@ a {
      <br>
 		
             <div class="row">
-                <div  class="col-md-9 single_left">
-                <h4 class="m_11">Related Products in the same Category</h4>
-                <div class="col-md-4 product1">
-                    <img src="~/images/s1.jpg" class="img-responsive" alt="" />
-                    <div class="shop_desc">
-                        <a href="single.html">
-                        </a><h3><a href="single.html"></a><a href="#">aliquam volutp</a></h3>
-                        <p>Lorem ipsum consectetuer adipiscing </p>
-                        <span class="reducedfrom">$66.00</span>
-                        <span class="actual">$12.00</span><br>
-                        <ul class="buttons">
-                            <li class="cart"><a href="#">Add To Cart</a></li>
-                            <li class="shop_btn"><a href="#">Read More</a></li>
-                            <div class="clear"> </div>
-                        </ul>
-                    </div>
+                <div class="col-md-9 single_left">
+                    <h4 class="m_11">Related Products in the same Category</h4>
+                    @foreach (var item in Model.RecomendedProducts)
+                    {
+                        <div class="col-md-4 product1">
+                            <img src=@item.PictureUrl class="img-responsive" alt="" />
+                            <div class="shop_desc">
+                                <a href="single.html">
+                                </a><h3><a href="single.html"></a><a href="#">@(item.Name.Length>25 ? item.Name.Substring(0,25) : item.Name)...</a></h3>
+                                    <p>@(item.Description.Length>25 ? item.Description.Substring(0,25) : item.Description)... </p>
+                                <span class="actual">@item.Price&#x20BA</span><br>
+                                <ul class="buttons">
+                                    <li class="cart"><a href="#">Add To Cart</a></li>
+                                    <li class="shop_btn"><a href="#">Read More</a></li>
+                                    <div class="clear"> </div>
+                                </ul>
+                            </div>
+                        </div>
+                    }
                 </div>
-                <div class="col-md-4 product1">
-                    <img src="~/images/s2.jpg" class="img-responsive" alt="" />
-                    <div class="shop_desc">
-                        <a href="single.html">
-                        </a><h3><a href="single.html"></a><a href="#">aliquam volutp</a></h3>
-                        <p>Lorem ipsum consectetuer adipiscing </p>
-                        <span class="reducedfrom">$66.00</span>
-                        <span class="actual">$12.00</span><br>
-                        <ul class="buttons">
-                            <li class="cart"><a href="#">Add To Cart</a></li>
-                            <li class="shop_btn"><a href="#">Read More</a></li>
-                            <div class="clear"> </div>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <img src="~/images/s3.jpg" class="img-responsive" alt="" />
-                    <div class="shop_desc">
-                        <a href="single.html">
-                        </a><h3><a href="single.html"></a><a href="#">aliquam volutp</a></h3>
-                        <p>Lorem ipsum consectetuer adipiscing </p>
-                        <span class="reducedfrom">$66.00</span>
-                        <span class="actual">$12.00</span><br>
-                        <ul class="buttons">
-                            <li class="cart"><a href="#">Add To Cart</a></li>
-                            <li class="shop_btn"><a href="#">Read More</a></li>
-                            <div class="clear"> </div>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 

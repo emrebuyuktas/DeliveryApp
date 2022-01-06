@@ -11,5 +11,6 @@ namespace DeliveryApp.Web.Services
         Task<string> AddAsync(ProductList product, string url);
         Task DeleteAsync(string url, string id);
         Task UpdateAsync(ProductUpdateDto productUpdateDto, string url);
+        Task UpdateRating(Rating rating, string url);
     }
 }

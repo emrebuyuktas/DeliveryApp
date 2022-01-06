@@ -21,7 +21,7 @@ namespace DeliveryApp.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Product(int id)
         {
-            var product = await _iproductService.GetAsync(id);
+            var product = await _iproductService.GetProductWithComments(id);
             return Ok(product);
         }
         [HttpGet]
@@ -63,6 +63,14 @@ namespace DeliveryApp.API.Controllers
         {
             var products = await _iproductService.SearchAsync(keyword,currentPage,pageSize,isAscending);
             return Ok(products);
+        }
+        [HttpPut("rating")]
+        public async Task<IActionResult> UpdateRating(Rating rating)
+        {
+            var response = await _iproductService.UpdateRatingAsync(rating.ProductId,rating.RatingValue);
+            if (response.ResultStatus == ResultStatus.Succes)
+                return NoContent();
+            return BadRequest(response);
         }
     }
 }

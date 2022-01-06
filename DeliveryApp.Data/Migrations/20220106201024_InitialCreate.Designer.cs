@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DeliveryApp.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211226123424_InitialCreate")]
+    [Migration("20220106201024_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -160,6 +160,9 @@ namespace DeliveryApp.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RatingCount")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

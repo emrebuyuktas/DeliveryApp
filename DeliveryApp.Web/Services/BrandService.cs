@@ -22,8 +22,9 @@ namespace DeliveryApp.Web.Services
             _update = update;
             _brands = brands;
             _httpContextAccessor = httpContextAccessor;
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_httpContextAccessor.HttpContext.Request
-                    .Cookies["DeliveryApp"]);
+            var token = _httpContextAccessor.HttpContext.Request
+.Cookies["DeliveryApp"];
+            _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
         }
 
         public async Task<string> AddAsync(Brand brand, string url)

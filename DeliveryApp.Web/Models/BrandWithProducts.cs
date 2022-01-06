@@ -7,7 +7,7 @@ namespace DeliveryApp.Web.Models
 {
     public class BrandWithProducts
     {
-        public IList<ProductBrandWithProductsDto> Data { get; set; }
+        public ProductBrandWithProductsDto Data { get; set; }
 
         public ResultStatus ResultStatus { get; set; }
 

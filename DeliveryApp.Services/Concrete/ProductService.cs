@@ -90,7 +90,7 @@ namespace DeliveryApp.Services.Concrete
                 products = await _unitOfWork.Products.GetAllAsync(x => x.ProductTypeId == productTypeId && x.ProductBrandId==productBrandId, x => x.ProductBrand, x => x.ProductType);
             }
             var sortedProducts = isAscending ? products.OrderBy(x => x.Rating).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList() :
-                products.OrderByDescending(x => x.Price).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                products.OrderByDescending(x => x.Rating).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
             var productsToReturn = _mapper.Map<IList<ProductDto>>(sortedProducts);
             return new DataResult<IList<ProductDto>>(ResultStatus.Succes, productsToReturn);
         }
@@ -149,11 +149,23 @@ namespace DeliveryApp.Services.Concrete
 
         public async Task<IDataResult<ProductDto>> GetProductWithComments(int productId)
         {
-            var product = await _unitOfWork.Products.GetAsync(x => x.Id == productId, x => x.ProductBrand, x => x.ProductType,x=>x.Comments.AsEnumerable().Where(x=>x.IsPublished==true));
+            var product = await _unitOfWork.Products.GetAsync(x => x.Id == productId, x => x.ProductBrand, x => x.ProductType);
+            var comments = await _unitOfWork.Comment.GetAllAsync(x => x.IsPublished == true&&x.ProductId==productId);
             if(product==null)
                 return new DataResult<ProductDto>(ResultStatus.Error, "No products found with specified criteria", null);
             var productToReturnDto = _mapper.Map<ProductDto>(product);
+            productToReturnDto.Comments = _mapper.Map<IList<CommentReturnDto>>(comments);
             return new DataResult<ProductDto>(ResultStatus.Succes, productToReturnDto);
+        }
+
+        public async Task<IResult> UpdateRatingAsync(int productId, int rating)
+        {
+            var product = await _unitOfWork.Products.GetAsync(x => x.Id == productId);
+            product.RatingCount += 1;
+            product.Rating = (product.Rating + rating) / product.RatingCount;
+            await _unitOfWork.Products.UpdateAsync(product);
+            await _unitOfWork.CommitAsync();
+            return new Result(ResultStatus.Succes, "");
         }
     }
 }

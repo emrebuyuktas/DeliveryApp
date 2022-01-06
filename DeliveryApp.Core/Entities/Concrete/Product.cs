@@ -15,5 +15,6 @@ namespace DeliveryApp.Core.Entities.Concrete
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Order> Orders { get; set; }
         public virtual int Rating { get; set; } = 0;
+        public virtual int RatingCount { get; set; } = 0;
     }
 }
