@@ -244,14 +244,56 @@ a {
                         </form>
                     </div>
                 </div>
+               
+
+             <div class="row">
+                <div class="col-md-9 single_left">
+                 
+                   <div class="col-md-12">
+                    <div style="margin-top: -250px;margin-left: -120px;" class="blog-comment">
+                    <h3 style="color:#E25050;" class="text-success">Comments</h3>
+                    <hr/>
+                    <ul  class="comments">
+                    <li class="clearfix">
+                      <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
+                      <div class="post-comments">
+                          <p class="meta">Dec 18, 2014 <a style="color: #E25050;" href="#">User1</a> says : <i class="pull-right"><a style="color: #E25050;" href="#"><small>Reply</small></a></i></p>
+                          <p>
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                              Etiam a sapien odio, sit amet
+                          </p>
+                      </div>
+                    </li>
+                    <li class="clearfix">
+                      <img src="https://bootdey.com/img/Content/user_2.jpg" class="avatar" alt="">
+                      <div class="post-comments">
+                          <p class="meta">Dec 19, 2014 <a style="color: #E25050;" href="#">User2</a> says : <i class="pull-right"><a style="color: #E25050;" href="#"><small>Reply</small></a></i></p>
+                          <p>
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                              Etiam a sapien odio, sit amet
+                          </p>
+                      </div>
+                    
+                     
+                    </li>
+                    </ul>
+                </div>
+            </div>
+        </div></div></div></div></div>
+
+
+         <div class="main">
+      <div class="shop_top">
+		<div class="container">
+            <div class="row">
                 @{
                     if (HttpContextAccessor.HttpContext.Request
                     .Cookies["DeliveryApp"] != null)
                     {
                         <div class="row">
-                            <div class="col-md-12 contact">
+                            <div  class="col-md-12 contact">
                                 <form asp-controller="Comment" asp-action="Add" method="post">
-                                    <div class="text">
+                                    <div style="margin-top: -260px;margin-left: 140px" class="text">
                                         <input type="hidden" value="@Model.Data.Id" name="ProductId" />
                                         <textarea name="Text" value="Message:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message:</textarea>
                                         <div class="form-submit">
@@ -265,42 +307,7 @@ a {
                     }
                 }
             </div>
-
-             <div class="row">
-                <div class="col-md-9 single_left">
-                 <div class="container bootstrap snippets bootdey">
-                   <div class="col-md-12">
-                    <div style="margin-top: -250px;margin-left: 75px;" class="blog-comment">
-                    <h3 class="text-success">Comments</h3>
-                    <hr/>
-                    <ul  class="comments">
-                    <li class="clearfix">
-                      <img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
-                      <div class="post-comments">
-                          <p class="meta">Dec 18, 2014 <a href="#">JohnDoe</a> says : <i class="pull-right"><a href="#"><small>Reply</small></a></i></p>
-                          <p>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                              Etiam a sapien odio, sit amet
-                          </p>
-                      </div>
-                    </li>
-                    <li class="clearfix">
-                      <img src="https://bootdey.com/img/Content/user_2.jpg" class="avatar" alt="">
-                      <div class="post-comments">
-                          <p class="meta">Dec 19, 2014 <a href="#">JohnDoe</a> says : <i class="pull-right"><a href="#"><small>Reply</small></a></i></p>
-                          <p>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                              Etiam a sapien odio, sit amet
-                          </p>
-                      </div>
-                    
-                     
-                    </li>
-                    </ul>
-                </div>
-            </div>
-        </div></div></div></div></div>
-    </div>
+    </div></div></div>
      <div class="main">
       <div class="shop_top">
 		<div class="container">
@@ -359,6 +366,6 @@ a {
     </div>
 
     </div>
-    </div>
+    
 </body>
 </html>
