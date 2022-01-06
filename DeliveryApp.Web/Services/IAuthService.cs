@@ -13,6 +13,7 @@ namespace DeliveryApp.Web.Services
         Task<User> RegisterAsync(UserRegisterDto userRegisterDto, string url);
         Task DeleteAsync(string url, string id);
         Task UpdateAsync(UserUpdateDto userUpdateDto, string url);
+        Task ChangePasswordAsync(PasswordChangeDto passwordChangeDto, string url);
         Task<User> LoginAsync(UserLoginDto userLoginDto,string url);
         Task<User> GetCurrentUserAsync(string url, string token);
 

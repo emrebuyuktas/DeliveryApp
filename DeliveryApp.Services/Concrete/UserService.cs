@@ -147,5 +147,10 @@ namespace DeliveryApp.Services.Concrete
                 return new Result(ResultStatus.Succes, $"{userUpdateDto.UserName} has been updated");
             return new Result(ResultStatus.Error, $"An error occurred while updating");
         }
+
+        public Task<IDataResult<UserWithOrders>> GetUserWithOrdersAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

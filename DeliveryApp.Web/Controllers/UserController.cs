@@ -28,6 +28,17 @@ namespace DeliveryApp.Web.Controllers
             UserProfile userProfile = new UserProfile { Data = user.Data, Address = adress.Data };
             return View(userProfile);
         }
+        [HttpGet]
+        public IActionResult PasswordChange()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> PasswordChange(PasswordChangeDto passwordChangeDto)
+        {
+            await _authService.ChangePasswordAsync(passwordChangeDto, "https://localhost:44369/api/User");
+            return RedirectToAction("Logout", "Auth");
+        }
         [HttpPost]
         public async Task<IActionResult> Update(UserUpdateModelView userUpdateModelView)
         {
@@ -53,7 +64,7 @@ namespace DeliveryApp.Web.Controllers
                     DoorNumber = userUpdateModelView.Defination
                 };
                 var result = await _address.AddAsync(addressAddDto, "https://localhost:44369/api/Address");
-                return RedirectToAction("UserProfile", "User");
+                return RedirectToAction("Logout", "Auth");
             }
             else
             {
@@ -68,7 +79,7 @@ namespace DeliveryApp.Web.Controllers
                 };
                 await _address.UpdateAsync(addressUpdateDto, "https://localhost:44369/api/Address");
             }
-            return RedirectToAction("UserProfile", "User");
+            return RedirectToAction("Logout", "Auth");
         }
     }
 }

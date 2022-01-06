@@ -18,11 +18,12 @@ namespace DeliveryApp.Web.Services
         private readonly HttpClient _client;
         private readonly IApiService<User> _service;
         private readonly IApiService<UserUpdateDto> _update;
+        private readonly IApiService<PasswordChangeDto> _change;
         private readonly IApiService<UserRegisterDto> _register;
         private readonly IApiService<UserLoginDto> _login;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AuthService(IApiService<User> service, HttpClient client, IApiService<UserRegisterDto> register, IApiService<UserLoginDto> login, IHttpContextAccessor httpContextAccessor, IApiService<UserUpdateDto> update)
+        public AuthService(IApiService<User> service, HttpClient client, IApiService<UserRegisterDto> register, IApiService<UserLoginDto> login, IHttpContextAccessor httpContextAccessor, IApiService<UserUpdateDto> update, IApiService<PasswordChangeDto> change)
         {
 
             _service = service;
@@ -34,6 +35,7 @@ namespace DeliveryApp.Web.Services
         .Cookies["DeliveryApp"];
             _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
             _update = update;
+            _change = change;
         }
 
         public async Task<User> RegisterAsync(UserRegisterDto userRegisterDto, string url)
@@ -72,6 +74,11 @@ namespace DeliveryApp.Web.Services
         public async Task UpdateAsync(UserUpdateDto userUpdateDto, string url)
         {
             await _update.UpdateAsync(userUpdateDto, url, _client);
+        }
+
+        public async Task ChangePasswordAsync(PasswordChangeDto passwordChangeDto, string url)
+        {
+            await _change.UpdateAsync(passwordChangeDto, url, _client);
         }
     }
 }
