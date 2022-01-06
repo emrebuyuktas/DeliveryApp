@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -18,15 +19,17 @@ namespace DeliveryApp.Services.Concrete
     public class UserService : IUserService
     {
         private readonly UserManager<User> _userManager;
+        private readonly IOrderService _orderService;
         private readonly SignInManager<User> _signInManager;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
-        public UserService(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IConfiguration configuration)
+        public UserService(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IConfiguration configuration, IOrderService orderService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _mapper = mapper;
             _configuration = configuration;
+            _orderService = orderService;
         }
 
         public async Task<IDataResult<UserDto>> GetUserAsync(int id)
@@ -148,9 +151,22 @@ namespace DeliveryApp.Services.Concrete
             return new Result(ResultStatus.Error, $"An error occurred while updating");
         }
 
-        public Task<IDataResult<UserWithOrders>> GetUserWithOrdersAsync()
+        public async Task<IDataResult<UserWithOrders>> GetUserWithOrdersAsync(string email)
         {
-            throw new NotImplementedException();
+            var user =await _userManager.FindByEmailAsync(email);
+            var orders = await _orderService.GetOrderAsync(user.Email);
+            var userwithorders = _mapper.Map<UserWithOrders>(user);
+            if(orders.Data.Count>5)
+            {
+                var returnOrders=orders.Data.OrderByDescending(x=>x.OrderDate).Skip(Math.Max(0, orders.Data.Count() - 5));
+                userwithorders.Orders = _mapper.Map<IList<OrderListDto>>(returnOrders);
+            }
+            else
+            {
+                var returnOrders = orders.Data.OrderByDescending(x => x.OrderDate);
+                userwithorders.Orders = _mapper.Map<IList<OrderListDto>>(returnOrders);
+            }
+            return new DataResult<UserWithOrders>(ResultStatus.Succes, userwithorders);
         }
     }
 }

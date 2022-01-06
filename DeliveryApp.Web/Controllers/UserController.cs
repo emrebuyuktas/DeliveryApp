@@ -23,9 +23,16 @@ namespace DeliveryApp.Web.Controllers
         {
             var token = _httpContextAccessor.HttpContext.Request
 .Cookies["DeliveryApp"];
-            var user = await _authService.GetAsync($"https://localhost:44369/api/User/{userId}",token);
+            var user = await _authService.GetUserWithOrdersAsync($"https://localhost:44369/api/User/orders");
             var adress =await _address.GetUserAddressAsync($"https://localhost:44369/api/Address/user/{userId}");
-            UserProfile userProfile = new UserProfile { Data = user.Data, Address = adress.Data };
+            UserProfile userProfile = new UserProfile 
+            { Id=user.Data.Id,
+              Email= user.Data.Email,
+              PhoneNumber= user.Data.PhoneNumber,
+              UserName= user.Data.UserName,
+              UserSurname= user.Data.UserSurname,
+              Orders=user.Data.Orders,
+              Address = adress.Data };
             return View(userProfile);
         }
         [HttpGet]

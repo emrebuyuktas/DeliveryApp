@@ -74,24 +74,24 @@
                             <div id="small-dialog3" class="mfp-hide">
                                 <form method="post" asp-controller="User" asp-action="Update">
                                     <div class="pop_up2">
-                                        <input type="hidden" name="Id" value="@Model.Data.Id" />
+                                        <input type="hidden" name="Id" value="@Model.Id" />
                                         <h4 class="m_4"><a href="#">Name</a></h4>
-                                        <p class="m_4"><div class="to"><input name="UserName" type="text" class="text" value="@Model.Data.UserName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '@Model.Data.UserName';}"></div></p>
+                                        <p class="m_4"><div class="to"><input name="UserName" type="text" class="text" value="@Model.UserName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '@Model.UserName';}"></div></p>
 
                                     </div>
                                     <div class="pop_up2">
                                         <h4 class="m_4"><a href="#">Surname</a></h4>
-                                        <p class="m_4"><div class="to"><input name="UserSurname" type="text" class="text" value="@Model.Data.UserSurname" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '@Model.Data.UserSurname';}"></div></p>
+                                        <p class="m_4"><div class="to"><input name="UserSurname" type="text" class="text" value="@Model.UserSurname" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '@Model.UserSurname';}"></div></p>
 
                                     </div>
                                     <div class="pop_up2">
                                         <h4 class="m_4"><a href="#">E-Mail</a></h4>
-                                        <p class="m_4"><div class="to"><input name="Email" type="text" class="text" value="@Model.Data.Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '@Model.Data.Email';}"></div></p>
+                                        <p class="m_4"><div class="to"><input name="Email" type="text" class="text" value="@Model.Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '@Model.Email';}"></div></p>
 
                                     </div>
                                     <div class="pop_up2">
                                         <h4 class="m_4"><a href="#">Phone</a></h4>
-                                        <p class="m_4"><div class="to"><input name="PhoneNumber" type="text" class="text" value="@Model.Data.PhoneNumber" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '@Model.Data.PhoneNumber';}"></div></p>
+                                        <p class="m_4"><div class="to"><input name="PhoneNumber" type="text" class="text" value="@Model.PhoneNumber" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '@Model.PhoneNumber';}"></div></p>
 
                                     </div>
                                     <div class="pop_up2">
@@ -145,7 +145,7 @@
 
 
                                 <h4 class="m_4"><a href="#">Name </a></h4>
-                                <p class="m_4">@Model.Data.UserName </p> <br>
+                                <p class="m_4">@Model.UserName </p> <br>
                                 <a class="popup-with-zoom-anim" href="#small-dialog3"><button style="margin-left: 100px;" type="button" class="btn btn-danger">Update</button></a>
                             </div>
                         </div>
@@ -157,7 +157,7 @@
         </div>
         <div>
             <h4 class="m_4"><a href="#">Surname</a></h4>
-            <p class="m_4">@Model.Data.UserSurname</p> <br>
+            <p class="m_4">@Model.UserSurname</p> <br>
             <a class="popup-with-zoom-anim" href="#small-dialog3"><button style="margin-left: 130px;" type="button" class="btn btn-danger">Update</button></a>
         </div>
     </div>
@@ -168,7 +168,7 @@
         </div>
         <div>
             <h4 class="m_4"><a href="#">E-Mail</a></h4>
-            <p class="m_4">@Model.Data.Email</p> <br>
+            <p class="m_4">@Model.Email</p> <br>
             <a class="popup-with-zoom-anim" href="#small-dialog3"><button style="margin-left: 130px;" type="button" class="btn btn-danger">Update</button></a>
         </div>
     </div>
@@ -179,7 +179,7 @@
         </div>
         <div>
             <h4 class="m_4"><a href="#">Phone</a></h4>
-            <p class="m_4">@Model.Data.PhoneNumber</p> <br>
+            <p class="m_4">@Model.PhoneNumber</p> <br>
             <a class="popup-with-zoom-anim" href="#small-dialog3"><button style="margin-left: 100px;" type="button" class="btn btn-danger">Update</button></a>
         </div>
     </div>
@@ -225,8 +225,23 @@
     <div class="row">
         <div class="col-md-4 team_bottom">
             <ul class="team_list">
-                <h4>Past Shopping</h4>
-                <li><a class="popup-with-zoom-anim" href="#small-dialog3">Always free from repetition</a><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt</p></li>
+                @{
+                    if (Model.Orders!=null)
+                    {
+                        foreach (var item in Model.Orders)
+                        {
+                            <h4>Past Shopping</h4>
+                            <li><a class="popup-with-zoom-anim" href="#small-dialog3">Order Data: @item.OrderDate</a><p>
+                                Order Statu: @item.Status / Total Price: @item.TotalPrice <br />
+                                  @foreach (var product in item.Products)
+                                  {
+                                      @product.Name<br />
+                                  }
+                                  </p></li>
+                        }
+                    }
+                }
+
             </ul>
         </div>
 

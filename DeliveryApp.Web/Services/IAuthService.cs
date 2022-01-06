@@ -1,8 +1,5 @@
 ﻿using DeliveryApp.Core.Dtos;
 using DeliveryApp.Web.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.Web.Services
@@ -16,6 +13,7 @@ namespace DeliveryApp.Web.Services
         Task ChangePasswordAsync(PasswordChangeDto passwordChangeDto, string url);
         Task<User> LoginAsync(UserLoginDto userLoginDto,string url);
         Task<User> GetCurrentUserAsync(string url, string token);
+        Task<UserWithOrdersViewModel> GetUserWithOrdersAsync(string url);
 
     }
 }

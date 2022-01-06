@@ -14,6 +14,7 @@ namespace DeliveryApp.Services.AutoMapper.Profiles
         public UserProfile()
         {
             CreateMap<User, UserListDto>();
+            CreateMap<User, UserWithOrders>().ReverseMap();
             CreateMap<UserRegisterDto, User>().ReverseMap();
             CreateMap<UserUpdateDto, User>().ReverseMap();
             CreateMap<UserDto, User>().ReverseMap();

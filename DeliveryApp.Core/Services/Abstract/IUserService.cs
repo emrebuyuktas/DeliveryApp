@@ -17,7 +17,7 @@ namespace DeliveryApp.Core.Services.Abstract
         Task<IDataResult<UserDto>> GetUserAsync(int id);
         Task<IDataResult<UserDto>> GetCurrentUserAsync(string email);
         Task<IDataResult<IList<UserListDto>>> GetUserListAsync();
-        Task<IDataResult<UserWithOrders>> GetUserWithOrdersAsync();
+        Task<IDataResult<UserWithOrders>> GetUserWithOrdersAsync(string email);
 
     }
 }

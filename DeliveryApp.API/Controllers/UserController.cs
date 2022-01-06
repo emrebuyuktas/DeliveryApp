@@ -71,5 +71,12 @@ namespace DeliveryApp.API.Controllers
             }
             return BadRequest(response);
         }
+        [HttpGet("orders")]
+        public async Task<IActionResult> UserWithOrders()
+        {
+            var userEmail = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+            var user = await _userService.GetUserWithOrdersAsync(userEmail);
+            return Ok(user);
+        }
     }
 }
