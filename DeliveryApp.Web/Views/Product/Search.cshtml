@@ -1,4 +1,4 @@
-﻿@model DeliveryApp.Web.Models.ProductList
+﻿@model DeliveryApp.Core.Dtos.ProductListDto
 @{ Layout = "_Layout"; }
 
 
@@ -25,7 +25,7 @@
         <div class="shop_top">
             <div class="container">
                 <div class="row shop_box-top">
-                    @foreach (var item in Model.Data)
+                    @foreach (var item in Model.Products)
                     {
                         <div class="col-md-3 shop_box">
                             <a href="single.html">
@@ -36,7 +36,7 @@
                                     <p>@(item.Description.Length>30 ? item.Description.Substring(0,30) : item.Description)...</p>
                                     <span class="actual">@item.Price&#x20BA</span><br>
                                     <ul class="buttons">
-                                        <li class="cart"><a href="#">Add To Basket</a></li>
+                                        <li class="cart"><a asp-controller="Basket" asp-action="AddSingle" asp-route-productId="@item.Id">Add To Basket</a></li>
                                         <li class="shop_btn"><a asp-controller="Product" asp-action="Detail" asp-route-productId="@item.Id">Read More</a></li>
                                         <div class="clear"> </div>
                                     </ul>

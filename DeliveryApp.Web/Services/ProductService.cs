@@ -13,11 +13,12 @@ namespace DeliveryApp.Web.Services
     {
         private readonly HttpClient _client;
         private readonly IApiService<ProductList> _service;
+        private readonly IApiService<Search> _search;
         private readonly IApiService<Product> _singleProduct;
         private readonly IApiService<ProductUpdateDto> _updateService;
         private readonly IApiService<Rating> _updateRating;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public ProductService(HttpClient client, IApiService<ProductList> service, IApiService<ProductUpdateDto> updateService, IApiService<Product> singleProduct, IHttpContextAccessor httpContextAccessor, IApiService<Rating> updateRating)
+        public ProductService(HttpClient client, IApiService<ProductList> service, IApiService<ProductUpdateDto> updateService, IApiService<Product> singleProduct, IHttpContextAccessor httpContextAccessor, IApiService<Rating> updateRating, IApiService<Search> search)
         {
             _client = client;
             _service = service;
@@ -25,6 +26,7 @@ namespace DeliveryApp.Web.Services
             _singleProduct = singleProduct;
             _httpContextAccessor = httpContextAccessor;
             _updateRating = updateRating;
+            _search = search;
         }
 
         public async Task<string> AddAsync(ProductList product,string url)
@@ -45,10 +47,13 @@ namespace DeliveryApp.Web.Services
         {
             return await _service.GetAsync(url, _client);
         }
-
         public async Task<Product> GetAsync(string url)
         {
             return await _singleProduct.GetAsync(url, _client);
+        }
+        public async Task<ProductListDto> SearchAsync(string url)
+        {
+            return (await _search.GetAsync(url, _client)).Data;
         }
 
         public async Task UpdateAsync(ProductUpdateDto productUpdateDto, string url)

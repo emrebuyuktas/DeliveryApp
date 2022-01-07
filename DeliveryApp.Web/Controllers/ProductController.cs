@@ -40,7 +40,7 @@ namespace DeliveryApp.Web.Controllers
         public async Task<IActionResult> Detail(int productId)
         {
             var model = await _product.GetAsync($"https://localhost:44369/api/Products/{productId}");
-            var recomended = await _product.GetAllAsync("https://localhost:44369/api/Products?productTypeId=1&currentPage=1&pageSize=3&isAscending=true");
+            var recomended = await _product.GetAllAsync("https://localhost:44369/api/Products?productTypeId=1&currentPage=1&pageSize=3&isAscending=false");
             ProductWithRecomendedModelView modelview = new ProductWithRecomendedModelView
             {
                 Product = model.Data,
@@ -51,7 +51,7 @@ namespace DeliveryApp.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Search(string keyword)
         {
-            var model = await _product.GetAllAsync($"https://localhost:44369/api/Products/Search?keyword={keyword}&currentPage=1&pageSize=1000&isAscending=true");
+            var model = await _product.SearchAsync($"https://localhost:44369/api/Products/Search?keyword={keyword}&currentPage=1&pageSize=1000&isAscending=false");
             return View(model);
         }
         [HttpPost]

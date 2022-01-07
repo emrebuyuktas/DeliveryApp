@@ -27,17 +27,20 @@ namespace DeliveryApp.Web.Controllers
         [HttpPost]
          public async Task<IActionResult> Login([FromForm] UserLoginDto userLoginDto)
          {
-             var response = await _auth.LoginAsync(userLoginDto, "https://localhost:44369/api/Auth/Login");
-             if (response.ResultStatus==ResultStatus.Error)
-                 return View();
-            var token = response.Data.Token;
-            Response.Cookies.Append("DeliveryApp", token, new Microsoft.AspNetCore.Http.CookieOptions
+            if (ModelState.IsValid)
             {
-                HttpOnly = true,
-                SameSite = SameSiteMode.Strict,
-                Expires= DateTimeOffset.Now.AddHours(1)
-            });;
-            return RedirectToAction("Index", "Home");
+                var response = await _auth.LoginAsync(userLoginDto, "https://localhost:44369/api/Auth/Login");
+                if (response.ResultStatus == ResultStatus.Error)
+                    return View(userLoginDto);
+                var token = response.Data.Token;
+                Response.Cookies.Append("DeliveryApp", token, new Microsoft.AspNetCore.Http.CookieOptions
+                {
+                    HttpOnly = true,
+                    SameSite = SameSiteMode.Strict,
+                    Expires = DateTimeOffset.Now.AddHours(1)
+                }); ;
+            }
+            return View();
         }
         [HttpGet]
         public IActionResult Register()
@@ -47,19 +50,23 @@ namespace DeliveryApp.Web.Controllers
         [HttpPost] 
          public async Task<IActionResult> Register([FromForm] UserRegisterDto userRegisterDto)
          {
-             var response = await _auth.RegisterAsync(userRegisterDto, "https://localhost:44369/api/Auth/Register");
-             if (response.ResultStatus == ResultStatus.Succes)
-             {
-                var token = response.Data.Token;
-                Response.Cookies.Append("DeliveryApp", token, new Microsoft.AspNetCore.Http.CookieOptions
+            if (ModelState.IsValid)
+            {
+                var response = await _auth.RegisterAsync(userRegisterDto, "https://localhost:44369/api/Auth/Register");
+                if (response.ResultStatus == ResultStatus.Succes)
                 {
-                    HttpOnly = true,
-                    SameSite = SameSiteMode.Strict,
-                    Expires = DateTimeOffset.Now.AddHours(1)
-                });
-                return RedirectToAction("Index", "Home");
+                    var token = response.Data.Token;
+                    Response.Cookies.Append("DeliveryApp", token, new Microsoft.AspNetCore.Http.CookieOptions
+                    {
+                        HttpOnly = true,
+                        SameSite = SameSiteMode.Strict,
+                        Expires = DateTimeOffset.Now.AddHours(1)
+                    });
+                    return RedirectToAction("Index", "Home");
+                }
+                return View(userRegisterDto);
             }
-            return View();
+            return View("Login",userRegisterDto);
         }
         [HttpGet]
         public IActionResult Logout()

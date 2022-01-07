@@ -103,7 +103,7 @@ namespace DeliveryApp.Services.Concrete
             {
                     products = await _unitOfWork.Products.GetAllAsync(null, x => x.ProductBrand, x => x.ProductType);
                 var sortedProducts = isAscending ? products.OrderBy(x => x.Price).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList() :
-                    products.OrderByDescending(x => x.Price).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+                    products.OrderByDescending(x => x.Rating).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
                 var productsToReturn = _mapper.Map<IList<ProductDto>>(sortedProducts);
                 return new DataResult<ProductListDto>(ResultStatus.Succes, new ProductListDto
                 {
