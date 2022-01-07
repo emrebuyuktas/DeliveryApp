@@ -33,9 +33,9 @@ namespace DeliveryApp.API.Controllers
             return Ok(response);
         }
         [HttpPut()]
-        public async Task<IActionResult> Roles(int id,UserRoleAssignDto userRoleAssignDto)
+        public async Task<IActionResult> Roles(UserRoleAssignDto userRoleAssignDto)
         {
-            var response = await _roleService.AssignRoleAsync(id.ToString(),userRoleAssignDto);
+            var response = await _roleService.AssignRoleAsync(userRoleAssignDto);
             return Ok(response);
         }
     }

@@ -12,8 +12,8 @@ namespace DeliveryApp.Data.EntityFramework.Mappings
             b.HasKey(u => u.Id);
 
             // Indexes for "normalized" username and email, to allow efficient lookups
-            b.HasIndex(u => u.NormalizedUserName).HasName("UserNameIndex").IsUnique();
-            b.HasIndex(u => u.NormalizedEmail).HasName("EmailIndex");
+            b.HasIndex(u => u.NormalizedUserName).HasName("UserNameIndex").IsUnique(false);
+            b.HasIndex(u => u.NormalizedEmail).HasName("EmailIndex").IsUnique();
 
             // Maps to the AspNetUsers table
             b.ToTable("AspNetUsers");

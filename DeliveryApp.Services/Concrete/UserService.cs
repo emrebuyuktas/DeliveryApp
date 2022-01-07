@@ -23,13 +23,15 @@ namespace DeliveryApp.Services.Concrete
         private readonly SignInManager<User> _signInManager;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
-        public UserService(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IConfiguration configuration, IOrderService orderService)
+        private readonly IRoleService _roleService;
+        public UserService(UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IConfiguration configuration, IOrderService orderService, IRoleService roleService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _mapper = mapper;
             _configuration = configuration;
             _orderService = orderService;
+            _roleService = roleService;
         }
 
         public async Task<IDataResult<UserDto>> GetUserAsync(int id)
@@ -90,6 +92,7 @@ namespace DeliveryApp.Services.Concrete
                 UserName=user.UserName,
                 UserSurname=user.UserSurname,
                 Email=user.Email,
+                PhoneNumber=user.PhoneNumber,
                 Token=new TokenHandler(_configuration,_userManager).CreateToken(userLoginDto).Result
             });;;;;
 
@@ -124,6 +127,10 @@ namespace DeliveryApp.Services.Concrete
                 return new DataResult<UserDto>(ResultStatus.Error,"Check your information",null);
             }
             var returnedUser = await _userManager.FindByEmailAsync(userRegisterDto.Email);
+            List<string> roles = new List<string>();
+            roles.Add("Member");
+            UserRoleAssignDto userRoleAssignDto = new UserRoleAssignDto { UserId = returnedUser.Id.ToString(), Roles = roles };
+            await _roleService.AssignRoleAsync(userRoleAssignDto);
             UserLoginDto userLoginDto = new UserLoginDto
             {
                 E_mail = userRegisterDto.Email,

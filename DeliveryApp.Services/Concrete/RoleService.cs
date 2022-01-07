@@ -28,9 +28,9 @@ namespace DeliveryApp.Services.Concrete
             _roleManager = roleManager;
         }
 
-        public async Task<IResult> AssignRoleAsync(string userId,UserRoleAssignDto userRoleAssignDto)
+        public async Task<IResult> AssignRoleAsync(UserRoleAssignDto userRoleAssignDto)
         {
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(userRoleAssignDto.UserId);
             foreach (var role in userRoleAssignDto.Roles)
             {
                 await _userManager.AddToRoleAsync(user, role);

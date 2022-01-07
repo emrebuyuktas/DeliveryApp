@@ -1,9 +1,12 @@
 ﻿using DeliveryApp.Core.Dtos;
+using DeliveryApp.Shared.Result.Concrete;
 using DeliveryApp.Web.HttpService;
 using DeliveryApp.Web.Models;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.Web.Services
@@ -12,10 +15,11 @@ namespace DeliveryApp.Web.Services
     {
         private readonly HttpClient _client;
         private readonly IApiService<Brand> _service;
+        private readonly IApiService<ProductBrandAddDto> _add;
         private readonly IApiService<ProductBrandUpdateDto> _update;
         private readonly IApiService<BrandWithProducts> _brands;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public BrandService(IApiService<Brand> service, HttpClient client, IApiService<ProductBrandUpdateDto> update, IApiService<BrandWithProducts> brands, IHttpContextAccessor httpContextAccessor)
+        public BrandService(IApiService<Brand> service, HttpClient client, IApiService<ProductBrandUpdateDto> update, IApiService<BrandWithProducts> brands, IHttpContextAccessor httpContextAccessor, IApiService<ProductBrandAddDto> add)
         {
             _service = service;
             _client = client;
@@ -25,16 +29,20 @@ namespace DeliveryApp.Web.Services
             var token = _httpContextAccessor.HttpContext.Request
 .Cookies["DeliveryApp"];
             _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+            _add = add;
         }
 
-        public async Task<string> AddAsync(Brand brand, string url)
+        public async Task<Result> AddAsync(ProductBrandAddDto productBrandAddDto, string url)
         {
-            return await _service.AddAsync(brand, url, _client);
+            return JsonSerializer.Deserialize<Result>(await _add.AddAsync(productBrandAddDto, url, _client), new JsonSerializerOptions()
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            });
         }
 
-        public async Task DeleteAsync(string url, string id)
+        public async Task DeleteAsync(string url)
         {
-            await _service.DeleteAsync(url + id, _client);
+            await _service.DeleteAsync(url, _client);
         }
 
         public async Task<Brand> GetAsync(string url)

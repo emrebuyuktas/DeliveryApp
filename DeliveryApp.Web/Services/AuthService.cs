@@ -2,10 +2,7 @@
 using DeliveryApp.Web.HttpService;
 using DeliveryApp.Web.Models;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -17,14 +14,16 @@ namespace DeliveryApp.Web.Services
 
         private readonly HttpClient _client;
         private readonly IApiService<User> _service;
+        private readonly IApiService<UserList> _allusers;
         private readonly IApiService<UserWithOrdersViewModel> _userWithOrders;
         private readonly IApiService<UserUpdateDto> _update;
+        private readonly IApiService<UserRoleAssignDto> _updateRole;
         private readonly IApiService<PasswordChangeDto> _change;
         private readonly IApiService<UserRegisterDto> _register;
         private readonly IApiService<UserLoginDto> _login;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AuthService(IApiService<User> service, HttpClient client, IApiService<UserRegisterDto> register, IApiService<UserLoginDto> login, IHttpContextAccessor httpContextAccessor, IApiService<UserUpdateDto> update, IApiService<PasswordChangeDto> change, IApiService<UserWithOrdersViewModel> userWithOrders)
+        public AuthService(IApiService<User> service, HttpClient client, IApiService<UserRegisterDto> register, IApiService<UserLoginDto> login, IHttpContextAccessor httpContextAccessor, IApiService<UserUpdateDto> update, IApiService<PasswordChangeDto> change, IApiService<UserWithOrdersViewModel> userWithOrders, IApiService<UserList> allusers, IApiService<UserRoleAssignDto> updateRole)
         {
 
             _service = service;
@@ -34,11 +33,13 @@ namespace DeliveryApp.Web.Services
             _httpContextAccessor = httpContextAccessor;
             var token = _httpContextAccessor.HttpContext.Request
         .Cookies["DeliveryApp"];
-            if(string.IsNullOrEmpty(token))
+            if (string.IsNullOrEmpty(token))
                 _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
             _update = update;
             _change = change;
             _userWithOrders = userWithOrders;
+            _allusers = allusers;
+            _updateRole = updateRole;
         }
 
         public async Task<User> RegisterAsync(UserRegisterDto userRegisterDto, string url)
@@ -58,6 +59,10 @@ namespace DeliveryApp.Web.Services
         {
             
             return await _service.GetAsync(url, _client);
+        }
+        public async Task<UserList> GetAllAsync(string url)
+        {
+            return await _allusers.GetAsync(url, _client);
         }
         public async Task<User> GetCurrentUserAsync(string url,string token)
         {
@@ -88,6 +93,11 @@ namespace DeliveryApp.Web.Services
         {
             var user = await _userWithOrders.GetAsync(url, _client);
             return user;
+        }
+
+        public async Task AssignRoleAsync(UserRoleAssignDto userRoleAssignDto, string url)
+        {
+            await _updateRole.UpdateAsync(userRoleAssignDto, url, _client);
         }
     }
 }

@@ -40,10 +40,10 @@ namespace DeliveryApp.API.Controllers
                 return BadRequest(deletedComment);
             return NoContent();
         }
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Publish(int id)
+        [HttpPut]
+        public async Task<IActionResult> Publish(CommentPublishDto commentPublishDto)
         {
-            var comment = await _commentService.PublishAsync(id);
+            var comment = await _commentService.PublishAsync(commentPublishDto.CommentId);
             if (comment.ResultStatus == ResultStatus.Error)
                 return BadRequest(comment);
             return NoContent();

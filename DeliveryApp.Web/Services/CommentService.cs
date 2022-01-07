@@ -16,9 +16,9 @@ namespace DeliveryApp.Web.Services
         private readonly HttpClient _client;
         private readonly IApiService<CommentDto> _service;
         private readonly IApiService<Comment> _comments;
-        private readonly IApiService<CommentUpdate> _update;
+        private readonly IApiService<CommentPublishDto> _update;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public CommentService(HttpClient client, IApiService<CommentDto> service, IApiService<CommentUpdate> update, IHttpContextAccessor httpContextAccessor)
+        public CommentService(HttpClient client, IApiService<CommentDto> service, IApiService<CommentPublishDto> update, IHttpContextAccessor httpContextAccessor, IApiService<Comment> comments)
         {
 
             _client = client;
@@ -27,6 +27,7 @@ namespace DeliveryApp.Web.Services
             _httpContextAccessor = httpContextAccessor;
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_httpContextAccessor.HttpContext.Request
 .Cookies["DeliveryApp"]);
+            _comments = comments;
         }
 
         public async Task<string> AddAsync(CommentDto Comment, string url)
@@ -34,9 +35,9 @@ namespace DeliveryApp.Web.Services
             return await _service.AddAsync(Comment, url, _client);
         }
 
-        public async Task DeleteAsync(string url, string id)
+        public async Task DeleteAsync(string url)
         {
-            await _service.DeleteAsync(url + id, _client);
+            await _service.DeleteAsync(url, _client);
         }
 
         public async Task<Comment> GetAsync(string url)
@@ -44,7 +45,7 @@ namespace DeliveryApp.Web.Services
             return await _comments.GetAsync(url, _client);
         }
         
-        public async Task UpdateAsync(CommentUpdate update, string url)
+        public async Task UpdateAsync(CommentPublishDto update, string url)
         {
             await _update.UpdateAsync(update, url, _client);
         }

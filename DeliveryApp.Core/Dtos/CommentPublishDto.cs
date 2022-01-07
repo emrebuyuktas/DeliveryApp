@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace DeliveryApp.Core.Dtos
 {
-    public class UserRoleAssignDto
+    public class CommentPublishDto
     {
-        public string UserId { get; set; }
-        public IList<string> Roles { get; set; }
+        public int CommentId { get; set; }
     }
 }

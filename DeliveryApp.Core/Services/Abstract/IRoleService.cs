@@ -10,7 +10,7 @@ namespace DeliveryApp.Core.Services.Abstract
 {
     public interface IRoleService
     {
-        Task<IResult> AssignRoleAsync(string userId, UserRoleAssignDto userRoleAssignDto);
+        Task<IResult> AssignRoleAsync(UserRoleAssignDto userRoleAssignDto);
         Task<IDataResult<IList<RoleDto>>> GetAllRolesAsync();
         Task<IResult> RemoveRoleAsync(string userId, UserRoleAssignDto userRoleAssignDto);
         Task CreateRoles();

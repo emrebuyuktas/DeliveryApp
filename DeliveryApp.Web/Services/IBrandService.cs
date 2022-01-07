@@ -1,4 +1,5 @@
 ﻿using DeliveryApp.Core.Dtos;
+using DeliveryApp.Shared.Result.Concrete;
 using DeliveryApp.Web.Models;
 using System.Threading.Tasks;
 
@@ -8,8 +9,8 @@ namespace DeliveryApp.Web.Services
     {
         Task<Brand> GetAsync(string url);
         Task<BrandWithProducts> GetWithProductsAsync(string url);
-        Task<string> AddAsync(Brand brand, string url);
-        Task DeleteAsync(string url, string id);
+        Task<Result> AddAsync(ProductBrandAddDto productBrandAddDto, string url);
+        Task DeleteAsync(string url);
         Task UpdateAsync(ProductBrandUpdateDto productBrandUpdateDto, string url);
     }
 }

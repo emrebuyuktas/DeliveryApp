@@ -6,7 +6,7 @@ namespace DeliveryApp.Core.Dtos
 {
     public class UserListDto
     {
-        //role
+        public int Id { get; set; }
         [DisplayName("Name")]
         [Required(ErrorMessage = "Name can not be null.")]
         [MaxLength(100, ErrorMessage = "Name can not be longer than 100 character.")]
@@ -19,6 +19,7 @@ namespace DeliveryApp.Core.Dtos
         [MinLength(1, ErrorMessage = "Surname can not be shorter than 1 character.")]
         public string UserSurname { get; set; }
 
+        public string Email { get; set; }
         [DisplayName("Roles")]
         [Required(ErrorMessage = "Roles can not be null.")]
         [MaxLength(100, ErrorMessage = "Role can not be longer than 100 character.")]

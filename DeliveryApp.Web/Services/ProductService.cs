@@ -1,10 +1,13 @@
 ﻿
 using DeliveryApp.Core.Dtos;
+using DeliveryApp.Shared.Result.Concrete;
 using DeliveryApp.Web.HttpService;
 using DeliveryApp.Web.Models;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.Web.Services
@@ -13,12 +16,13 @@ namespace DeliveryApp.Web.Services
     {
         private readonly HttpClient _client;
         private readonly IApiService<ProductList> _service;
+        private readonly IApiService<ProductAddDto> _add;
         private readonly IApiService<Search> _search;
         private readonly IApiService<Product> _singleProduct;
         private readonly IApiService<ProductUpdateDto> _updateService;
         private readonly IApiService<Rating> _updateRating;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public ProductService(HttpClient client, IApiService<ProductList> service, IApiService<ProductUpdateDto> updateService, IApiService<Product> singleProduct, IHttpContextAccessor httpContextAccessor, IApiService<Rating> updateRating, IApiService<Search> search)
+        public ProductService(HttpClient client, IApiService<ProductList> service, IApiService<ProductUpdateDto> updateService, IApiService<Product> singleProduct, IHttpContextAccessor httpContextAccessor, IApiService<Rating> updateRating, IApiService<Search> search, IApiService<ProductAddDto> add)
         {
             _client = client;
             _service = service;
@@ -27,20 +31,24 @@ namespace DeliveryApp.Web.Services
             _httpContextAccessor = httpContextAccessor;
             _updateRating = updateRating;
             _search = search;
+            _add = add;
         }
 
-        public async Task<string> AddAsync(ProductList product,string url)
+        public async Task<Result> AddAsync(ProductAddDto productAddDto,string url)
         {
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_httpContextAccessor.HttpContext.Request
         .Cookies["DeliveryApp"]);
-            return await _service.AddAsync(product,url,_client);
+            return JsonSerializer.Deserialize<Result>(await _add.AddAsync(productAddDto, url, _client), new JsonSerializerOptions()
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            });
         }
 
-        public async Task DeleteAsync(string url, string id)
+        public async Task DeleteAsync(string url)
         {
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_httpContextAccessor.HttpContext.Request
         .Cookies["DeliveryApp"]);
-            await _service.DeleteAsync(url + id, _client);
+            await _service.DeleteAsync(url, _client);
         }
 
         public async Task<ProductList> GetAllAsync(string url)
