@@ -33,7 +33,7 @@ namespace DeliveryApp.Web.Services
             _httpContextAccessor = httpContextAccessor;
             var token = _httpContextAccessor.HttpContext.Request
         .Cookies["DeliveryApp"];
-            if (string.IsNullOrEmpty(token))
+            if (!string.IsNullOrEmpty(token))
                 _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
             _update = update;
             _change = change;
