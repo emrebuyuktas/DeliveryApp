@@ -21,4 +21,13 @@
     <ProjectReference Include="..\DeliveryApp.Core\DeliveryApp.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\Admin\assets\demo\chart-area-demo.js" />
+    <None Include="wwwroot\Admin\assets\demo\chart-bar-demo.js" />
+    <None Include="wwwroot\Admin\assets\demo\chart-pie-demo.js" />
+    <None Include="wwwroot\Admin\assets\demo\datatables-demo.js" />
+    <None Include="wwwroot\Admin\assets\img\error-404-monochrome.svg" />
+    <None Include="wwwroot\Admin\js\scripts.js" />
+  </ItemGroup>
+
 </Project>

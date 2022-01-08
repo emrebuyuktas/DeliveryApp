@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace DeliveryApp.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class ProductController : Controller
     {
         private readonly IProductService _product;
