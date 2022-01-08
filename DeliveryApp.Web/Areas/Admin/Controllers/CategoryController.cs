@@ -1,4 +1,5 @@
 ﻿using DeliveryApp.Core.Dtos;
+using DeliveryApp.Web.Areas.Admin.Models;
 using DeliveryApp.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace DeliveryApp.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _category;
@@ -33,32 +35,31 @@ namespace DeliveryApp.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _category.AddAsync(productTypeAddDto, "https://localhost:44369/api/Types");
-                if (result.ResultStatus == Shared.Result.ComplexTypes.ResultStatus.Error)
-                {
-                    return View(productTypeAddDto);
-                }
+                await _category.AddAsync(productTypeAddDto, "https://localhost:44369/api/Types");
                 return RedirectToAction("Index", "Category");
             }
             return View(productTypeAddDto);
         }
         [HttpGet]
-        public IActionResult UpdateCategory()
+        public async Task<IActionResult> UpdateCategory(int categoryId)
         {
-            return View();
+            var category = await _category.GetCategorAsync($"https://localhost:44369/api/Types/{categoryId}");
+            CategoryUpdateViewModel categoryUpdateViewModel = new CategoryUpdateViewModel { ProductTypeDto = category.Data, ProductTypeUpdateDto = null };
+            return View(categoryUpdateViewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateProduct(ProductTypeUpdateDto productTypeUpdate)
+        public async Task<IActionResult> UpdateCategory(ProductTypeUpdateDto productTypeUpdate)
         {
             if (ModelState.IsValid)
             {
                 await _category.UpdateAsync(productTypeUpdate, "https://localhost:44369/api/Types");
                 return RedirectToAction("Index", "Category");
             }
-            return View(productTypeUpdate);
+            CategoryUpdateViewModel categoryUpdateViewModel = new CategoryUpdateViewModel { ProductTypeDto = null, ProductTypeUpdateDto = productTypeUpdate };
+            return View(categoryUpdateViewModel);
         }
         [HttpGet]
-        public async Task<IActionResult> DeleteProduct(int categoryId)
+        public async Task<IActionResult> DeleteCategory(int categoryId)
         {
             await _category.DeleteAsync($"https://localhost:44369/api/Types/{categoryId}");
             return RedirectToAction("Index", "Category");

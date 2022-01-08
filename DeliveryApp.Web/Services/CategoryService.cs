@@ -15,11 +15,12 @@ namespace DeliveryApp.Web.Services
     {
         private readonly HttpClient _client;
         private readonly IApiService<Category> _service;
+        private readonly IApiService<SingleCategory> _single;
         private readonly IApiService<ProductTypeAddDto> _add;
         private readonly IApiService<ProductTypeUpdateDto> _updateService;
         private readonly IApiService<CategoryWithProducts> _categories;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public CategoryService(HttpClient client, IApiService<Category> service, IApiService<ProductTypeUpdateDto> updateService, IApiService<CategoryWithProducts> categories, IHttpContextAccessor httpContextAccessor, IApiService<ProductTypeAddDto> add)
+        public CategoryService(HttpClient client, IApiService<Category> service, IApiService<ProductTypeUpdateDto> updateService, IApiService<CategoryWithProducts> categories, IHttpContextAccessor httpContextAccessor, IApiService<ProductTypeAddDto> add, IApiService<SingleCategory> single)
         {
 
             _client = client;
@@ -28,16 +29,14 @@ namespace DeliveryApp.Web.Services
             _categories = categories;
             _httpContextAccessor = httpContextAccessor;
             _add = add;
+            _single = single;
         }
 
-        public async Task<Result> AddAsync(ProductTypeAddDto productTypeAddDto, string url)
+        public async Task AddAsync(ProductTypeAddDto productTypeAddDto, string url)
         {
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_httpContextAccessor.HttpContext.Request
 .Cookies["DeliveryApp"]);
-            return JsonSerializer.Deserialize<Result>(await _add.AddAsync(productTypeAddDto, url, _client), new JsonSerializerOptions()
-            {
-                ReferenceHandler = ReferenceHandler.Preserve
-            });
+            await _add.AddAsync(productTypeAddDto, url, _client);
         }
 
         public async Task DeleteAsync(string url)
@@ -50,6 +49,11 @@ namespace DeliveryApp.Web.Services
         public async Task<Category> GetAsync(string url)
         {
             return await _service.GetAsync(url, _client);
+        }
+
+        public async Task<SingleCategory> GetCategorAsync(string url)
+        {
+            return await _single.GetAsync(url,_client);
         }
 
         public Task<CategoryWithProducts> GetWithProductsAsync(string url)

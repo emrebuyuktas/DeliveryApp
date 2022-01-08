@@ -30,4 +30,8 @@
     <None Include="wwwroot\Admin\js\scripts.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Brand\" />
+  </ItemGroup>
+
 </Project>
