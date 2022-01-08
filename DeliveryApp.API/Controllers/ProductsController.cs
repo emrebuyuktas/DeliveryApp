@@ -30,6 +30,12 @@ namespace DeliveryApp.API.Controllers
             var products = await _iproductService.GetAllWithPagesAsync(productTypeId, productBrandId, currentPage, pageSize,isAscending);
             return Ok(products);
         }
+        [HttpGet("All")]
+        public async Task<IActionResult> GetAll()
+        {
+            var products = await _iproductService.GetAllAsync();
+            return Ok(products);
+        }
         [HttpPost]
         public async Task<IActionResult> Save(ProductAddDto productAddDto)
         {

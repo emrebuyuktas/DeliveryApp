@@ -24,7 +24,7 @@ namespace DeliveryApp.Web.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var model = await _product.GetAsync("https://localhost:44369/api/Products/");
+            var model = await _product.GetAllAsync("https://localhost:44369/api/Products/All");
             return View(model);
         }
         [HttpGet]
