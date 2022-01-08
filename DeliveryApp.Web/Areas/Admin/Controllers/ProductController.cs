@@ -40,11 +40,8 @@ namespace DeliveryApp.Web.Areas.Admin.Controllers
         {
             if(ModelState.IsValid)
             {
-                var result = await _product.AddAsync(productAddDto, "https://localhost:44369/api/Products");
-                if(result.ResultStatus==Shared.Result.ComplexTypes.ResultStatus.Error)
-                {
-                    return View(productAddDto);
-                }
+                 await _product.AddAsync(productAddDto, "https://localhost:44369/api/Products");
+                
                 return RedirectToAction("Index", "Product");
             }
             return View(productAddDto);

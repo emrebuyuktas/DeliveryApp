@@ -96,7 +96,7 @@
                                             <th></th>
                                             <th></th>
                                             <th></th>
-                                            <th><button class="w3-btn w3-white w3-border w3-border-blue w3-round-large" onclick="document.location='default.asp'"><p>New Product</p></button></th>
+                                            <th><a asp-action="AddProduct" asp-controller="Product"><button class="w3-btn w3-white w3-border w3-border-blue w3-round-large"  ><p>New Product</p></button></a></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -110,7 +110,8 @@
                                             <td>@item.ProductBrand</td>
                                             <td>@item.Description</td>
                                             <td>@item.Price</td>
-                                            <td><button class="w3-btn w3-white w3-border w3-border-blue w3-round-large" onclick="document.location='default.asp'">Update</button></td>
+                                            <td>
+                                                <a asp-action="UpdateProduct" asp-controller="Product" ><button class="w3-btn w3-white w3-border w3-border-blue w3-round-large">Update</button></a></td>
                                             <td><button type="button" class="w3-btn w3-white w3-border w3-border-blue w3-round-large" data-toggle="modal" data-target="#staticModal">X</button></td>
                                             <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true" data-backdrop="static">
                                                 <div class="modal-dialog modal-sm" role="document">
