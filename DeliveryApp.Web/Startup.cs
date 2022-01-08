@@ -42,6 +42,7 @@ namespace DeliveryApp.Web
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IAddressService, AddressService>();
+            services.AddScoped<IOrderService, OrderService>();
             services.AddScoped(typeof(IApiService<>), typeof(ApiService<>));
             services.AddHttpClient<ProductService>(opt => {
                 opt.BaseAddress = new Uri(Configuration["baseUrl"]);
@@ -62,6 +63,9 @@ namespace DeliveryApp.Web
                 opt.BaseAddress = new Uri(Configuration["baseUrl"]);
             });
             services.AddHttpClient<AddressService>(opt => {
+                opt.BaseAddress = new Uri(Configuration["baseUrl"]);
+            });
+            services.AddHttpClient<OrderService>(opt => {
                 opt.BaseAddress = new Uri(Configuration["baseUrl"]);
             });
             services.AddHttpContextAccessor();

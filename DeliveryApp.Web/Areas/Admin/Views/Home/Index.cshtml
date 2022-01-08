@@ -1,5 +1,64 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model DeliveryApp.Web.Areas.Admin.Models.Order
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid">
+
+
+            <div class="row">
+                <br>
+
+            </div>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    Orders
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Products</th>
+                                    <th>DeliverAddress</th>
+                                    <th>OrderDate</th>
+                                    <th>Quantities</th>
+                                    <th>TotalPrice</th>
+                                    <th>Status</th>
+                                    <th>Update</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <form action="/action_page.php">
+                                    <td>1</td>
+                                    <td>Ülker Gofret</td>
+                                    <td>Adana</td>
+                                    <td>25/12/2012</td>
+                                    <td>5 Adet</td>
+                                    <td>500TL</td>
+                                    <td>
+
+                                        <select id="cars" name="cars">
+                                            <option value="volvo">Hazırlanıyor</option>
+                                            <option value="saab">Beklemede</option>
+                                            <option value="fiat">Iptal</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="submit">
+
+                                    </td>
+                                    </form>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</div>
