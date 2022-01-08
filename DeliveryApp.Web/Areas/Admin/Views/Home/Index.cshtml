@@ -1,9 +1,15 @@
-﻿@model DeliveryApp.Web.Areas.Admin.Models.Order
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model DeliveryApp.Web.Areas.Admin.Models.Order
 @{ 
     Layout = "_Layout";
 }
 <div id="layoutSidenav_content">
     <main>
+
+        <div id="layoutSidenav">
+            
+            <div id="layoutSidenav_content">
+
         <div class="container-fluid">
 
 
@@ -34,20 +40,25 @@
                             </thead>
 
                             <tbody>
+                                 @foreach (var item in Model.Data)
+                                        {
                                 <tr>
-                                    <form action="/action_page.php">
-                                    <td>1</td>
-                                    <td>Ülker Gofret</td>
-                                    <td>Adana</td>
-                                    <td>25/12/2012</td>
-                                    <td>5 Adet</td>
-                                    <td>500TL</td>
+                                    <form asp-controller="Order" asp-action="UpdateOrder" method="post" >
+                                    <td>@item.Id</td>
+                                    <td>@foreach (var product in item.Products )
+                                        {
+                                            @product.Name
+                                        }</td>
+                                    <td>@item.DeliverAddress</td>
+                                    <td>@item.OrderDate</td>
+                                    <td>@item.Quantities</td>
+                                    <td>@item.TotalPrice</td>
                                     <td>
-
-                                        <select id="cars" name="cars">
-                                            <option value="volvo">Hazırlanıyor</option>
-                                            <option value="saab">Beklemede</option>
-                                            <option value="fiat">Iptal</option>
+                                        <input type="hidden" name="Id" value="@item.Id">                                        
+                                        <select  name="OrderStatus">
+                                            <option value="0">@item.Status</option>
+                                            <option value="1">InDelivery</option>
+                                            <option value="2">Delivered</option>
                                         </select>
                                     </td>
                                     <td>
@@ -56,11 +67,14 @@
                                     </td>
                                     </form>
                                 </tr>
+                                }
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+        </div>
+        </div>
         </div>
     </main>
 

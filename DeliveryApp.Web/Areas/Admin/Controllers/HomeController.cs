@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DeliveryApp.Web.Services;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,18 @@ namespace DeliveryApp.Web.Areas.Admin.Controllers
     [Area("Admin")]
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IOrderService _orderService;
+
+        public HomeController(IOrderService orderService)
         {
-            return View();
+            _orderService = orderService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var orders = await _orderService.GetOrdersAsync("https://localhost:44369/api/Order");
+            return View(orders);
         }
     }
 }
