@@ -40,7 +40,7 @@ namespace DeliveryApp.Web.Controllers
                     Expires = DateTimeOffset.Now.AddHours(1)
                 }); ;
             }
-            return View();
+            return RedirectToAction("Index", "Home");
         }
         [HttpGet]
         public IActionResult Register()
