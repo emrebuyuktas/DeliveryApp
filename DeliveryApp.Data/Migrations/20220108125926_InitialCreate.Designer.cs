@@ -10,11 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DeliveryApp.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-<<<<<<< HEAD:DeliveryApp.Data/Migrations/20220107200628_InitialCreate.Designer.cs
-    [Migration("20220107200628_InitialCreate")]
-=======
-    [Migration("20220107165214_InitialCreate")]
->>>>>>> 15ca007c5f45ec8c990d6db029f58a9b74a4f4ac:DeliveryApp.Data/Migrations/20220107165214_InitialCreate.Designer.cs
+    [Migration("20220108125926_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
