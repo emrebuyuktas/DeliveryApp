@@ -9,7 +9,7 @@ namespace DeliveryApp.Web.Services
     {
         Task<ProductList> GetAllAsync(string url);
         Task<Product> GetAsync(string url);
-        Task<Result> AddAsync(ProductAddDto productAddDto, string url);
+        Task AddAsync(ProductAddDto productAddDto, string url);
         Task DeleteAsync(string url);
         Task UpdateAsync(ProductUpdateDto productUpdateDto, string url);
         Task UpdateRating(Rating rating, string url);

@@ -34,14 +34,11 @@ namespace DeliveryApp.Web.Services
             _add = add;
         }
 
-        public async Task<Result> AddAsync(ProductAddDto productAddDto,string url)
+        public async Task AddAsync(ProductAddDto productAddDto,string url)
         {
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_httpContextAccessor.HttpContext.Request
         .Cookies["DeliveryApp"]);
-            return JsonSerializer.Deserialize<Result>(await _add.AddAsync(productAddDto, url, _client), new JsonSerializerOptions()
-            {
-                ReferenceHandler = ReferenceHandler.Preserve
-            });
+            await _add.AddAsync(productAddDto, url, _client);
         }
 
         public async Task DeleteAsync(string url)
