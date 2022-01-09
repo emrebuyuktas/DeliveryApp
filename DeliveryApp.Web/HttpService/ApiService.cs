@@ -29,7 +29,6 @@ namespace DeliveryApp.Web.HttpService
         {
             await Task.Delay(2000);
             var response = await httpClient.GetAsync(url);
-            var deneme = await response.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<T>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
             {
                 ReferenceHandler = ReferenceHandler.Preserve

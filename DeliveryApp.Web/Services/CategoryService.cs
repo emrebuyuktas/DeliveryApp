@@ -28,21 +28,21 @@ namespace DeliveryApp.Web.Services
             _updateService = updateService;
             _categories = categories;
             _httpContextAccessor = httpContextAccessor;
+            var token = _httpContextAccessor.HttpContext.Request
+.Cookies["DeliveryApp"];
+            if (!string.IsNullOrEmpty(token))
+                _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
             _add = add;
             _single = single;
         }
 
         public async Task AddAsync(ProductTypeAddDto productTypeAddDto, string url)
         {
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_httpContextAccessor.HttpContext.Request
-.Cookies["DeliveryApp"]);
             await _add.AddAsync(productTypeAddDto, url, _client);
         }
 
         public async Task DeleteAsync(string url)
         {
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_httpContextAccessor.HttpContext.Request
-.Cookies["DeliveryApp"]);
             await _service.DeleteAsync(url, _client);
         }
 
@@ -64,8 +64,6 @@ namespace DeliveryApp.Web.Services
 
         public async Task UpdateAsync(ProductTypeUpdateDto productTypeUpdateDto, string url)
         {
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_httpContextAccessor.HttpContext.Request
-.Cookies["DeliveryApp"]);
             await _updateService.UpdateAsync(productTypeUpdateDto, url, _client);
         }
     }

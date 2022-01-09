@@ -8,8 +8,9 @@ namespace DeliveryApp.Web.Services
     public interface IBrandService
     {
         Task<Brand> GetAsync(string url);
+        Task<SingleBrand> GetBrandAsync(string url);
         Task<BrandWithProducts> GetWithProductsAsync(string url);
-        Task<Result> AddAsync(ProductBrandAddDto productBrandAddDto, string url);
+        Task AddAsync(ProductBrandAddDto productBrandAddDto, string url);
         Task DeleteAsync(string url);
         Task UpdateAsync(ProductBrandUpdateDto productBrandUpdateDto, string url);
     }

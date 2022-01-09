@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace DeliveryApp.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CommentController : Controller
     {
         private readonly ICommentService _commentService;
@@ -16,20 +17,20 @@ namespace DeliveryApp.Web.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var comments = await _commentService.GetAsync("https://localhost:44369/api/Comment");
+            var comments = await _commentService.GetAllAsync("https://localhost:44369/api/Comment");
             return View(comments);
         }
         [HttpPost]
         public async Task<IActionResult> PublishComment(CommentPublishDto commentPublishDto)
         {
             await _commentService.UpdateAsync(commentPublishDto, "https://localhost:44369/api/Comment");
-            return RedirectToAction("Index", "Category");
+            return RedirectToAction("Index", "Comment");
         }
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> DeleteComment(int commentId)
         {
-            await _commentService.DeleteAsync($"https://localhost:44369/api/Comment/{commentId}");
-            return RedirectToAction("Index", "Category");
+            await _commentService.DeleteAsync($"https://localhost:44369/api/Comment?id={commentId}");
+            return RedirectToAction("Index", "Comment");
         }
     }
 }

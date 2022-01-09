@@ -29,6 +29,10 @@ namespace DeliveryApp.Web.Services
             _updateService = updateService;
             _singleProduct = singleProduct;
             _httpContextAccessor = httpContextAccessor;
+            var token = _httpContextAccessor.HttpContext.Request
+.Cookies["DeliveryApp"];
+            if (!string.IsNullOrEmpty(token))
+                _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
             _updateRating = updateRating;
             _search = search;
             _add = add;
@@ -36,15 +40,11 @@ namespace DeliveryApp.Web.Services
 
         public async Task AddAsync(ProductAddDto productAddDto,string url)
         {
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_httpContextAccessor.HttpContext.Request
-        .Cookies["DeliveryApp"]);
             await _add.AddAsync(productAddDto, url, _client);
         }
 
         public async Task DeleteAsync(string url)
         {
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_httpContextAccessor.HttpContext.Request
-        .Cookies["DeliveryApp"]);
             await _service.DeleteAsync(url, _client);
         }
 
@@ -63,8 +63,6 @@ namespace DeliveryApp.Web.Services
 
         public async Task UpdateAsync(ProductUpdateDto productUpdateDto, string url)
         {
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_httpContextAccessor.HttpContext.Request
-        .Cookies["DeliveryApp"]);
             await _updateService.UpdateAsync(productUpdateDto, url, _client);
         }
 

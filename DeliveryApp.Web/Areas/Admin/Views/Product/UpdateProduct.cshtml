@@ -1,4 +1,4 @@
-﻿@model DeliveryApp.Web.Areas.Admin.Models.ProductAddViewModel
+﻿@model DeliveryApp.Web.Areas.Admin.Models.ProductUpdateViewModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -28,51 +28,55 @@
                                     <div class="card-header"><h3 class="text-center font-weight-dark my-4">Product Update</h3></div>
                                     <div class="card-body">
                                        
-                                        <form asp-controller="Product" asp-action="UpdateProduct" method="post" >
-                                        <input type="hidden" value="@Model." />    
+                                        <form asp-controller="Product" asp-action="UpdateProduct" method="post">
+                                            <input type="hidden" name="Id" value="@Model.Product.Id" />
                                             <div class="form-group">
-                                                <label class="small mb-1" for="inputName">New  Name</label>
-                                                <input class="form-control py-4" id="inputName" name="" type="text" placeholder="ÜlKER Çikolata" />
-                                            </div>   
+                                                <label class="small mb-1" for="inputName">Name</label>
+                                                <input class="form-control py-4" id="inputName" name="Name" type="text" value="@Model.Product.Name" />
+                                            </div>
                                             <div class="form-group">
-                                                <label class="small mb-1" for="inputName">New  Brand</label>
-                                                <input class="form-control py-4" list="brands" name="brands" placeholder="Ülker">
-                                                <select  name="OrderStatus">
-                                                     @foreach (var item in Model.Brands)
+                                                <label class="small mb-1" for="inputName">Product Url</label>
+                                                <input class="form-control py-4" id="inputName" name="PictureUrl" type="url" value="@Model.Product.PictureUrl"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="inputName">Brand</label>
+                                                <input class="form-control py-4" list="@Model.Brands" name="ProductBrandId" value="@Model.Product.ProductBrandId">
+                                                <datalist id="@Model.Brands">
+                                                    @foreach (var item in Model.Brands)
                                                     {
                                                         <option value="@item.Id">@item.Name</option>
                                                     }
-                                                     
-                                                 </select>       
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="small mb-1" for="inputName">New Type</label>
-                                                <input class="form-control py-4" list="types" name="types" placeholder="AburCubur">
-                                                
-                                                  <select  name="OrderStatus">
-                                                     @foreach (var item in Model.Categories)
-                                                    {
-                                                        <option value="@item.Id">@item.Name</option>
-                                                    }
-                                                     
-                                                 </select>                                               
-                                                
-                                            </div>
-                                             <div class="form-group">
-                                                <label class="small mb-1" for="inputName">New  description</label>
-                                                <input class="form-control py-4" id="inputName" type="text" placeholder="ÜlKER Çikolata" />
-                                            </div> 
-                                            <div class="form-group">
-                                                <label class="small mb-1" for="inputPrice">New Price</label>
-                                                <input class="form-control py-4" id="inputPrice" type="number" placeholder="500TL" />
-                                            </div>                                         
-                                            
 
-                                            
+
+                                                </datalist>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="inputName">Category</label>
+                                                <input class="form-control py-4" list="@Model.Categories" name="ProductTypeId" value="@Model.Product.ProductTypeId">
+                                                <datalist id="@Model.Categories">
+                                                    @foreach (var item in Model.Categories)
+                                                    {
+                                                        <option value="@item.Id">@item.Name</option>
+                                                    }
+
+
+                                                </datalist>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="inputName">Description</label>
+                                                <input class="form-control py-4" id="inputName" type="text" name="Description" value="@Model.Product.Description" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="inputPrice">Price</label>
+                                                <input class="form-control py-4" id="inputPrice" type="number" name="Price" value="@Model.Product.Price" />
+                                            </div>
+
+
+
 
                                             <div style="float: right;" class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                
-                                               <button type="submit" class="btn btn-primary">Update</button>
+
+                                                <button type="submit" class="btn btn-primary">Update</button>
                                             </div>
                                         </form>
                                     </div>

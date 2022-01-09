@@ -111,29 +111,9 @@
                                             <td>@item.Description</td>
                                             <td>@item.Price</td>
                                             <td>
-                                                <a asp-action="UpdateProduct" asp-controller="Product" ><button class="w3-btn w3-white w3-border w3-border-blue w3-round-large">Update</button></a></td>
-                                            <td><button type="button" class="w3-btn w3-white w3-border w3-border-blue w3-round-large" data-toggle="modal" data-target="#staticModal">X</button></td>
-                                            <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true" data-backdrop="static">
-                                                <div class="modal-dialog modal-sm" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="staticModalLabel">Delete Product</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>
-                                                                Do you want Delete
-                                                            </p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                            <a asp-action="DeleteProduct" asp-controller="Product" asp-route-productId="@item.Id"><button type="button" class="btn btn-primary">Confirm</button></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                <a asp-action="UpdateProduct" asp-controller="Product" asp-route-productId="@item.Id" ><button class="w3-btn w3-white w3-border w3-border-blue w3-round-large">Update</button></a></td>
+                                            <td><a asp-action="DeleteProduct" asp-controller="Product" asp-route-productId="@item.Id"><button type="button" class="w3-btn w3-white w3-border w3-border-blue w3-round-large" data-toggle="modal" data-target="#staticModal">X</button></a></td>
+                                           
                                         </tr>
                                         }
 
