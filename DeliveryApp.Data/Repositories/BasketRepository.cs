@@ -35,7 +35,6 @@ namespace DeliveryApp.Data.Repositories
                         await UpdateBasketAsync(basket);
                         return true;
                     }
-                    return false;
                 }
             }
             return false;
