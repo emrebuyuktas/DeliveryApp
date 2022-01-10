@@ -46,6 +46,7 @@ namespace DeliveryApp.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Remove(int id)
         {
             var response = await _userService.UserDeleteAsync(id);

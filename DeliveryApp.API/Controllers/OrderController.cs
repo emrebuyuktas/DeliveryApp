@@ -35,6 +35,7 @@ namespace DeliveryApp.API.Controllers
             return Ok(order);
         }
         [HttpGet]
+        [Authorize(Roles = "Admin,Courier")]
         public async Task<IActionResult> GetOrders()
         {
             var orders = await _orderService.GetOrdersAsync();

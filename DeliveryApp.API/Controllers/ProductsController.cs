@@ -1,6 +1,7 @@
 ﻿using DeliveryApp.Core.Dtos;
 using DeliveryApp.Core.Services.Abstract;
 using DeliveryApp.Shared.Result.ComplexTypes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -37,18 +38,21 @@ namespace DeliveryApp.API.Controllers
             return Ok(products);
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Save(ProductAddDto productAddDto)
         {
             var product = await _iproductService.AddAsync(productAddDto);
             return Created(string.Empty, product);
         }
         [HttpPost("products")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Save(IList<ProductAddDto> productAddDtos)
         {
             var products = await _iproductService.AddRangeAsync(productAddDtos);
             return Created(string.Empty, products);
         }
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(ProductUpdateDto productUpdateDto)
         {
             var response = await _iproductService.UpdateAsync(productUpdateDto);
@@ -57,6 +61,7 @@ namespace DeliveryApp.API.Controllers
             return BadRequest(response);
         }
         [HttpDelete("{id}")]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> Remove(int id)
         {
             var response = await _iproductService.DeleteAsync(id);

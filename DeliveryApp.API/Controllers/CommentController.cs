@@ -1,6 +1,7 @@
 ﻿using DeliveryApp.Core.Dtos;
 using DeliveryApp.Core.Services.Abstract;
 using DeliveryApp.Shared.Result.ComplexTypes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -33,6 +34,7 @@ namespace DeliveryApp.API.Controllers
             return Created(string.Empty,comment);
         }
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var deletedComment = await _commentService.DeleteAsync(id);
@@ -41,6 +43,7 @@ namespace DeliveryApp.API.Controllers
             return NoContent();
         }
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Publish(CommentPublishDto commentPublishDto)
         {
             var comment = await _commentService.PublishAsync(commentPublishDto.CommentId);

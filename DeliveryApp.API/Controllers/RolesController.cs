@@ -1,5 +1,6 @@
 ﻿using DeliveryApp.Core.Dtos;
 using DeliveryApp.Core.Services.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -33,6 +34,7 @@ namespace DeliveryApp.API.Controllers
             return Ok(response);
         }
         [HttpPut()]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Roles(UserRoleAssignDto userRoleAssignDto)
         {
             var response = await _roleService.AssignRoleAsync(userRoleAssignDto);
