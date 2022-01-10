@@ -25,12 +25,11 @@ namespace DeliveryApp.API.Controllers
             _contextAccessor = contextAccessor;
             _userManager = userManager;
         }
-        [HttpPost("{id}")]
-        public async Task<IActionResult> CreateOrder(string id)
+        [HttpPost]
+        public async Task<IActionResult> CreateOrder(CreateOrderDto createOrderDto)
         {
             var userEmail = _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
-            var userId = await _userManager.FindByEmailAsync(userEmail);
-            var order = await _orderService.CreateOrderAsync(id, userEmail);
+            var order = await _orderService.CreateOrderAsync(createOrderDto.Id, userEmail);
             if (order.ResultStatus == ResultStatus.Error)
                 return BadRequest(order);
             return Ok(order);

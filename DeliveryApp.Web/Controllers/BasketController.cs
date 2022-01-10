@@ -1,4 +1,5 @@
-﻿using DeliveryApp.Core.Entities.Concrete;
+﻿using DeliveryApp.Core.Dtos;
+using DeliveryApp.Core.Entities.Concrete;
 using DeliveryApp.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -9,10 +10,12 @@ namespace DeliveryApp.Web.Controllers
     {
         private readonly IBasketService _basketService;
         private readonly IProductService _productService;
-        public BasketController(IBasketService basketService, IProductService productService)
+        private readonly IOrderService _orderService;
+        public BasketController(IBasketService basketService, IProductService productService, IOrderService orderService)
         {
             _basketService = basketService;
             _productService = productService;
+            _orderService = orderService;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -36,7 +39,7 @@ namespace DeliveryApp.Web.Controllers
                 ProductType=product.Data.ProductType
             }) ;
             await _basketService.UpdateAsync(basket, "https://localhost:44369/api/Basket");
-            return View("Index",basket);
+            return RedirectToAction("Index","Basket");
         }
         [HttpGet]
         public async Task<IActionResult> Delete(int productId)
@@ -50,7 +53,13 @@ namespace DeliveryApp.Web.Controllers
             var basket = await _basketService.GetAsync("https://localhost:44369/api/Basket");
             basket.Items.Add(item);
             await _basketService.UpdateAsync(basket, "https://localhost:44369/api/Basket");
-            return View("Index",basket);
+            return View("Index","Basket");
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateOrder(CreateOrderDto createOrderDto)
+        {
+            await _orderService.CreateOrdersAsync(createOrderDto, "https://localhost:44369/api/Order");
+            return RedirectToAction("UserProfile", "User");
         }
 
     }

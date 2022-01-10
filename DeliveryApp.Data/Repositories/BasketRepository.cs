@@ -31,6 +31,7 @@ namespace DeliveryApp.Data.Repositories
                     if(item.Id==productId)
                     {
                         basket.Items.Remove(item);
+                        basket.TotalPrice =basket.TotalPrice - item.Quantity * item.Price;
                         await UpdateBasketAsync(basket);
                         return true;
                     }
@@ -46,16 +47,7 @@ namespace DeliveryApp.Data.Repositories
             CustomerBasket basket = new CustomerBasket();
             if (!data.IsNullOrEmpty)
             {
-                basket= JsonSerializer.Deserialize<CustomerBasket>(data);
-                foreach (var item in basket.Items)
-                {
-                    if(item.Quantity>0)
-                        basket.TotalPrice += item.Price * item.Quantity;
-                    else
-                    {
-                        basket.TotalPrice += item.Price;
-                    }
-                }
+                basket = JsonSerializer.Deserialize<CustomerBasket>(data);
             }
 
             return data.IsNullOrEmpty ? null : basket;
@@ -63,6 +55,11 @@ namespace DeliveryApp.Data.Repositories
 
         public async Task<CustomerBasket> UpdateBasketAsync(CustomerBasket basket)
         {
+            basket.TotalPrice = 0;
+            foreach (var item in basket.Items)
+            {
+                basket.TotalPrice += item.Price * item.Quantity;
+            }
             var created = await _database.StringSetAsync(basket.Id, JsonSerializer.Serialize(basket),
                TimeSpan.FromDays(30));
 

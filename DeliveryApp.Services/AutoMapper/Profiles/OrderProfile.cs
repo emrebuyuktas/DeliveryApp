@@ -11,6 +11,7 @@ namespace DeliveryApp.Services.AutoMapper.Profiles
             CreateMap<Order, OrderDto>().ReverseMap();
             CreateMap<Order, OrderListDto>().ReverseMap();
             CreateMap<Order, OrderUpdateDto>().ReverseMap();
+            CreateMap<Order, OrderAddDto>().ReverseMap();
         }
     }
 }

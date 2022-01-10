@@ -27,7 +27,6 @@ namespace DeliveryApp.Web.HttpService
 
         public async Task<T> GetAsync(string url,HttpClient httpClient)
         {
-            await Task.Delay(2000);
             var response = await httpClient.GetAsync(url);
             return JsonSerializer.Deserialize<T>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions()
             {

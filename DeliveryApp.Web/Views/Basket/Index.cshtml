@@ -188,38 +188,44 @@ button:focus {
             </div>
         </div>
         @{
-            foreach (var item in Model.Items)
+            if (Model.Items.Count > 0)
             {
-                <div class="row d-flex justify-content-center border-top">
-                    <div class="col-5">
-                        <div class="row d-flex">
-                            <div class="book"> <img src=@item.PictureUrl class="book-img"> </div>
-                            <div class="my-auto flex-column d-flex pad-left">
-                                <h6 class="mob-text">@item.Name</h6>
-                                <p class="mob-text">@item.ProductBrand x @item.Quantity</p>
+                foreach (var item in Model.Items)
+                {
+                    <div class="row d-flex justify-content-center border-top">
+                        <div class="col-5">
+                            <div class="row d-flex">
+                                <div class="book"> <img src=@item.PictureUrl class="book-img"> </div>
+                                <div class="my-auto flex-column d-flex pad-left">
+                                    <h6 class="mob-text">@item.Name</h6>
+                                    <p class="mob-text">@item.ProductBrand x @item.Quantity</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="my-auto col-7">
+                            <div class="row text-right">
+                                <div class="col-4">
+                                    <p class="mob-text">@item.ProductType</p>
+                                </div>
+                                <div class="col-4">
+                                    <h6 class="mob-text">@item.Price&#x20BA x @item.Quantity</h6>
+                                </div>
+                                <div class="col-4">
+                                    <a asp-action="Delete" asp-controller="Basket" asp-route-productId="@item.Id">
+                                        <svg color="red" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                        </svg>
+                                    </a>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-                    <div class="my-auto col-7">
-                        <div class="row text-right">
-                            <div class="col-4">
-                                <p class="mob-text">@item.ProductType</p>
-                            </div>
-                            <div class="col-4">
-                                <h6 class="mob-text">@item.Price&#x20BA x @item.Quantity</h6>
-                            </div>
-                            <div class="col-4">
-                                <a asp-action="Delete" asp-controller="Basket" asp-route-productId="@item.Id" ><svg color="red" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
-    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-</svg></a>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
+                }
             }
         }
+
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="card">
@@ -249,18 +255,22 @@ button:focus {
                             </div>
                         </div>
                         <div class="col-lg-4 mt-2">
-                            <div class="row d-flex justify-content-between px-4">
+                            @*<div class="row d-flex justify-content-between px-4">
                                 <p class="mb-1 text-left">Subtotal</p>
                                 <h6 class="mb-1 text-right">$23.49</h6>
                             </div>
                             <div class="row d-flex justify-content-between px-4">
                                 <p class="mb-1 text-left">Shipping</p>
                                 <h6 class="mb-1 text-right">$2.99</h6>
-                            </div>
+                            </div>*@
                             <div class="row d-flex justify-content-between px-4" id="tax">
-                                <p class="mb-1 text-left">Total (tax included)</p>
-                                <h6 class="mb-1 text-right">$26.48</h6>
-                            </div> <button class="btn-block btn-blue"> <span> <span id="checkout">Checkout</span> <span id="check-amt">$26.48</span> </span> </button>
+                                <p class="mb-1 text-left">Total</p>
+                                <h6 class="mb-1 text-right">@Model.TotalPrice&#x20BA</h6>
+                            </div>
+                            <form asp-controller="Basket" asp-action="CreateOrder" method="post">
+                                <input type="hidden" value="@Model.Id" name="Id" />
+                                <button type="submit" class="btn-block btn-blue"> <span> <span id="checkout">Checkout</span> <span id="check-amt">@Model.TotalPrice&#x20BA</span> </span> </button>
+                            </form>
                         </div>
                     </div>
                 </div>

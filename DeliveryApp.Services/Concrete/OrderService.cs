@@ -45,9 +45,17 @@ namespace DeliveryApp.Services.Concrete
             var address = await _addressService.GetWithUserIdAsync(user.Id);
             var deliveryAddress = address.Data.Neighbourhood + " " + address.Data.Street + " " + " " + address.Data.DoorNumber + " " + address.Data.City;
             Order order = new Order(productList,deliveryAddress,user.Id,user,basket.TotalPrice,quantities);
-            await _unitOfWork.Order.AddAsync(order);
+            try
+            {
+                await _unitOfWork.Order.AddAsync(order);
+            }
+            catch (Exception e)
+            {
+
+            }
             var returnDto=_mapper.Map<OrderDto>(order);
             await _unitOfWork.CommitAsync();
+            await _basketRepo.DeleteBasketAsync(user.Id.ToString());
             return new DataResult<OrderDto>(ResultStatus.Succes, returnDto);
         }
 
