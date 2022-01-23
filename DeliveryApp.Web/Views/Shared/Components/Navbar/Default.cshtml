@@ -63,10 +63,10 @@
                             <a asp-controller="Home" asp-action="Index"><img src="~/images/logo.png" alt="" /></a>
                         </div>
                         <div class="menu">
-                            <a class="toggleMenu" href="~/#"><img src="~/images/nav.png" alt="" /></a>
+                            <a class="toggleMenu" asp-controller="Home" asp-action="Index"><img src="~/images/nav.png" alt="" /></a>
                             <ul class="nav" id="nav">
                                 <li><a asp-controller="Home" asp-action="Index">HomePage</a></li>
-                                <li><a href="experiance.html">Categories</a></li>
+                                <li><a asp-controller="Product" asp-action="AllProducts">Products</a></li>
 
                                 @{
                                     if (Model.Data != null)

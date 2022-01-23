@@ -232,6 +232,59 @@ a {
 .rating:hover>input:checked~label:before {
     opacity: 0.4
 }
+
+/* Popup container */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s
+}
+
+/* Add animation (fade in the popup) */
+@@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
     </style>
 </head>
 <body>
@@ -264,35 +317,55 @@ a {
                     <div class="clear"> </div>
                 </div>
                 <div class="col-md-3" style="position:relative; bottom:465px;left:720px">
-                    <div class="box-info-product">
-                        <form asp-controller="Basket" asp-action="Add" method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="Id" value="@Model.Product.Id" />
-                            <input type="hidden" name="Name" value="@Model.Product.Name" />
-                            <input type="hidden" name="Price" value="@Model.Product.Price" />
-                            <input type="hidden" name="PictureUrl" value="@Model.Product.PictureUrl" />
-                            <input type="hidden" name="ProductBrand" value="@Model.Product.ProductBrand" />
-                            <input type="hidden" name="ProductType" value="@Model.Product.ProductType" />
 
-                            <p class="price2">@Model.Product.Price&#x20BA</p>
-                            <ul class="prosuct-qty">
-                                <span>Quantity:</span>
-                                <select name="Quantity">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                </select>
-                            </ul>
-                            <button type="submit" name="Submit" class="exclusive">
-                                <span>Add to cart</span>
-                            </button>
-                        </form>
-                    </div>
+                        <div class="box-info-product">
+                            <form asp-controller="Basket" asp-action="Add" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="Id" value="@Model.Product.Id" />
+                                <input type="hidden" name="Name" value="@Model.Product.Name" />
+                                <input type="hidden" name="Price" value="@Model.Product.Price" />
+                                <input type="hidden" name="PictureUrl" value="@Model.Product.PictureUrl" />
+                                <input type="hidden" name="ProductBrand" value="@Model.Product.ProductBrand" />
+                                <input type="hidden" name="ProductType" value="@Model.Product.ProductType" />
+
+                                <p class="price2">@Model.Product.Price&#x20BA</p>
+                                <ul class="prosuct-qty">
+                                    <span>Quantity:</span>
+                                    <select name="Quantity">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                    </select>
+                                </ul>
+                                @if (HttpContextAccessor.HttpContext.Request
+.Cookies["DeliveryApp"] == null)
+                                {
+                            <div class="popup" onclick="myFunction()">
+                                <button type="button" name="Submit" class="exclusive">
+                                    <span>Add to cart</span>
+                                </button>
+                                <span class="popuptext" id="myPopup">Sign in your acount!</span>
+                            </div>
+
+                                }
+                                else
+                                {
+                                    <button type="submit" name="Submit" class="exclusive">
+                                        <span>Add to cart</span>
+                                    </button>
+                                }
+
+                            </form>
+                        </div>
+
                 </div>
 
-
+                <div class="clear"> </div>
+                <br />
+                <br />
+                <div class="clear"> </div>
                 <div class="row">
                     <div style="margin-top: -250px;float:left;" class="col-md-9 single_left">
 
@@ -399,8 +472,13 @@ a {
                                     <p>@(item.Description.Length>25 ? item.Description.Substring(0,25) : item.Description)... </p>
                                     <span class="actual">@item.Price&#x20BA</span><br>
                                     <ul class="buttons">
-                                        <li class="cart"><a href="#">Add To Cart</a></li>
-                                        <li class="shop_btn"><a href="#">Read More</a></li>
+                                        @{
+                                            if (HttpContextAccessor.HttpContext.Request.Cookies["DeliveryApp"] != null)
+                                            {
+                                                <li class="cart"><a asp-controller="Basket" asp-action="AddSingle" asp-route-productId="@item.Id">Add To Basket</a></li>
+                                            }
+                                        }
+                                        <li class="shop_btn"><a asp-controller="Product" asp-action="Detail" asp-route-productId="@item.Id">Read More</a></li>
                                         <div class="clear"> </div>
                                     </ul>
                                 </div>
@@ -413,6 +491,11 @@ a {
     </div>
 
     </div>
-    
+    <script>
+        function myFunction() {
+            var popup = document.getElementById("myPopup");
+            popup.classList.toggle("show");
+        }
+    </script>
 </body>
 </html>

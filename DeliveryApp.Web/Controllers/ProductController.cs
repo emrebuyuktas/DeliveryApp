@@ -19,6 +19,25 @@ namespace DeliveryApp.Web.Controllers
             _brand = brand;
         }
         [HttpGet]
+        public async Task<IActionResult> AllProducts()
+        {
+            var categories = await _category.GetAsync("https://localhost:44369/api/Types");
+            AllProductsViewModel allProductsViewModel = new AllProductsViewModel();
+            foreach (var category in categories.Data)
+            {
+                var products = (await _category.GetWithProductsAsync($"https://localhost:44369/api/Types/{category.Id}/products")).Data;
+                ProductTypeWithProductsDto productTypeWithProductsDto = new ProductTypeWithProductsDto
+                {
+                    Id = category.Id,
+                    Name=category.Name,
+                    Products=products.Products
+                };
+                allProductsViewModel.Products.Add(productTypeWithProductsDto);
+            }
+            return View(allProductsViewModel);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var model = await _product.GetAsync("https://localhost:44369/api/Products/");
