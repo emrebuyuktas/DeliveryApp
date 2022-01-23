@@ -23,12 +23,12 @@ contributors: @Kilicceker @yunusarikan @emrebuyuktas
 
 ## Some pictures of website
 
-![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/img/Website/Ekran Görüntüsü (777).png )
+![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/img/Website/1.png )
 
-![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/img/Website/Ekran Görüntüsü (7788).png )
+![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/img/Website/2.png )
 
-![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/img/Website/Ekran Görüntüsü (779).png)
+![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/img/Website/3.png)
 
-![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/img/Website/Ekran Görüntüsü (780).png)
+![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/img/Website/4.png)
 
-![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/img/Website/Ekran Görüntüsü (781).png )
+![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/img/Website/5.png )
