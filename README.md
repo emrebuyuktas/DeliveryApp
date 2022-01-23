@@ -23,12 +23,12 @@ contributors: @Kilicceker @yunusarikan @emrebuyuktas
 
 ## Some pictures of website
 
-![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/img/Website/1.png )
+![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/imges/Website/1.png )
 
-![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/img/Website/2.png )
+![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/imges/Website/2.png )
 
-![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/img/Website/3.png)
+![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/imges/Website/3.png)
 
-![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/img/Website/4.png)
+![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/imges/Website/4.png)
 
-![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/img/Website/5.png )
+![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/imges/Website/5.png )
