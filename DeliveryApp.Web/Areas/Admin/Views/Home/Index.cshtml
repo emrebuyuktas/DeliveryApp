@@ -3,6 +3,8 @@
 @{
     Layout = "_Layout";
 }
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ <link href="~/Admin/css/styles.css" rel="stylesheet" />
 <div id="layoutSidenav_content">
     <main>
 
@@ -57,14 +59,14 @@
                                             <td>@item.TotalPrice</td>
                                             <td>
                                                 <input type="hidden" name="Id" value="@item.Id">
-                                                <select name="OrderStatus">
+                                                <select class="w3-btn w3-white w3-border w3-border-blue w3-round-large"  name="OrderStatus">
                                                     <option value="0">@item.Status</option>
                                                     <option value="1">InDelivery</option>
                                                     <option value="2">Delivered</option>
                                                 </select>
                                             </td>
                                             <td>
-                                                <input type="submit">
+                                                <input class="w3-btn w3-white w3-border w3-border-blue w3-round-large" type="submit">
 
                                             </td>
                                             </form>

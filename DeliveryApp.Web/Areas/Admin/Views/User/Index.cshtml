@@ -3,6 +3,8 @@
 @{
     Layout = "_Layout";
 }
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="~/Admin/css/styles.css" rel="stylesheet" />
 <div id="layoutSidenav_content">
     <main>
 
@@ -32,7 +34,8 @@
                                             <th>Surname</th>
                                             <th>Email</th>
                                             <th>Phone Number</th>
-
+                                            <th>Select Role </th>
+                                            <th>Update Role</th>
                                         </tr>
                                     </thead>
 
@@ -50,7 +53,7 @@
                                                     <td>@item.PhoneNumber</td>
                                                     <td>
                                                         <input type="hidden" name="Id" value="@item.Id">
-                                                        <select name="Role">
+                                                        <select class="w3-btn w3-white w3-border w3-border-blue w3-round-large" name="Role">
                                                             <option value="Courier">Courier</option>
                                                             <option value="Admin">Admin</option>
                                                         </select>

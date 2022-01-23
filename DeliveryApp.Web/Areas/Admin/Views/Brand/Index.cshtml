@@ -3,55 +3,8 @@
     Layout = "_Layout";
 }
 @model DeliveryApp.Web.Models.Brand
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Dashboard - SB Admin</title>
-    <link href="css/styles.css" rel="stylesheet" />
-    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <script>
-            var subjectObject = {
-                "beklemede": {
-                },
-                "Iptal": {
-
-                }
-            }
-            window.onload = function () {
-                var subjectSel = document.getElementById("subject");
-                var topicSel = document.getElementById("topic");
-                var chapterSel = document.getElementById("chapter");
-                for (var x in subjectObject) {
-                    subjectSel.options[subjectSel.options.length] = new Option(x, x);
-                }
-                subjectSel.onchange = function () {
-                    //empty Chapters- and Topics- dropdowns
-                    chapterSel.length = 1;
-                    topicSel.length = 1;
-                    //display correct values
-                    for (var y in subjectObject[this.value]) {
-                        topicSel.options[topicSel.options.length] = new Option(y, y);
-                    }
-                }
-                topicSel.onchange = function () {
-                    //empty Chapters dropdown
-                    chapterSel.length = 1;
-                    //display correct values
-                    var z = subjectObject[subjectSel.value][this.value];
-                    for (var i = 0; i < z.length; i++) {
-                        chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
-                    }
-                }
-            }
-    </script>
-</head>
+<link href="~/Admin/css/styles.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body class="sb-nav-fixed">
     <div id="layoutSidenav">
         <div id="layoutSidenav_content">
@@ -82,11 +35,11 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
+                                            
                                             <th></th>
                                             <th></th>
                                             <th></th>
-                                            <th></th>
-                                            <th><a asp-action="AddBrand" asp-controller="Brand"><button class="w3-btn w3-white w3-border w3-border-blue w3-round-large"><p>New Category</p></button></a></th>
+                                            <th><a asp-action="AddBrand" asp-controller="Brand"><button class="btn btn-primary"><p>New Category</p></button></a></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -95,8 +48,8 @@
                                             <tr>
                                                 <td>@item.Id</td>
                                                 <td>@item.Name</td>
-                                                <td><a asp-action="UpdateBrand" asp-controller="Brand" asp-route-brandId="@item.Id"><button type="button" class="btn btn-primary">Update</button></a>
-                                                <td><a asp-action="DeleteBrand" asp-controller="Brand" asp-route-brandId="@item.Id"><button type="button" class="w3-btn w3-white w3-border w3-border-blue w3-round-large" data-toggle="modal" data-target="#staticModal">X</button></a></td>
+                                                <td><a asp-action="UpdateBrand" asp-controller="Brand" asp-route-brandId="@item.Id"><button class="w3-btn w3-white w3-border w3-border-blue w3-round-large" type="button" class="btn btn-primary">Update</button></a>
+                                                <td><a asp-action="DeleteBrand" asp-controller="Brand" asp-route-brandId="@item.Id"><button class="w3-btn w3-white w3-border w3-border-blue w3-round-large" type="button" class="w3-btn w3-white w3-border w3-border-blue w3-round-large" data-toggle="modal" data-target="#staticModal">X</button></a></td>
                                             </tr>
                                         }
                                     </tbody>
@@ -112,13 +65,5 @@
 
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="js/scripts.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="assets/demo/chart-area-demo.js"></script>
-    <script src="assets/demo/chart-bar-demo.js"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-    <script src="assets/demo/datatables-demo.js"></script>
+    
 </body>
