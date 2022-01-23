@@ -21,10 +21,6 @@ A grocery delivery application we developed for a software engineering course
 
 contributors: @Kilicceker @yunusarikan @emrebuyuktas
 
-<a href="https://github.com/remarkablemark/html-react-parser/graphs/contributors">
-  <img src="https://opencollective.com/html-react-parser/contributors.svg?width=890&button=false">
-</a>
-
 ## Some pictures of website
 
 ![alt text](https://github.com/emrebuyuktas/MyBlog/blob/master/MyBlog.Mvc/wwwroot/img/insiteimages/home.png "Home")
