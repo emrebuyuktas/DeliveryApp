@@ -7,6 +7,7 @@ using DeliveryApp.Shared.Result.Abstract;
 using DeliveryApp.Shared.Result.ComplexTypes;
 using DeliveryApp.Shared.Result.Concrete;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.Services.Concrete
@@ -68,6 +69,7 @@ namespace DeliveryApp.Services.Concrete
         public async Task<IDataResult<ProductTypeWithProductsDto>> GetWithProducts(int id)
         {
             var types = await _unitOfWork.Type.GetAsync(x => x.Id == id, x => x.Products);
+            types.Products.OrderBy(x => x.Rating);
             if(types==null)
                 return new DataResult<ProductTypeWithProductsDto>(ResultStatus.Error, "No types found with specified criteria", null);
             var typesToList = _mapper.Map<ProductTypeWithProductsDto>(types);

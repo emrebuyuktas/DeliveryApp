@@ -53,7 +53,7 @@ namespace DeliveryApp.Web.Controllers
             var basket = await _basketService.GetAsync("https://localhost:44369/api/Basket");
             basket.Items.Add(item);
             await _basketService.UpdateAsync(basket, "https://localhost:44369/api/Basket");
-            return View("Index","Basket");
+            return RedirectToAction("Index","Basket");
         }
         [HttpPost]
         public async Task<IActionResult> CreateOrder(CreateOrderDto createOrderDto)

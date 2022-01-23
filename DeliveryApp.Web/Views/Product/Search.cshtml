@@ -1,6 +1,6 @@
 ﻿@model DeliveryApp.Core.Dtos.ProductListDto
 @{ Layout = "_Layout"; }
-
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
 <!DOCTYPE HTML>
 <html>
@@ -36,7 +36,12 @@
                                     <p>@(item.Description.Length>30 ? item.Description.Substring(0,30) : item.Description)...</p>
                                     <span class="actual">@item.Price&#x20BA</span><br>
                                     <ul class="buttons">
-                                        <li class="cart"><a asp-controller="Basket" asp-action="AddSingle" asp-route-productId="@item.Id">Add To Basket</a></li>
+                                        @{
+                                            if (HttpContextAccessor.HttpContext.Request.Cookies["DeliveryApp"] != null)
+                                            {
+                                                <li class="cart"><a asp-controller="Basket" asp-action="AddSingle" asp-route-productId="@item.Id">Add To Basket</a></li>
+                                            }
+                                        }
                                         <li class="shop_btn"><a asp-controller="Product" asp-action="Detail" asp-route-productId="@item.Id">Read More</a></li>
                                         <div class="clear"> </div>
                                     </ul>
@@ -49,35 +54,35 @@
         </div>
     </div>
     <script type="text/javascript">
-            $(document).ready(function () {
-                $(".dropdown img.flag").addClass("flagvisibility");
+        $(document).ready(function () {
+            $(".dropdown img.flag").addClass("flagvisibility");
 
-                $(".dropdown dt a").click(function () {
-                    $(".dropdown dd ul").toggle();
-                });
-
-                $(".dropdown dd ul li a").click(function () {
-                    var text = $(this).html();
-                    $(".dropdown dt a span").html(text);
-                    $(".dropdown dd ul").hide();
-                    $("#result").html("Selected value is: " + getSelectedValue("sample"));
-                });
-
-                function getSelectedValue(id) {
-                    return $("#" + id).find("dt a span.value").html();
-                }
-
-                $(document).bind('click', function (e) {
-                    var $clicked = $(e.target);
-                    if (!$clicked.parents().hasClass("dropdown"))
-                        $(".dropdown dd ul").hide();
-                });
-
-
-                $("#flagSwitcher").click(function () {
-                    $(".dropdown img.flag").toggleClass("flagvisibility");
-                });
+            $(".dropdown dt a").click(function () {
+                $(".dropdown dd ul").toggle();
             });
+
+            $(".dropdown dd ul li a").click(function () {
+                var text = $(this).html();
+                $(".dropdown dt a span").html(text);
+                $(".dropdown dd ul").hide();
+                $("#result").html("Selected value is: " + getSelectedValue("sample"));
+            });
+
+            function getSelectedValue(id) {
+                return $("#" + id).find("dt a span.value").html();
+            }
+
+            $(document).bind('click', function (e) {
+                var $clicked = $(e.target);
+                if (!$clicked.parents().hasClass("dropdown"))
+                    $(".dropdown dd ul").hide();
+            });
+
+
+            $("#flagSwitcher").click(function () {
+                $(".dropdown img.flag").toggleClass("flagvisibility");
+            });
+        });
     </script>
 </body>
 </html>
