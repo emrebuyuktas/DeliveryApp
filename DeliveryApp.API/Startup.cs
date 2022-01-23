@@ -69,7 +69,7 @@ namespace DeliveryApp.API
                     .GetConnectionString("Redis"), true);
                 return ConnectionMultiplexer.Connect(configuration);
             });
-
+            services.AddHttpClient<CommentService>();
             // For Identity
             services.AddIdentity<User, DeliveryApp.Core.Entities.Concrete.Role>()
                 .AddEntityFrameworkStores<AppDbContext>()

@@ -6,7 +6,9 @@ using DeliveryApp.Core.UnitOfWorks;
 using DeliveryApp.Shared.Result.Abstract;
 using DeliveryApp.Shared.Result.ComplexTypes;
 using DeliveryApp.Shared.Result.Concrete;
+using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace DeliveryApp.Services.Concrete
@@ -15,10 +17,12 @@ namespace DeliveryApp.Services.Concrete
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public CommentService(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly HttpClient _client;
+        public CommentService(IUnitOfWork unitOfWork, IMapper mapper, HttpClient client)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _client = client;
         }
 
 
@@ -50,11 +54,17 @@ namespace DeliveryApp.Services.Concrete
 
         public async Task<IResult> PublishAsync(int id)
         {
-            var comment = await _unitOfWork.Comment.GetAsync(x => x.Id == id);
+            var comment = await _unitOfWork.Comment.GetAsync(x => x.Id == id,x=>x.Product);
             if(comment==null)
                 return new Result(ResultStatus.Error, $"No comment found with specified criteria");
+            var response = await _client.GetAsync($"http://127.0.0.1:5000/home/{comment.Text}");
+            var result = await response.Content.ReadAsStringAsync();
             comment.IsPublished = true;
+            var product = comment.Product;
+            product.Rating+= Int32.Parse(result);
             await _unitOfWork.Comment.UpdateAsync(comment);
+            await _unitOfWork.CommitAsync();
+            await _unitOfWork.Products.UpdateAsync(product);
             await _unitOfWork.CommitAsync();
             return new Result(ResultStatus.Succes, $"Comment has been published successfully");
         }
