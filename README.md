@@ -23,12 +23,12 @@ contributors: @Kilicceker @yunusarikan @emrebuyuktas
 
 ## Some pictures of website
 
-![alt text](https://github.com/emrebuyuktas/MyBlog/blob/master/MyBlog.Mvc/wwwroot/img/insiteimages/home.png "Home")
+![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/img/Website/Ekran Görüntüsü (777).png )
 
-![alt text](https://github.com/emrebuyuktas/MyBlog/blob/master/MyBlog.Mvc/wwwroot/img/insiteimages/blogpost.png "Blog post")
+![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/img/Website/Ekran Görüntüsü (7788).png )
 
-![alt text](https://github.com/emrebuyuktas/MyBlog/blob/master/MyBlog.Mvc/wwwroot/img/insiteimages/chart.png "chart")
+![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/img/Website/Ekran Görüntüsü (779).png)
 
-![alt text](https://github.com/emrebuyuktas/MyBlog/blob/master/MyBlog.Mvc/wwwroot/img/insiteimages/admin%20menu.png "adminmenu")
+![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/img/Website/Ekran Görüntüsü (780).png)
 
-![alt text](https://github.com/emrebuyuktas/MyBlog/blob/master/MyBlog.Mvc/wwwroot/img/insiteimages/category.png "adminmenu")
+![alt text](https://github.com/emrebuyuktas/DeliveryApp/blob/master/DeliveryApp.Web/wwwroot/img/Website/Ekran Görüntüsü (781).png )
